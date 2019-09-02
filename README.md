@@ -1,2 +1,2 @@
 # Emergencity
-Hi you are on Mobil branch
+Hi you are on Mobile branch
