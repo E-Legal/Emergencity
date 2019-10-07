@@ -19,17 +19,15 @@ public class DomainError {
       return new DomainError(HttpStatus.NOT_FOUND.value(), data);
     }
 
-    public static DomainError AlreadyMember(JSONObject data) {
-        return new DomainError(HttpStatus.BAD_REQUEST.value(), data);
-    }
 
     public static DomainError Unauthorized(JSONObject data) {
         return new DomainError(HttpStatus.UNAUTHORIZED.value(), data);
     }
 
-    public static DomainError AlreadyInPack(JSONObject data) {
+    public static DomainError BadRequest(JSONObject data) {
         return new DomainError(HttpStatus.BAD_REQUEST.value(), data);
     }
+
 
     public static DomainError Conflict(JSONObject data) {
         return new DomainError(HttpStatus.CONFLICT.value(), data);

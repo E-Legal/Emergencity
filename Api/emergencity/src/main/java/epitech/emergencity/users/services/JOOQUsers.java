@@ -49,6 +49,8 @@ public class JOOQUsers implements Users, JOOQCrudUtils {
                 .createdAt(record.getCreatedAt())
                 .updatedAt(record.getUpdateAt())
                 .admin(record.getAdmin())
+                .superuser(record.getSuperuser())
+                .algorithm(record.getAlgorithm())
                 .token(record.getToken())
                 .updateToken(record.getTokenUpdate())
                 .endToken(record.getTokenEnd())
@@ -63,6 +65,8 @@ public class JOOQUsers implements Users, JOOQCrudUtils {
                 .createdAt(record.getValue(EMERGENCITY_USER.CREATED_AT))
                 .updatedAt(record.getValue(EMERGENCITY_USER.UPDATE_AT))
                 .admin(record.getValue(EMERGENCITY_USER.ADMIN))
+                .superuser(record.getValue(EMERGENCITY_USER.SUPERUSER))
+                .algorithm(record.getValue(EMERGENCITY_USER.ALGORITHM))
                 .token(record.getValue(EMERGENCITY_USER.TOKEN))
                 .updateToken(record.getValue(EMERGENCITY_USER.TOKEN_UPDATE))
                 .endToken(record.getValue(EMERGENCITY_USER.TOKEN_END))
@@ -124,11 +128,37 @@ public class JOOQUsers implements Users, JOOQCrudUtils {
 
     @Override
     @Transactional(readOnly = true)
-    public Option<User> get(String token) {
+    public Option<User> checkToken(String token) {
         OffsetDateTime now = OffsetDateTime.now();
         return Option.ofOptional(
                 database.selectFrom(EMERGENCITY_USER)
                         .where(EMERGENCITY_USER.TOKEN.eq(token).and(EMERGENCITY_USER.TOKEN_END.greaterThan(now)))
+                        .fetchOptional()
+                        .map(JOOQUsers::fromRecord)
+        );
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Option<User> UserEgalOfSuppAdmin(String token) {
+        OffsetDateTime now = OffsetDateTime.now();
+        return Option.ofOptional(
+                database.selectFrom(EMERGENCITY_USER)
+                        .where(EMERGENCITY_USER.TOKEN.eq(token)
+                                .and(EMERGENCITY_USER.TOKEN_END.greaterThan(now))
+                                .and(EMERGENCITY_USER.ADMIN.eq(true).or(EMERGENCITY_USER.SUPERUSER.eq(true))))
+                        .fetchOptional()
+                        .map(JOOQUsers::fromRecord)
+        );
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Option<User> get(UUID id) {
+        OffsetDateTime now = OffsetDateTime.now();
+        return Option.ofOptional(
+                database.selectFrom(EMERGENCITY_USER)
+                        .where(EMERGENCITY_USER.ID.eq(id))
                         .fetchOptional()
                         .map(JOOQUsers::fromRecord)
         );

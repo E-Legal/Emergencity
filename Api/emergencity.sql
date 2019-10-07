@@ -19,7 +19,17 @@ created_at TIMESTAMP WITH TIME ZONE,
 name text NOT NULL UNIQUE,
 password text NOT NULL,
 admin boolean,
+superuser boolean,
+algorithm boolean,
 token text,
 token_update TIMESTAMP WITH TIME ZONE,
 token_end TIMESTAMP WITH TIME ZONE
+);
+CREATE TABLE EMERGENCITY_DESTINATION(
+id UUID PRIMARY KEY,
+y_start text,
+x_start	text,
+y_end text,
+x_end text,
+course text
 );

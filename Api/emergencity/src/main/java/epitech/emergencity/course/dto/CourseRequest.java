@@ -1,10 +1,12 @@
-package epitech.emergencity.trafficLight.dto;
+package epitech.emergencity.course.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.json.Json;
+import javax.json.bind.Jsonb;
 import javax.validation.constraints.NotNull;
 import java.util.UUID;
 
@@ -12,15 +14,11 @@ import java.util.UUID;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class TrafficLightsRequest {
+public class CourseRequest {
     private UUID id;
     @NotNull
-    private String city;
+    private String start;
     @NotNull
-    private String x;
-    @NotNull
-    private String y;
-    @NotNull
-    private String z;
-
+    private String end;
+    private String course;
 }

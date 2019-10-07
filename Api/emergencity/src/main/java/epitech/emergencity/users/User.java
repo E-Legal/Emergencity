@@ -18,6 +18,8 @@ public class User {
     private String password;
     private String token;
     private Boolean admin;
+    private Boolean superuser;
+    private Boolean algorithm;
 
     private OffsetDateTime updateToken;
     private OffsetDateTime endToken;

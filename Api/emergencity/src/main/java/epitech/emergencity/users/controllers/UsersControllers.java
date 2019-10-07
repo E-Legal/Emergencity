@@ -32,7 +32,7 @@ public class UsersControllers {
     @GetMapping("/me/{tId}")
     private Object me(@PathVariable @Valid @NotNull String tId) {
         return API.For(
-                users.get(tId))
+                users.checkToken(tId))
                 .yield(user -> user)
                 .toEither(DomainError.Unauthorized(null))
                 .fold(r -> ResponseEntity.status(r.getStatus()).body(r.getData()), u -> u);
