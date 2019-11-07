@@ -1,0 +1,10 @@
+version: "3"
+
+services:
+  web-emergencity:
+    build: .
+    container_name: web-emergencity
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./dashboard-src:/var/dashboard-src
