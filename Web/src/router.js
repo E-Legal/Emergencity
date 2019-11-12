@@ -3,14 +3,24 @@ import Router from "vue-router";
 import Home from "./views/Home.vue";
 import Register from "./views/Register.vue";
 import Login from "./views/Login.vue";
+import Profile from "./views/Profile.vue";
+import Logout from "./views/Logout.vue";
 import Dashboard from "./views/Dashboard.vue";
-import BootstrapVue from 'bootstrap-vue'
+import BootstrapVue from "bootstrap-vue";
 
-
-Vue.use(BootstrapVue)
+Vue.use(BootstrapVue);
 Vue.use(Router);
-import 'bootstrap/dist/css/bootstrap.css'
-import 'bootstrap-vue/dist/bootstrap-vue.css'
+import "bootstrap/dist/css/bootstrap.css";
+import "bootstrap-vue/dist/bootstrap-vue.css";
+
+function isAuthenticated() {
+  if (localStorage.getItem("login")) {
+    console.log(localStorage.getItem("login"));
+    return true;
+  } else {
+    return false;
+  }
+}
 
 export default new Router({
   mode: "history",
@@ -19,12 +29,31 @@ export default new Router({
     {
       path: "/",
       name: "home",
-      component: Home
+      component: Home,
+      beforeEnter(to, from, next) {
+        if (isAuthenticated()) {
+          next();
+        } else {
+          next("/login");
+        }
+      }
     },
     {
       path: "/login",
       name: "login",
       component: Login
+    },
+    {
+      path: "/profile",
+      name: "profile",
+      component: Profile,
+      beforeEnter(to, from, next) {
+        if (isAuthenticated()) {
+          next();
+        } else {
+          next("/login");
+        }
+      }
     },
     {
       path: "/register",
@@ -35,6 +64,11 @@ export default new Router({
       path: "/dashboard",
       name: "dashboard",
       component: Dashboard
+    },
+    {
+      path: "/logout",
+      name: "logout",
+      component: Logout
     },
     {
       path: "/about",
