@@ -5,6 +5,7 @@ import Register from "./views/Register.vue";
 import Login from "./views/Login.vue";
 import Profile from "./views/Profile.vue";
 import Logout from "./views/Logout.vue";
+import Stats from "./views/Stats.vue";
 import Dashboard from "./views/Dashboard.vue";
 import BootstrapVue from "bootstrap-vue";
 
@@ -42,6 +43,11 @@ export default new Router({
       path: "/login",
       name: "login",
       component: Login
+    },
+    {
+      path: "/stats",
+      name: "stats",
+      component: Stats
     },
     {
       path: "/profile",
