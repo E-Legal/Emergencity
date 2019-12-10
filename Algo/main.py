@@ -7,7 +7,7 @@ print("---------- Log API")
 
 token = ""
 try:
-	username = "laegan"
+	username = "test"
 	password = "yoho"
 	req = "http://localhost:9000/login"
 	res = requests.post(req, data = {"name": username, "password": password})
@@ -47,12 +47,14 @@ except Exception as e:
 print("---------- calcule route")
 
 try:
+	th = []
 	for coord in coords:
-		obj = GPS(coord)
-		route = str(obj.get_route())
-		res = requests.post("http://localhost:9000/courses/" + coord["id"], params= {"token": token}, data = {"route": str(route)})
-		if (res.status_code != 200):
-			raise "Erreur envoi route"
+		obj = GPS(coord, token)
+		obj.start()
+		th.append(obj)
+
+	for i in th:
+		i.join()
 	print("---------- Calcule route OK")
 except Exception as e:
 	print("KO Calculer route")
