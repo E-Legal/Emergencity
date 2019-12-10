@@ -9,8 +9,11 @@
     "test:unit": "vue-cli-service test:unit"
   },
   "dependencies": {
+    "@pderas/vue2-geocoder": "^1.1.0",
+    "axios": "^0.19.0",
     "bootstrap": "^4.3.1",
     "bootstrap-vue": "^2.0.0-rc.28",
+    "chart.js": "^2.9.3",
     "core-js": "^2.6.5",
     "jquery": "^3.4.1",
     "leaflet": "^1.5.1",
@@ -18,7 +21,10 @@
     "portal-vue": "^2.1.6",
     "register-service-worker": "^1.6.2",
     "vue": "^2.6.10",
+    "vue-chartjs": "^3.5.0",
     "vue-router": "^3.0.3",
+    "vue2-gmap-custom-marker": "^5.5.4",
+    "vue2-google-maps": "^0.10.7",
     "vue2-leaflet": "^2.2.1",
     "vuex": "^3.0.1"
   },
