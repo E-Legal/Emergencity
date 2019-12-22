@@ -273,22 +273,32 @@ export default {
       this.submitting = true;
     },
     sendFormData() {
-            const options = {
-        headers: {'accept': 'application/json'}
+      console.log(this.email) 
+      console.log(this.password)
+      const params = {
+        name: this.email, 
+        password: this.password
+      };
+            const options = { crossdomain: true,
+        headers: {'Content-Type': 'application/x-www-form-urlencoded', 'crossDomain': true, 'Content-Type': 'text/plain;charset=utf-8',}
       }
       axios.
-        post('http://localhost:8081/login', { email: this.email, password: this.password}, options)
+        post("http://localhost:9000/login?" + "name=" + this.email + "&password=" + this.password, null, options)
         .then((response) => {
+          console.log("oui")
           console.log(response.status)
           if (response.status === 200) {
             this.enableSubmitLoader();
+            this.login_success();
           }
-          this.login_success();
       }, (error) => {
-        this.enableSubmitLoader();
-        alert("Login without Network")
         console.log(error)
-        this.login_success();
+        //this.enableSubmitLoader();
+        alert("Login without Network")
+                    this.enableSubmitLoader();
+            this.login_success();
+        console.log(error)
+        //this.login_success();
       });
     },
     login_success() {

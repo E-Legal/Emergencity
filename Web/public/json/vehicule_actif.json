@@ -1,0 +1,46 @@
+[
+    {
+      "index": 0,
+      "changed?": false
+    },
+    {
+      "index": 1,
+      "date": "22 Mars 2014",
+      "nb_vehicules_actifs": 16
+    },
+    {
+      "index": 2,
+      "date": "23 Mars 2014",
+      "nb_vehicules_actifs": 24
+    },
+    {
+      "index": 3,
+      "date": "24 Mars 2014",
+      "nb_vehicules_actifs": 8
+    },
+    {
+      "index": 4,
+      "date": "25 Mars 2014",
+      "nb_vehicules_actifs": 9
+    },
+    {
+      "index": 5,
+      "date": "26 Mars 2014",
+      "nb_vehicules_actifs": 6
+    },
+    {
+      "index": 6,
+      "date": "27 Mars 2014",
+      "nb_vehicules_actifs": 16
+    },
+    {
+      "index": 7,
+      "date": "28 Mars 2014",
+      "nb_vehicules_actifs": 30
+    },
+    {
+        "index": 8,
+        "date": "29 Mars 2014",
+        "nb_vehicules_actifs": 12
+    }
+  ]
