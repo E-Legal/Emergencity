@@ -1,7 +1,7 @@
 <template>
-  <div class="stats">
   
-
+  <div class="stats" style="background: url('/assets/white3.png') repeat center center fixed;  background-position: center;">
+    <div>
       <div class="container">
         <div class="Chart">
                <!-- <datepicker class="redsize" ></datepicker>   -->
@@ -43,9 +43,9 @@
               <div v-else class="loader"></div>
             </div>
           </div>
-          
+          </div>
         </div>
-      </div>
+      </div>  
   </div>
       
 </template>
@@ -76,7 +76,6 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
-  margin-top: 60px;
 }
 .container {
   max-width: 1500px;
