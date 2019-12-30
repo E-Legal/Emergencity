@@ -298,7 +298,7 @@ export default {
                     this.enableSubmitLoader();
             this.login_success();
         console.log(error)
-        //this.login_success();
+        this.login_success();
       });
     },
     login_success() {
