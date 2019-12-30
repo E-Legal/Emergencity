@@ -432,9 +432,6 @@ export default {
   },
   methods: {
     submit() {
-      const options = {
-        headers: {'accept': 'application/json'}
-      }
       alert("yolo")
       alert("swag")
       console.log("test")
@@ -442,19 +439,26 @@ export default {
         alert("Email different");
         return;
       }
+      const options = { crossdomain: true,
+        headers: {'Content-Type': 'application/x-www-form-urlencoded', 'crossDomain': true, 'Content-Type': 'text/plain;charset=utf-8',}
+      }
+      this.password = "oui";
       axios.
-        post('http://localhost:8081/', { nom: this.prenom, prenom: this.prenom, profession: this.profession, ville: this.ville, email: this.email}, options)
+        post("http://localhost:9000/register?" + "name=" + this.email + "&password=" + this.password, null, options)
         .then((response) => {
           console.log(response.status)
+          console.log(response.data)
+          alert("yes")
           if (response.status === 200) {
             this.enableSubmitLoader();
           }
           this.register_success();
       }, (error) => {
         alert("Register without Network");
-                    this.enableSubmitLoader();
+        
+        //          this.enableSubmitLoader();
         console.log(error)
-        this.register_success();
+        //this.register_success();
       });
     },
     enableSubmitLoader() {
