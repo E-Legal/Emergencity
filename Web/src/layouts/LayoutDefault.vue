@@ -13,8 +13,12 @@
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarText">
+          <ul class="navbar-nav mr-auto">
+             <li class="nav-item" style="float:left">
+                <router-link class="navbar-brand" to="/"><img style="" class="pict" src="/img/logo.png"/></router-link>
+            </li>
+          </ul>
           <ul class="navbar-nav ml-auto">
-
             <li v-if="!user" class="nav-item">
               <router-link class="nav-link" to="/register"
                 >Inscription</router-link
@@ -27,10 +31,10 @@
               
   
                <li v-if="user" class="nav-item">
-                <router-link class="navbar-brand" to="/"><span class="power_up"><img class="pict" src="/img/icons/map.svg"/></span><span class="link"> Map </span></router-link>
+                <router-link class="navbar-brand" to="/dashboard"><span class="power_up"><img class="pict" src="/img/icons/map.svg"/></span><span class="link"> Map </span></router-link>
             </li>
             <li v-if="user" class="nav-item">
-                <router-link class="navbar-brand" to="/"><span class="power_up"><img class="pict" src="/img/icons/bar.svg"/></span><span class="link"> Statistique </span></router-link>
+                <router-link class="navbar-brand" to="/stats"><span class="power_up"><img class="pict" src="/img/icons/bar.svg"/></span><span class="link"> Statistique </span></router-link>
             </li>
              <li v-if="user" class="nav-item">
                 <router-link class="navbar-brand" to="/"><span class="power_up"><img class="pict" src="/img/icons/car.svg"/></span><span class="link"> Véhicules </span></router-link>

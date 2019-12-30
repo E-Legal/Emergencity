@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <div style="background: url('/assets/gray.jpg')  no-repeat center center fixed; height: calc(100vh - 56px);  background-position: center;
+    <div style="background: url('/assets/black.jpg')   no-repeat center center fixed; height: calc(100vh - 56px);  background-position: center;
   background-repeat: no-repeat;
   background-size: cover; " class="container-fluid">
   <br>

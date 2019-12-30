@@ -1,11 +1,8 @@
 <template>
   <div class="register">
     <div class="container-flex centered">
-   <div
-      style="background: url('/assets/gray.jpg') no-repeat center center fixed; height: calc(100vh - 56px);  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover; "
-    >
+     <div class="stats" style="background: url('/assets/black.jpg') repeat center center fixed;  background-position: center;">
+
         <h1 class="d-flex justify-content-center bold_title inscription">INSCRIPTION</h1>
         <h1 class="d-flex justify-content-center emergencity">Emergencity</h1>
           <div style="background-color:rgba(158,156,156, 0.5); z-index: 1000; height: calc(50vh - 56px)">
