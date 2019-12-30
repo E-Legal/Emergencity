@@ -1,6 +1,6 @@
 <template>
   
-  <div class="stats" style="background: url('/assets/white3.png') repeat center center fixed;  background-position: center;">
+  <div class="stats" style="background: url('/assets/white3.png') repeat center center fixed;  background-position: center; overflow: auto;">
     <div>
       <div class="container">
         <div class="Chart">

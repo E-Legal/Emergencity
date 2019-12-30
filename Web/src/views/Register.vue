@@ -438,6 +438,7 @@ export default {
       const options = {
         headers: {'accept': 'application/json'}
       }
+      alert("yolo")
       console.log("test")
       if (this.email != this.confirm_mail) {
         alert("Email different");
