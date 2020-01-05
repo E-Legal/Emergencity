@@ -38,9 +38,6 @@
       <!-- row.// -->
       {{ email }} {{ password }} {{ log }} {{ info }}
     </div>
-      <h1>
-    CACAAAA !!
-  </h1>
   </div>
 
   <!--container end.//-->
