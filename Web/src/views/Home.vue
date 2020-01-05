@@ -16,47 +16,37 @@
             <div class="col-lg-4 d-flex justify-content-center img_padd">
               <router-link class="nav-link" to="/profile">
               <img
-                src="/assets/profile_claire.png"
-                style=" width: 150px; height: 150px;"
+                src="/img/profile/avatar.png"
+                style=""
               />  
          
               </router-link>
             </div>
             <div class="col-lg-4 d-flex justify-content-center img_padd">
               <router-link class="nav-link" to="/stats">
-              <img
-                src="/assets/STAT8BLC.png"
-                style=" width: 130px; height: 150px;"
+              <img 
+                src="/img/profile/profits.png"
+                style=""
               /></router-link>
             </div>
             <div class="col-lg-4 d-flex justify-content-center img_padd">
                <router-link class="nav-link" to="/dashboard">
               <img
-                src="/assets/map_clair.png"
-                style=" width: 130px; height: 150px;"
+                src="/img/profile/map.png"
+                style=""
               /></router-link>
             </div>
             <div
-              class="col-lg-6 d-flex justify-content-center img_padd"
-              style="padding-left: 17%"
+              class="col-lg-4 offset-lg-4 d-flex justify-content-center img_padd"
+             
             >
-              <img
-                src="/assets/wifi_blc.png"
-                style=" width: 150px; height: 150px;"
-              />
-            </div>
-            <div
-              class="col-lg-6 d-flex justify-content-center img_padd"
-              style="padding-right: 17%"
-            >
-              <img
-                src="/assets/ambulance_blc.png"
-                style=" width: 200px; height: 150px;"
+              <img 
+                src="/img/profile/car.png"
+             
               />
             </div>
           </div>
         </div>
-        
       </div>
       
 </template>
@@ -77,6 +67,11 @@
 }
 .img_padd {
   padding-bottom: 5%;
+}
+.img_border {
+    border-style: solid;
+  border-width: 2px;
+  border-color: white;
 }
 .bold_title {
   font-weight: bold;
