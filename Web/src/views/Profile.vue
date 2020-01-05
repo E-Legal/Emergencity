@@ -45,7 +45,7 @@
 <div class="w3-row w3-section">
   <div class="w3-col" style="width:50px"><i class="w3-xxlarge fa fa-envelope"></i></div>
     <div class="w3-rest">
-      <input style="width:350px; height: 50px" class="w3-input w3-border" name="email" type="text" placeholder="marie.boodart@email.com" disabled>
+      <input style="width:350px; height: 50px" class="w3-input w3-border" name="email" type="text" placeholder="Email" :value="this.log" disabled>
     </div>
 </div>
 <br>
@@ -343,7 +343,8 @@ export default {
       email: "",
       password: "",
       submitting: false,
-      log: ""
+      log: "",
+      edit: false
     };
   },
   methods: {
@@ -353,6 +354,9 @@ export default {
       } else {
         this.validationError();
       }
+    },
+    editProfile() {
+
     },
     enableSubmitLoader() {
       this.submitting = true;

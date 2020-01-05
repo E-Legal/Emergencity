@@ -47,7 +47,7 @@
                 </template>
                 <b-dropdown-item disabled><center><img style="width: 30px; height: 30px;" src="/assets/marie.png"/></center></b-dropdown-item>
                 <b-dropdown-item disabled><center>Marie Boodart</center></b-dropdown-item>
-                <b-dropdown-item disabled><center><u>marie.boodart@email.com</u></center></b-dropdown-item>
+                <b-dropdown-item disabled><center><u>{{ this.user }}</u></center></b-dropdown-item>
                 <b-dropdown-item><center><router-link class="nav-link" to="/logout">Deconnexion</router-link></center></b-dropdown-item>
               </b-dropdown>
             </li>
