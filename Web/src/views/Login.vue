@@ -1,14 +1,24 @@
 <template>
-  <div class="login" style="overflow: hidden">
-    <div style="background: url('/assets/traffics.jpg') no-repeat center center fixed; height: calc(100vh - 64px);  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;">
-      <h1 style="color:white" class="d-flex justify-content-center emergencity_title">EMERGENCITY</h1>
-      <div
-        style="background-color:rgba(158,156,156, 0.3); z-index: 1000"
-      >
-        <center>
-          <form id="demo" @submit.prevent="submit" novalidate>
+  <div class="register">
+<div class="background-image"></div>
+<div class="content">
+  <br>
+  <br>
+  <br>
+    <div class="container-flex" style="text-align: center; margin: 0 auto">
+      <div style="width: 400px; heidht: 400px; margin: 0 auto">
+    <b-card
+      title="Connexion"
+      img-src="https://ipravda.sk/res/2014/12/10/thumbs/marseille_01-clanokW.jpg  "
+      img-alt="Image"
+      img-top
+      align= "center"
+      style="-webkit-box-shadow: 10px 10px 5px -5px rgba(0,0,0,0.75);
+-moz-box-shadow: 10px 10px 5px -5px rgba(0,0,0,0.75);
+box-shadow: 10px 10px 5px -5px rgba(0,0,0,0.75);"
+    >
+      <b-card-text>
+      <form id="demo" @submit.prevent="submit" novalidate>
             <input
               type="text"
               id="login"
@@ -18,34 +28,56 @@
               v-model="email"
             />
             <input
-              type="text"
+              type="password"
               id="password"
               class="col-lg-6 box_space"
               name="login"
               placeholder="Mot de passe"
               v-model="password"
+              style="margin-left: 1%;"
             />
             <br />
-            <input type="submit" class="fadeIn fourth button_space" value="Connexion" />
+            <input type="submit" class="btn btn-outline-primary" value="Connexion" />
           </form>
-        </center>
-      </div>
-      <div class="container centered" styl e>
-        <aside class="col-sm-4" style="margin: 0 auto;">
-          <!-- card.// -->
-        </aside>
-      </div>
-      <!-- row.// -->
-      {{ email }} {{ password }} {{ log }} {{ info }}
+      </b-card-text>
+    </b-card>
     </div>
+    </div>
+      </div>
   </div>
-
-  <!--container end.//-->
 </template>
 
-<style lang="scss">
+<style scoped>
+* {
+  box-sizing: border-box;
+}
+.form-control {
+  margin: 2%;
+}
+.background-image {
+  background-image: url('https://blogvoyages.fr/wp-content/uploads/2017/04/marseille.jpg');
+  background-size: cover;
+  display: block;
+  filter: blur(5px);
+  -webkit-filter: blur(5px);
+  height: 1000px;
+  left: 0;
+  position: fixed;
+  right: 0;
+  z-index: 1;
+}
 
-
+.content {
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+  top: 10px;
+  left: 0;
+  position: fixed;
+  margin-left: 20px;
+  margin-right: 20px;
+  right: 0;
+  z-index: 2;
+  padding: 0 10px;
+}
 </style>
 
 <script>

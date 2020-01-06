@@ -90,7 +90,7 @@ box-shadow: 10px 10px 5px -5px rgba(0,0,0,0.75);"
               <br>
               <div class="d-flex justify-content-center">
                 <input
-                  class="btn"
+                  class="btn btn-outline-primary"
                   type="submit"
                   value="Demande envoyé"
                 />
@@ -108,7 +108,9 @@ box-shadow: 10px 10px 5px -5px rgba(0,0,0,0.75);"
 * {
   box-sizing: border-box;
 }
-
+.form-control {
+  margin: 2%;
+}
 .background-image {
   background-image: url('https://blogvoyages.fr/wp-content/uploads/2017/04/marseille.jpg');
   background-size: cover;

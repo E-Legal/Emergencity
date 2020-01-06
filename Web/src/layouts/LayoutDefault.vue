@@ -1,6 +1,6 @@
 <template>
   <div class="LayoutDefault">
-      <nav class="navbar navbar-expand-lg shadow" style="    padding-right: 14%;">
+      <nav class="navbar navbar-expand-lg shadow" style="     z-index: 100;   padding-right: 14%;">
         <button
           class="navbar-toggler"
           type="button"
@@ -20,12 +20,11 @@
           </ul>
           <ul class="navbar-nav ml-auto">
             <li v-if="!user" class="nav-item">
-              <router-link class="nav-link" to="/register"
-                >Inscription</router-link
-              >
+              
+                       <router-link class="navbar-brand" to="/register"><span class="power_up"><img class="pict" src="/img/icons/register.svg"/></span><span class="link"> Inscription </span></router-link> 
             </li>
             <li v-if="!user" class="nav-i tem">
-              <router-link class="nav-link" to="/login">Connexion</router-link>
+                <router-link class="navbar-brand" to="/login"><span class="power_up"><img class="pict" src="/img/icons/login.svg"/></span><span class="link"> Login </span></router-link>
             </li>
 
               
@@ -46,8 +45,7 @@
                   <img class="pict" style="height: 30px; width: 30px" src="/img/icons/user.svg"/>
                 </template>
                 <b-dropdown-item disabled><center><img style="width: 30px; height: 30px;" src="/assets/marie.png"/></center></b-dropdown-item>
-                <b-dropdown-item disabled><center>Marie Boodart</center></b-dropdown-item>
-                <b-dropdown-item disabled><center><u>{{ this.user }}</u></center></b-dropdown-item>
+               <router-link class="nav-link" to="/profile"> <b-dropdown-item disabled><center><u>{{ this.user }}</u></center></b-dropdown-item> </router-link>
                 <b-dropdown-item><center><router-link class="nav-link" to="/logout">Deconnexion</router-link></center></b-dropdown-item>
               </b-dropdown>
             </li>
