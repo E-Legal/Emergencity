@@ -38,7 +38,7 @@
           </div>
           <div class="col-6">
             <div class="Chart">
-              <h2>Total feux</h2> 
+              <h2>Total feux modifiés</h2> 
               <line-example v-if="this.total_feux" title="Total Feux" :total_feux="this.total_feux" :key="componentKey[3]"></line-example>
               <div v-else class="loader"></div>
             </div>

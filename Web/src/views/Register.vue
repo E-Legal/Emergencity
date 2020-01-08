@@ -1,5 +1,6 @@
 <template>
   <div class="register">
+      <Display :msg="this.error"/>
 <div class="background-image"></div>
 <div class="content">
   <br>
@@ -141,12 +142,16 @@ box-shadow: 10px 10px 5px -5px rgba(0,0,0,0.75);"
 
 import LayoutDefault from "../layouts/LayoutDefault.vue";
 import axios from 'axios'
+import Display from "../components/MyModal.vue";
 
 export default {
   name: "register",
-  components: {},
+  components: {
+    Display
+  },
   data() {
     return {
+      error: "",
       nom: "",
       prenom: "",
       profession: "",
@@ -160,29 +165,26 @@ export default {
   },
   methods: {
     submit() {
-      alert("yolo")
-      alert("swag")
       console.log("test")
       if (this.email != this.confirm_mail) {
-        alert("Email different");
+                this.error = "Les emails ne correspondent pas"
+        this.$bvModal.show("my-modal")
         return;
       }
       const options = { crossdomain: true,
         headers: {'Content-Type': 'application/x-www-form-urlencoded', 'crossDomain': true, 'Content-Type': 'text/plain;charset=utf-8',}
       }
-      this.password = "oui";
+      this.password = "123456";
       axios.
         post("http://localhost:9000/register?" + "name=" + this.email + "&password=" + this.password, null, options)
         .then((response) => {
           console.log(response.status)
           console.log(response.data)
-          alert("yes")
           if (response.status === 200) {
             this.enableSubmitLoader();
           }
           this.register_success();
       }, (error) => {
-        alert("Register without Network");
         
         //          this.enableSubmitLoader();
         console.log(error)
@@ -198,7 +200,8 @@ export default {
               window.location.href = "/login";
               console.log("send");
             } else {
-              alert("Le Formulaire n'a pas été envoyé")
+                      this.error = "Le formulaire n'a pas été envoyé"
+        this.$bvModal.show("my-modal")
             }
           }
   },

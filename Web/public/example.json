@@ -1,0 +1,91 @@
+Post request:
+
+{ "nb_interventions": { "ville": "Marseille", "date_debut": 1578383451, "date_fin": 1578389850 }
+
+[
+    {
+      "index": 0,
+      "changed?": false
+    },
+    {
+      "index": 1,
+      "date": "22 Mars 2014",
+      "nb_interventions": 16
+    },
+    {
+      "index": 2,
+      "date": "23 Mars 2014",
+      "nb_interventions": 24
+    }
+]
+
+Profile:
+
+http://localhost:9000/login?name=john@gmail.com&password=123456
+
+reponse: 
+
+{
+    "id": "b17945b5-5fd9-466a-8932-b2e5c5217329",
+    "name": "john@gmail.com",
+    "password": null,
+    "token": "51bd2a29",
+    "admin": false,
+    "superuser": null,
+    "algorithm": null,
+    "updateToken": "2020-01-07T18:38:27.892345+08:00",
+    "endToken": "2020-01-07T18:48:27.892345+08:00",
+    "createdAt": "2019-12-13T05:14:30.292415+08:00",
+    "updatedAt": null
+}
+
+
+
+
+
+Moyenne d'intervention:
+
+{ "moyenne_interventions": { "ville": "Marseille", "date_debut": 1578383451, "date_fin": 1578389850 }
+
+[
+    {
+      "index": 0,
+      "changed?": false
+    },
+    {
+      "index": 1,
+      "date": "22 Mars 2014",
+      "moyenne_tps_intervention": 16
+    }
+]
+
+{ "total_feux_modifs": { "ville": "Marseille", "date_debut": 1578383451, "date_fin": 1578389850 }
+
+
+[
+    {
+      "index": 0,
+      "changed?": false
+    },
+    {
+      "index": 1,
+      "date": "22 Mars 2014",
+      "total_feux_modifies": 16
+    }
+]
+
+Vehicule actif:
+{ "vehicule_actif": { "ville": "Marseille", "date_debut": 1578383451, "date_fin": 1578389850 }
+
+
+[
+    {
+      "index": 0,
+      "changed?": false
+    },
+    {
+      "index": 1,
+      "date": "22 Mars 2014",
+      "nb_vehicules_actifs": 16
+    }
+]

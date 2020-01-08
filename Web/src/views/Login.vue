@@ -133,9 +133,10 @@ export default {
       }, (error) => {
         console.log(error)
         //this.enableSubmitLoader();
-        alert("Login without Network")
-                    this.enableSubmitLoader();
-            this.login_success();
+        this.error = "Connexion refusé"
+        this.$bvModal.show("my-modal")
+        //this.enableSubmitLoader();
+        //this.login_success();
         console.log(error)
       });
     },
@@ -144,10 +145,10 @@ export default {
         localStorage.login = this.email;
         this.log = localStorage.login;
         this.$emit("update:layout", LayoutDefault);
-        window.location.href = "/";
-        console.log("send");
         this.error = "Connexion réussie"
         this.$bvModal.show("my-modal")
+        window.location.href = "/";
+        console.log("send");
       } else {
         this.error = "Mauvais Email ou/et Mot de passe"
                 this.$bvModal.show("my-modal")
