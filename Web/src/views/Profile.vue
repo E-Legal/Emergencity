@@ -10,6 +10,7 @@
       <img style="width: 150px; height: 150px;" src="/assets/marie.png" />
       <br>
       <br>
+      <Display :msg="this.error" :reload="true"/>
  <h2 style="font-family: 'Raleway', sans-serif;">Bienvenue, <i style="color:gray">Marie</i></h2>
         </center>
         <center>
@@ -19,7 +20,7 @@
     <div class="w3-rest">
       <div class="button" id="button-4">
     <div id="underline"></div>
-    <a style="text-decoration:none;">Editer informations</a>
+    <a v-on:click="greet" style="text-decoration:none;">Editer informations</a>
   </div>
     </div>
 </div>
@@ -29,7 +30,9 @@
 <div class="w3-row w3-section">
   <div class="w3-col" style="width:50px"><i class="w3-xxlarge fa fa-user"></i></div>
     <div class="w3-rest">
-      <input style="width:350px; height: 50px" class="w3-input w3-border" name="first" type="text" placeholder="Marie" disabled>
+      <input  v-if="this.edit" style="width:350px; height: 50px" class="w3-input w3-border" name="first" type="text" placeholder="" value="Marie">
+      <input v-else style="width:350px; height: 50px" class="w3-input w3-border" name="first" type="text" placeholder="" value="Marie" disabled>
+
     </div>
 </div>
 <br>
@@ -37,7 +40,8 @@
 <div class="w3-row w3-section">
   <div class="w3-col" style="width:50px"><i class="w3-xxlarge fa fa-user"></i></div>
     <div class="w3-rest">
-      <input style="width:350px; height: 50px" class="w3-input w3-border" name="last" type="text" placeholder="Boodart" disabled>
+      <input  v-if="this.edit" style="width:350px; height: 50px" class="w3-input w3-border" name="last" type="text" placeholder="" value="Boodart">
+      <input  v-else style="width:350px; height: 50px" class="w3-input w3-border" name="last" type="text" placeholder="" value="Boodart" disabled>
     </div>
 </div>
 <br>
@@ -45,7 +49,8 @@
 <div class="w3-row w3-section">
   <div class="w3-col" style="width:50px"><i class="w3-xxlarge fa fa-envelope"></i></div>
     <div class="w3-rest">
-      <input style="width:350px; height: 50px" class="w3-input w3-border" name="email" type="text" placeholder="Email" :value="this.log" disabled>
+      <input  v-if="this.edit" style="width:350px; height: 50px" class="w3-input w3-border" name="email" type="text" placeholder="" :value="this.log">
+      <input v-else style="width:350px; height: 50px" class="w3-input w3-border" name="email" type="text" placeholder="" :value="this.log" disabled>
     </div>
 </div>
 <br>
@@ -53,7 +58,8 @@
 <div class="w3-row w3-section">
   <div class="w3-col" style="width:50px"><i class="w3-xxlarge fa fa-user"></i></div>
     <div class="w3-rest">
-      <input style="width:350px; height: 50px" class="w3-input w3-border" name="last" type="text" placeholder="Fonction" disabled>
+      <input id="oui" v-if="this.edit" style="width:350px; height: 50px" class="w3-input w3-border" name="last" type="text" placeholder="Fonction" value="Agent">
+      <input id="lol" v-else style="width:350px; height: 50px" class="w3-input w3-border" name="last" type="text" value="Agent" placeholder="Fonction" disabled>
     </div>
 </div>
 <br>
@@ -61,14 +67,15 @@
 <div class="w3-row w3-section">
    <div class="w3-col" style="width:50px"><i class="w3-xxlarge fa fa-user"></i></div>
     <div class="w3-rest">
-      <input style="width:350px; height: 50px" class="w3-input w3-border" name="phone" type="text" placeholder="Marseille" disabled>
+      <input  v-if="this.edit" style="width:350px; height: 50px" class="w3-input w3-border" name="phone" type="text" placeholder="" value="Marseille" >
+      <input v-else style="width:350px; height: 50px" class="w3-input w3-border" name="phone" type="text" placeholder=""  value="Marseille" disabled>
     </div>
 </div>
 <br>
 <br>
-<div class="button" id="button-2">
+<div v-on:click="save_edit" class="button" id="button-2">
     <div id="slide"></div>
-    <a style="text-decoration:none;">Sauvegarder</a>
+Sauvegarder
   </div>
   <br>
   <br>
@@ -86,7 +93,7 @@ body {
   background: #2D3142;
   font-family: 'Raleway', sans-serif;
 }
-a:link
+.mybutton:link
 {
 text-decoration:none;
 color: black;
@@ -159,7 +166,7 @@ color: black;
   overflow: hidden;
 }
 
-a {
+.mybutton {
   color: #BFC0C0;
   text-decoration: none;
   letter-spacing: 1px;
@@ -332,11 +339,19 @@ h2.active {
 </style>
 
 <script>
+
 // @ is an alias to /src
 import LayoutDefault from "../layouts/LayoutDefault.vue";
+import Display from "../components/MyModal.vue";
+import Map from "../components/Map.vue";
+import axios from 'axios';
 
 export default {
   name: "profile",
+  components: {
+    Display,
+    Map
+  },
   data() {
     return {
       title: "Vue.js Demo Form",
@@ -344,10 +359,22 @@ export default {
       password: "",
       submitting: false,
       log: "",
-      edit: false
+      edit: false,
+      error: ""
     };
   },
   methods: {
+    save_edit() {
+      this.error = "Sauvegarde effectué!"
+      this.$bvModal.show('my-modal')
+    },
+      greet: function () {
+      if (this.edit == false) {
+        this.edit = true;
+      } else {
+      this.edit = false;
+      }
+    },
     submit() {
       if (this.password) {
         this.sendFormData();
@@ -377,9 +404,21 @@ export default {
     this.$emit("update:layout", LayoutDefault);
   },
   created() {
-    this.log = localStorage.login;
+                this.log = localStorage.login;
+               const options = { crossdomain: true,
+        headers: {'Content-Type': 'application/x-www-form-urlencoded', 'crossDomain': true, 'Content-Type': 'text/plain;charset=utf-8',}
+      }
+    axios.
+        post("http://localhost:9000/login?" + "name=" + this.email + "&password=" + "123456", null, options)
+        .then((response) => {
+          if (response.status === 200) {
+            this.log = response.data["name"]
+          }
+      }, (error) => {
+                    this.log = localStorage.login;
+      });
+
     this.$emit("update:layout", LayoutDefault);
   },
-  components: {}
 };
 </script>

@@ -1,5 +1,6 @@
 <template>
   <div class="register">
+    <Display :msg="this.error"/>
 <div class="background-image"></div>
 <div class="content">
   <br>
@@ -84,6 +85,7 @@ box-shadow: 10px 10px 5px -5px rgba(0,0,0,0.75);"
 // @ is an alias to /src
 import LayoutDefault from "../layouts/LayoutDefault.vue";
 import axios from 'axios'
+import Display from "../components/MyModal.vue";
 
 export default {
   name: "login",
@@ -94,7 +96,8 @@ export default {
       password: "",
       submitting: false,
       log: "",
-      info: ""
+      info: "",
+      error: ""
     };
   },
   methods: {
@@ -134,7 +137,6 @@ export default {
                     this.enableSubmitLoader();
             this.login_success();
         console.log(error)
-        this.login_success();
       });
     },
     login_success() {
@@ -144,12 +146,16 @@ export default {
         this.$emit("update:layout", LayoutDefault);
         window.location.href = "/";
         console.log("send");
+        this.error = "Connexion réussie"
+        this.$bvModal.show("my-modal")
       } else {
-        alert("Mauvais Email ou/et mot de passe");
+        this.error = "Mauvais Email ou/et Mot de passe"
+                this.$bvModal.show("my-modal")
       }
     },
     validationError() {
-      alert("Pas de mot de passe");
+              this.error = "Aucun mot de passe"
+                this.$bvModal.show("my-modal")
     }
   },
   mounted() {
@@ -159,6 +165,8 @@ export default {
     this.log = localStorage.login;
     this.$emit("update:layout", LayoutDefault);
   },
-  components: {}
+  components: {
+    Display
+  }
 };
 </script>
