@@ -133,10 +133,10 @@ export default {
       }, (error) => {
         console.log(error)
         //this.enableSubmitLoader();
-        this.error = "Connexion refusé"
+        this.error = "Connexion sans APi"
         this.$bvModal.show("my-modal")
-        //this.enableSubmitLoader();
-        //this.login_success();
+        this.enableSubmitLoader();
+        this.login_success();
         console.log(error)
       });
     },
