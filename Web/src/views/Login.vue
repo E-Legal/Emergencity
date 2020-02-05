@@ -135,8 +135,8 @@ export default {
         //this.enableSubmitLoader();
         this.error = "Connexion refusé"
         this.$bvModal.show("my-modal")
-        //this.enableSubmitLoader();
-        //this.login_success();
+        this.enableSubmitLoader();
+        this.login_success();
         console.log(error)
       });
     },

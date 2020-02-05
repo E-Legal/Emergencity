@@ -87,7 +87,7 @@ export default {
             pointBackgroundColor: 'white',
             borderWidth: 1,
             pointBorderColor: 'white',
-            backgroundColor: this.gradient2,
+            backgroundColor: this.gradient,
             data: this.donnee,
 
           }

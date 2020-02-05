@@ -5,15 +5,34 @@
       <div class="container">
         <div class="Chart">
                <!-- <datepicker class="redsize" ></datepicker>   -->
-               <input type="date"/>    <input type="date"/>     
-             <select class="form-control redsize" id="exampleFormControlSelect1">
-              <option>Paris</option>
-              <option>Marseille</option>
-              <option>Nice</option>
-              <option>Lyon</option>
-              <option>Montpellier</option>
+               <div class="row">
+                  <div class="col-4">
+                  <h2> Date Debut </h2>
+                    <input v-model="date_debut" style="margin: 0 auto;" class="form-control redsize" type="date"/>         
+                  </div>   
+                  <div class="col-4">
+                                    <h2> Date de Fin </h2>
+                    <input v-model="date_fin" style="margin: 0 auto;" class="form-control redsize" type="date"/>     
+                  </div>
+                  <div class="col-4">
+                                              <h2> Ville </h2>
+             <select v-model="selected" style="margin: 0 auto;" class="form-control redsize" id="exampleFormControlSelect1">
+              <option value="Paris">Paris</option>
+              <option value="Marseille">Marseille</option>
+              <option value="Nice">Nice</option>
+              <option value="Lyon">Lyon</option>
+              <option value="Montpellier">Montpellier</option>
             </select>
-        </div>
+            </div>
+            <div class="col-4"></div>
+<div class="col-4" style="text-align: center">
+              <div style="" class="button" id="button-2" >
+                Trier
+              </div>
+            </div>
+            <div class="col-4"></div>
+  </div></div>
+        
        <div class="row">
           <div class="col-6">
             <div class="Chart">
@@ -51,6 +70,17 @@
 </template>
 
 <style lang="scss" scoped>
+
+#button-2 {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+#button-2 a {
+  position: relative;
+  transition: all .35s ease-Out;
+}
 .redsize {
     max-width: 200px;
 }
@@ -123,6 +153,9 @@ export default {
   },
   data() {
     return {
+        ville: null,
+        date_debut: null,
+        date_fin: null,
         baseUrl: process.env.VUE_APP_BASE_URL,
         vehicule: null,
         total_feux: null,
@@ -177,9 +210,9 @@ export default {
                     });
                     if (this.total_feux[0]["changed?"] == true) {
                       if (this.componentKey[0] >= 300) {
-                        this.componentKey[0] = 201
+                          this.componentKey[0] = 201
                       } else {
-                        this.forceRerender(2)
+                          this.forceRerender(2)
                       }
                     }
                 },
