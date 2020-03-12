@@ -11,6 +11,7 @@ public interface Users {
     User create(String name, String password);
     boolean validUser(String name, String password);
     Option<User> tokenGen(String name, String password);
+    Option<User> tokenUpdate(String oldToken);
     Option<User> checkToken(String token);
     Option<User> get(UUID id);
     Option<User> UserEgalOfSuppAdmin(String token);

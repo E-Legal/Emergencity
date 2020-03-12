@@ -14,6 +14,7 @@ import java.util.UUID;
 public interface Courses {
     Course create(CourseRequest request);
     Option<Course> getById(UUID id);
-    Option<Course> modById(UUID id, String course);
+    Option<Course> modById(UUID id, String course, String time, String distance);
     Page<Course> listTCourse(Pageable pageable);
+    Boolean delete(UUID id);
 }

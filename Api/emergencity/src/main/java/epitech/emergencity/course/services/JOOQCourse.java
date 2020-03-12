@@ -3,20 +3,15 @@ package epitech.emergencity.course.services;
 import epitech.emergencity.course.Course;
 import epitech.emergencity.course.dto.CourseRequest;
 import epitech.emergencity.domain.tables.records.EmergencityDestinationRecord;
-import epitech.emergencity.domain.tables.records.EmergencityTrafficlightRecord;
 import epitech.emergencity.services.JOOQCrudUtils;
-import epitech.emergencity.trafficLight.TrafficLight;
-import epitech.emergencity.trafficLight.services.JOOQTrafficLight;
-import epitech.emergencity.users.services.JOOQUsers;
 import io.vavr.control.Option;
 import lombok.extern.slf4j.Slf4j;
 import org.jooq.DSLContext;
 import org.jooq.Field;
 import org.jooq.Record;
 import org.jooq.Result;
-import org.jooq.tools.json.JSONObject;
-import org.jooq.tools.json.JSONParser;
-import org.jooq.tools.json.ParseException;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -26,15 +21,12 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import javax.json.Json;
-import javax.json.bind.Jsonb;
-import java.time.OffsetDateTime;
+
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static epitech.emergencity.domain.Tables.*;
-import static epitech.emergencity.domain.Tables.EMERGENCITY_TRAFFICLIGHT;
 import static org.jooq.impl.DSL.asterisk;
 import static org.jooq.impl.DSL.count;
 
@@ -53,6 +45,8 @@ public class JOOQCourse implements Courses, JOOQCrudUtils {
                 .y_end(record.getYEnd())
                 .x_end(record.getXEnd())
                 .course(record.getCourse())
+                .time(record.getTime())
+                .distance(record.getDistance())
                 .build();
     }
 
@@ -64,6 +58,8 @@ public class JOOQCourse implements Courses, JOOQCrudUtils {
                 .y_end(record.getValue(EMERGENCITY_DESTINATION.Y_END))
                 .x_end(record.getValue(EMERGENCITY_DESTINATION.X_END))
                 .course(record.getValue(EMERGENCITY_DESTINATION.COURSE))
+                .time(record.getValue(EMERGENCITY_DESTINATION.TIME))
+                .distance(record.getValue(EMERGENCITY_DESTINATION.DISTANCE))
                 .build();
     }
 
@@ -98,30 +94,21 @@ public class JOOQCourse implements Courses, JOOQCrudUtils {
         RestTemplate restTemplate = new RestTemplate();
         String resp = restTemplate.getForObject(builder.toUriString(), String.class);
 
+        JSONObject root = new JSONObject(resp);
 
-        JSONParser parser = new JSONParser();
-        JSONObject json = null;
-        try {
-            json = (JSONObject) parser.parse(resp);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        log.info("merde merde merde {}", json.get("features"));
-        if (json.get("features").toString().compareTo("[]") == 0)
+        JSONArray feat = root.getJSONArray("features");
+
+        if (feat.length() == 0)
             return null;
-        String test  = json.get("features").toString();
-        test = test.substring(test.indexOf("\"x\":"));
-        String x = (String) test.subSequence(4, test.indexOf(','));
-        test = test.substring(test.indexOf("\"y\":"));
-        String y = (String) test.subSequence(4, test.indexOf(','));
 
-        log.info("Alors la x = {} et y = {}", x, y);
         String[] value = new String[2];
-        value[0] = x;
-        value[1] = y;
-        log.info("Alors la x = {} et y = {}", value[0], value[1]);
-        return (value);
 
+        JSONArray coord = feat.getJSONObject(0).getJSONObject("geometry").getJSONArray("coordinates");
+
+        value[0] = String.valueOf(coord.getDouble(0));
+        value[1] = String.valueOf(coord.getDouble(1));
+
+        return (value);
     }
 
     @Override
@@ -135,10 +122,12 @@ public class JOOQCourse implements Courses, JOOQCrudUtils {
     }
 
     @Override
-    public Option<Course> modById(UUID id, String course) {
+    public Option<Course> modById(UUID id, String course, String time, String disctance) {
         return Option.ofOptional(
                 database.update(EMERGENCITY_DESTINATION)
                         .set(EMERGENCITY_DESTINATION.COURSE, course)
+                        .set(EMERGENCITY_DESTINATION.TIME, time)
+                        .set(EMERGENCITY_DESTINATION.DISTANCE, disctance)
                         .where(EMERGENCITY_DESTINATION.ID.eq(id))
                         .returning(EMERGENCITY_DESTINATION.asterisk())
                         .fetchOptional()
@@ -171,5 +160,12 @@ public class JOOQCourse implements Courses, JOOQCrudUtils {
                 .map(JOOQCourse::fromRecord);
 
         return new PageImpl<>(courses, pageable, records.isEmpty() ? 0 : records.getValue(0, countField));
+    }
+
+    @Override
+    public Boolean delete(UUID id) {
+        return database.delete(EMERGENCITY_DESTINATION)
+                .where(EMERGENCITY_DESTINATION.ID.eq(id))
+                .execute() >0;
     }
 }

@@ -127,6 +127,25 @@ public class JOOQUsers implements Users, JOOQCrudUtils {
     }
 
     @Override
+    @Transactional
+    public Option<User> tokenUpdate(String oldToken) {
+        RandomString session = new RandomString();
+        String token = session.toString();
+        token = token.replace("epitech.emergencity.services.RandomString@", "");
+        OffsetDateTime now = OffsetDateTime.now();
+        return Option.ofOptional(
+                database.update(EMERGENCITY_USER)
+                        .set(EMERGENCITY_USER.TOKEN, token)
+                        .set(EMERGENCITY_USER.TOKEN_UPDATE, now)
+                        .set(EMERGENCITY_USER.TOKEN_END, now.plusMinutes(10))
+                        .where(EMERGENCITY_USER.TOKEN.eq(oldToken))
+                        .returning(EMERGENCITY_USER.asterisk())
+                        .fetchOptional()
+                        .map(JOOQUsers::fromRecord)
+        );
+    }
+
+    @Override
     @Transactional(readOnly = true)
     public Option<User> checkToken(String token) {
         OffsetDateTime now = OffsetDateTime.now();

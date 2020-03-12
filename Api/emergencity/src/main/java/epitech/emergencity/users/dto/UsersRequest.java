@@ -20,6 +20,8 @@ public class UsersRequest {
     private String name;
     @NotNull
     private String password;
+    private String lastName;
+    private String firstName;
     private Boolean admin;
     private Boolean superuser;
     private Boolean algorithm;

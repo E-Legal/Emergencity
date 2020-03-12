@@ -17,6 +17,8 @@ public class User {
     @NotNull
     private String password;
     private String token;
+    private String lastName;
+    private String firstName;
     private Boolean admin;
     private Boolean superuser;
     private Boolean algorithm;

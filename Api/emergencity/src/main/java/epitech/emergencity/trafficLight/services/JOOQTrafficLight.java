@@ -98,4 +98,13 @@ public class JOOQTrafficLight implements TrafficLights, JOOQCrudUtils {
 
         return new PageImpl<>(trafficLights, pageable, records.isEmpty() ? 0 : records.getValue(0, countField));
     }
+
+    @Override
+    public Boolean delete(UUID id) {
+        return database.delete(EMERGENCITY_TRAFFICLIGHT)
+                .where(EMERGENCITY_TRAFFICLIGHT.ID.eq(id))
+                .execute() >0;
+    }
+
+
 }

@@ -22,4 +22,6 @@ public class Course {
     @NotNull
     private String x_end;
     private String course;
+    private String time;
+    private String distance;
 }

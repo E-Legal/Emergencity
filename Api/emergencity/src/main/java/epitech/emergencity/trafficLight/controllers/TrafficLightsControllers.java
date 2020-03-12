@@ -7,16 +7,16 @@ import epitech.emergencity.trafficLight.services.TrafficLights;
 import epitech.emergencity.users.services.Users;
 import io.vavr.API;
 import lombok.extern.slf4j.Slf4j;
+import org.jooq.tools.json.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+import java.util.UUID;
 
 @EnableWebSecurity
 @RestController
@@ -44,7 +44,17 @@ public class TrafficLightsControllers {
         return API.For(
                 users.checkToken(token)
         ).yield(user -> trafficLights.listTrafficLight(pageable))
-                        .toEither(DomainError.Unauthorized(null))
-                        .fold(r -> ResponseEntity.status(r.getStatus()).body(r.getData()), u -> u);
+                .toEither(DomainError.Unauthorized(null))
+                .fold(r -> ResponseEntity.status(r.getStatus()).body(r.getData()), u -> u);
     }
+
+    @DeleteMapping("/{id}")
+    private Object delete(@PathVariable @Valid @NotNull UUID id, @Valid String token) throws ParseException {
+        return API.For(
+                users.UserEgalOfSuppAdmin(token)
+        ).yield((user) -> trafficLights.delete(id))
+                .toEither(DomainError.Unauthorized(null))
+                .fold(r -> ResponseEntity.status(r.getStatus()).body(r.getData()), u -> u);
+    }
+
 }

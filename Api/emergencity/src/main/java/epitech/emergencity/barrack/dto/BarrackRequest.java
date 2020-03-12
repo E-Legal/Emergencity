@@ -1,12 +1,10 @@
-package epitech.emergencity.course.dto;
+package epitech.emergencity.barrack.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.json.Json;
-import javax.json.bind.Jsonb;
 import javax.validation.constraints.NotNull;
 import java.util.UUID;
 
@@ -14,13 +12,10 @@ import java.util.UUID;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class CourseRequest {
+public class BarrackRequest {
     private UUID id;
     @NotNull
-    private String start;
+    private String city;
     @NotNull
-    private String end;
-    private String course;
-    private String time;
-    private String distance;
+    private String name;
 }
