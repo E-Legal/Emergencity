@@ -31,5 +31,7 @@ y_start text,
 x_start	text,
 y_end text,
 x_end text,
-course text
+course text,
+time text,
+distance text
 );
