@@ -1,0 +1,46 @@
+[
+    {
+      "index": 0,
+      "changed?": false
+    },
+    {
+      "index": 1,
+      "date": "22 Mars 2014",
+      "moyenne_tps_intervention": 16
+    },
+    {
+      "index": 2,
+      "date": "23 Mars 2014",
+      "moyenne_tps_intervention": 24
+    },
+    {
+      "index": 3,
+      "date": "24 Mars 2014",
+      "moyenne_tps_intervention": 8
+    },
+    {
+      "index": 4,
+      "date": "25 Mars 2014",
+      "moyenne_tps_intervention": 9
+    },
+    {
+      "index": 5,
+      "date": "26 Mars 2014",
+      "moyenne_tps_intervention": 6
+    },
+    {
+      "index": 6,
+      "date": "27 Mars 2014",
+      "moyenne_tps_intervention": 16
+    },
+    {
+      "index": 7,
+      "date": "28 Mars 2014",
+      "moyenne_tps_intervention": 30
+    },
+    {
+        "index": 8,
+        "date": "29 Mars 2014",
+        "moyenne_tps_intervention": 12
+    }
+  ]

@@ -17,15 +17,18 @@
     "core-js": "^2.6.5",
     "jquery": "^3.4.1",
     "leaflet": "^1.5.1",
+    "moment": "^2.24.0",
     "nuxt-leaflet": "0.0.19",
     "portal-vue": "^2.1.6",
     "register-service-worker": "^1.6.2",
     "vue": "^2.6.10",
+    "vue-bootstrap-datetimepicker": "^5.0.1",
     "vue-chartjs": "^3.5.0",
     "vue-router": "^3.0.3",
     "vue2-gmap-custom-marker": "^5.5.4",
     "vue2-google-maps": "^0.10.7",
     "vue2-leaflet": "^2.2.1",
+    "vuejs-datepicker": "^1.6.2",
     "vuex": "^3.0.1"
   },
   "devDependencies": {

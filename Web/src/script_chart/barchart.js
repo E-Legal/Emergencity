@@ -1,20 +1,22 @@
 import {Line, Bar} from 'vue-chartjs'
 
 export default {
-    extends: Line,
+    extends: Bar,
     props: {
       title: String,
       intervention: Array,
       vehicule: Array,
       moyenne_intervention: Array,
       total_feux: Array
+
     },
     data () {
       return {
         gradient: null,
         gradient2: null,
         label: [],
-        donnee: []
+        donnee: [],
+        options: {responsive: true, maintainAspectRatio: false}
       }
     },
     mounted () {
@@ -28,6 +30,14 @@ export default {
        });
       }
       if (this.moyenne_intervention) {
+        this.options = {  scales: {
+          yAxes: [{
+              ticks: {
+                  suggestedMin: 0,
+                  suggestedMax: 100
+              }
+          }]
+      }, responsive: true, maintainAspectRatio: false}
         this.moyenne_intervention.forEach((value, index) => {
           if (index === 0) {
             return;
@@ -78,10 +88,11 @@ export default {
             borderWidth: 1,
             pointBorderColor: 'white',
             backgroundColor: this.gradient2,
-            data: this.donnee
+            data: this.donnee,
+
           }
-        ]
-      }, {responsive: true, maintainAspectRatio: false})
+        ],
+      }, this.options)
   
     }
   }
