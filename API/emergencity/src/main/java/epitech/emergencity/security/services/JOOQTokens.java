@@ -20,8 +20,7 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import static epitech.emergencity.domain.Tables.EMERGENCITY_TOKEN;
-import static epitech.emergencity.domain.Tables.EMERGENCITY_USER;
+import static epitech.emergencity.domain.Tables.*;
 
 @Service
 @Slf4j
@@ -113,17 +112,14 @@ public class JOOQTokens implements Tokens, JOOQCrudUtils {
     @Override
     @Transactional
     public boolean is_admin(String token) {
-        Result<Record1<Boolean>> admin = database
-                .select(
-                        EMERGENCITY_USER.ADMIN
-                )
-                .from(EMERGENCITY_USER)
+        return database.fetchExists(database
+                .selectFrom(EMERGENCITY_USER
                 .join(EMERGENCITY_TOKEN)
                 .on(EMERGENCITY_TOKEN.TOKEN.eq(token))
+                .join(EMERGENCITY_COLINFAITTOUT_ADMIN)
+                .on(EMERGENCITY_COLINFAITTOUT_ADMIN.USER_ID.eq(EMERGENCITY_TOKEN.USER_ID)))
                 .where(EMERGENCITY_USER.ID.eq(EMERGENCITY_TOKEN.USER_ID))
-                .fetch();
-
-        return (boolean) admin.getValue(0, 0);
+        );
     }
 
     @Override
