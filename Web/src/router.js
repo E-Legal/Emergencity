@@ -40,6 +40,18 @@ export default new Router({
       }
     },
     {
+      path: "/",
+      name: "admin",
+      component: Home,
+      beforeEnter(to, from, next) {
+        if (isAuthenticated()) {
+          next();
+        } else {
+          next("/login");
+        }
+      }
+    },
+    {
       path: "/login",
       name: "login",
       component: Login
