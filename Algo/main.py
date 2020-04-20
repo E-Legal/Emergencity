@@ -64,6 +64,6 @@ while (1):
 		print("KO Calculer route")
 
 	c = input();
-	if (c == "end"):
-		break
-	#time.sleep(5)
+	#if (c == "end"):
+	#	break
+	time.sleep(5)

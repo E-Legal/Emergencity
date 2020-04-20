@@ -30,6 +30,7 @@ import javax.validation.constraints.NotNull;
 import java.sql.Array;
 import java.util.Map;
 import java.util.UUID;
+import java.util.function.Supplier;
 
 @EnableWebSecurity
 @RestController
@@ -43,6 +44,13 @@ public class CourseControllers {
     Users users;
     @Autowired
     Tokens tokens;
+
+    private <T> Either<DomainError, T> ifAuthorized(String token, Supplier<Either<DomainError, T>> block) {
+        if(tokens.is_admin(token) || tokens.is_super_user(token))
+            return block.get();
+        else
+            return Either.left(DomainError.Unauthorized(null));
+    }
 
     @PostMapping("/new")
     private Object create(@Valid CourseRequest request, @Valid String token) {
@@ -92,9 +100,11 @@ public class CourseControllers {
     @DeleteMapping("/{id}")
     private Object delete(@PathVariable @Valid @NotNull UUID id, @Valid String token) throws ParseException {
         return API.For(
-                users.UserEgalOfSuppAdmin(token)
-        ).yield((user) -> courses.delete(id))
-                .toEither(DomainError.Unauthorized(null))
+                tokens.checkToken(token),
+                courses.getById(id)
+        ).yield((check, course) ->
+                ifAuthorized(token, () -> Either.right(courses.delete(id)))
+        ).getOrElse(Either.left(DomainError.NotFound(null)))
                 .fold(r -> ResponseEntity.status(r.getStatus()).body(r.getData()), u -> u);
     }
 

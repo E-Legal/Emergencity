@@ -11,6 +11,7 @@ import epitech.emergencity.security.services.Tokens;
 import epitech.emergencity.services.DomainError;
 import epitech.emergencity.users.services.Users;
 import io.vavr.API;
+import io.vavr.control.Either;
 import lombok.extern.slf4j.Slf4j;
 import org.jooq.tools.json.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import java.util.UUID;
+import java.util.function.Supplier;
 
 @EnableWebSecurity
 @RestController
@@ -38,28 +40,32 @@ public class BarrackUserControllers {
     @Autowired
     Tokens tokens;
 
+    private <T> Either<DomainError, T> ifAuthorized(String token, Supplier<Either<DomainError, T>> block) {
+        if(tokens.is_admin(token))
+            return block.get();
+        else
+            return Either.left(DomainError.Unauthorized(null));
+    }
+
     @PostMapping("/new")
     private Object create(@Valid BarrackUserRequest request, @Valid String token) {
         return API.For(
-                users.UserEgalOfSuppAdmin(token)
-        ).yield(user -> {
-            BarrackUser e = barrackUsers.create(request);
-            if (e == null) {
-                DomainError r = (DomainError.BadRequest(null));
-                return (ResponseEntity.status(r.getStatus()).body(r.getData()));
-            }
-            return e;
-        })
-                .toEither(DomainError.Unauthorized(null))
+                tokens.checkToken(token),
+                barracks.getById(request.getBarrack_id())
+        ).yield((check, barrack )->
+                ifAuthorized(token, () -> Either.right(barrackUsers.create(request)))
+        ).getOrElse(Either.left(DomainError.NotFound(null)))
                 .fold(r -> ResponseEntity.status(r.getStatus()).body(r.getData()), u -> u);
     }
 
     @DeleteMapping("/delete")
     private Object delete(@Valid @NotNull BarrackUserRequest request, @Valid String token) throws ParseException {
         return API.For(
-                users.UserEgalOfSuppAdmin(token)
-        ).yield((user) -> barrackUsers.delete(request))
-                .toEither(DomainError.Unauthorized(null))
+                tokens.checkToken(token),
+                barracks.getById(request.getBarrack_id())
+        ).yield((check, barrack )->
+                ifAuthorized(token, () -> Either.right(barrackUsers.delete(request)))
+        ).getOrElse(Either.left(DomainError.NotFound(null)))
                 .fold(r -> ResponseEntity.status(r.getStatus()).body(r.getData()), u -> u);
     }
 

@@ -4,6 +4,7 @@ import epitech.emergencity.domain.tables.records.EmergencityTokenRecord;
 import epitech.emergencity.security.Token;
 import epitech.emergencity.services.JOOQCrudUtils;
 import epitech.emergencity.services.RandomString;
+import epitech.emergencity.users.User;
 import epitech.emergencity.users.services.Users;
 import io.vavr.control.Option;
 import lombok.extern.slf4j.Slf4j;
@@ -116,8 +117,8 @@ public class JOOQTokens implements Tokens, JOOQCrudUtils {
                 .selectFrom(EMERGENCITY_USER
                 .join(EMERGENCITY_TOKEN)
                 .on(EMERGENCITY_TOKEN.TOKEN.eq(token))
-                .join(EMERGENCITY_COLINFAITTOUT_ADMIN)
-                .on(EMERGENCITY_COLINFAITTOUT_ADMIN.USER_ID.eq(EMERGENCITY_TOKEN.USER_ID)))
+                .join(EMERGENCITY_ADMIN)
+                .on(EMERGENCITY_ADMIN.USER_ID.eq(EMERGENCITY_TOKEN.USER_ID)))
                 .where(EMERGENCITY_USER.ID.eq(EMERGENCITY_TOKEN.USER_ID))
         );
     }
@@ -125,34 +126,27 @@ public class JOOQTokens implements Tokens, JOOQCrudUtils {
     @Override
     @Transactional
     public boolean is_super_user(String token) {
-        Result<Record1<Boolean>> admin = database
-                .select(
-                        EMERGENCITY_USER.SUPERUSER
-                )
-                .from(EMERGENCITY_USER)
-                .join(EMERGENCITY_TOKEN)
-                .on(EMERGENCITY_TOKEN.TOKEN.eq(token))
+        return database.fetchExists(database
+                .selectFrom(EMERGENCITY_USER
+                        .join(EMERGENCITY_TOKEN)
+                        .on(EMERGENCITY_TOKEN.TOKEN.eq(token))
+                        .join(EMERGENCITY_SUPER_USER)
+                        .on(EMERGENCITY_SUPER_USER.USER_ID.eq(EMERGENCITY_TOKEN.USER_ID)))
                 .where(EMERGENCITY_USER.ID.eq(EMERGENCITY_TOKEN.USER_ID))
-                .fetch();
-
-        return (boolean) admin.getValue(0, 0);
+        );
     }
 
     @Override
     @Transactional
     public boolean is_algo(String token) {
-        Result<Record1<Boolean>> admin = database
-                .select(
-                        EMERGENCITY_USER.ALGORITHM
-                )
-                .from(EMERGENCITY_USER)
-                .join(EMERGENCITY_TOKEN)
-                .on(EMERGENCITY_TOKEN.TOKEN.eq(token))
+        return database.fetchExists(database
+                .selectFrom(EMERGENCITY_USER
+                        .join(EMERGENCITY_TOKEN)
+                        .on(EMERGENCITY_TOKEN.TOKEN.eq(token))
+                        .join(EMERGENCITY_ALGO)
+                        .on(EMERGENCITY_ALGO.USER_ID.eq(EMERGENCITY_TOKEN.USER_ID)))
                 .where(EMERGENCITY_USER.ID.eq(EMERGENCITY_TOKEN.USER_ID))
-                .fetch();
-
-        return (boolean) admin.getValue(0, 0);
-    }
+        );    }
 
     @Override
     public Map<String, Field<?>> sortableField() {
