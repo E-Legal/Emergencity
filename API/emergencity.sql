@@ -85,3 +85,12 @@ CONSTRAINT leanova_user_barrack_unique UNIQUE (user_id, barrack_id)
 
 INSERT INTO EMERGENCITY_USER (id, name, password, admin, superuser, algorithm) VALUES ('0e37df36-f698-11e6-8dd4-cb9ced3df976', 'test', 'yoho', true, true, true);
 INSERT INTO EMERGENCITY_ADMIN (user_id) VALUES ('0e37df36-f698-11e6-8dd4-cb9ced3df976');
+
+INSERT INTO EMERGENCITY_USER (id, name, password, admin, superuser, algorithm) VALUES ('d853e812-83cd-11ea-bc55-0242ac130003', 'algo', 'cocolito', true, true, true);
+INSERT INTO EMERGENCITY_ALGO (user_id) VALUES ('d853e812-83cd-11ea-bc55-0242ac130003');
+
+
+INSERT INTO EMERGENCITY_USER (id, name, password, admin, superuser, algorithm) VALUES ('a3850160-83ce-11ea-bc55-0242ac130003', 'colin_test_1', '', true, true, true);
+/*INSERT INTO EMERGENCITY_SUPER_USER (user_id) VALUES ('a3850160-83ce-11ea-bc55-0242ac130003');*/
+
+

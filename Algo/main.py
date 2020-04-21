@@ -8,8 +8,8 @@ print("---------- Log API")
 
 token = ""
 try:
-	username = "test"
-	password = "yoho"
+	username = "algo"
+	password = "cocolito"
 	req = "http://localhost:9000/login"
 	res = requests.post(req, data = {"name": username, "password": password})
 	token = res.json()['token']
@@ -63,7 +63,7 @@ while (1):
 	except Exception as e:
 		print("KO Calculer route")
 
-	c = input();
+	#c = input();
 	#if (c == "end"):
 	#	break
 	time.sleep(5)
