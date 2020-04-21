@@ -90,7 +90,25 @@ INSERT INTO EMERGENCITY_USER (id, name, password, admin, superuser, algorithm) V
 INSERT INTO EMERGENCITY_ALGO (user_id) VALUES ('d853e812-83cd-11ea-bc55-0242ac130003');
 
 
-INSERT INTO EMERGENCITY_USER (id, name, password, admin, superuser, algorithm) VALUES ('a3850160-83ce-11ea-bc55-0242ac130003', 'colin_test_1', '', true, true, true);
-/*INSERT INTO EMERGENCITY_SUPER_USER (user_id) VALUES ('a3850160-83ce-11ea-bc55-0242ac130003');*/
+INSERT INTO EMERGENCITY_USER (id, name, password, admin, superuser, algorithm) VALUES ('a3850160-83ce-11ea-bc55-0242ac130003', 'colin_test', '123Soleil', true, true, true);
+INSERT INTO EMERGENCITY_SUPER_USER (user_id) VALUES ('a3850160-83ce-11ea-bc55-0242ac130003');
+INSERT INTO EMERGENCITY_ADMIN (user_id) VALUES ('a3850160-83ce-11ea-bc55-0242ac130003');
 
+INSERT INTO EMERGENCITY_USER (id, name, password, admin, superuser, algorithm) VALUES ('ff60e40c-83d0-11ea-bc55-0242ac130003', 'quentin_test', '123Soleil', true, true, true);
+INSERT INTO EMERGENCITY_SUPER_USER (user_id) VALUES ('ff60e40c-83d0-11ea-bc55-0242ac130003');
+INSERT INTO EMERGENCITY_ADMIN (user_id) VALUES ('ff60e40c-83d0-11ea-bc55-0242ac130003');
 
+INSERT INTO EMERGENCITY_USER (id, name, password, admin, superuser, algorithm) VALUES ('23f733f2-83d1-11ea-bc55-0242ac130003', 'eliott_test', '123Soleil', true, true, true);
+INSERT INTO EMERGENCITY_SUPER_USER (user_id) VALUES ('23f733f2-83d1-11ea-bc55-0242ac130003');
+
+INSERT INTO EMERGENCITY_USER (id, name, password, admin, superuser, algorithm) VALUES ('411ba224-83d1-11ea-bc55-0242ac130003', 'sophie_test', '123Soleil', true, true, true);
+INSERT INTO EMERGENCITY_SUPER_USER (user_id) VALUES ('411ba224-83d1-11ea-bc55-0242ac130003');
+
+INSERT INTO EMERGENCITY_USER (id, name, password, admin, superuser, algorithm) VALUES ('4aa87ed4-83d1-11ea-bc55-0242ac130003', 'eloise_test', '123Soleil', true, true, true);
+INSERT INTO EMERGENCITY_SUPER_USER (user_id) VALUES ('4aa87ed4-83d1-11ea-bc55-0242ac130003');
+
+INSERT INTO EMERGENCITY_USER (id, name, password, admin, superuser, algorithm) VALUES ('09adbcf4-83d2-11ea-bc55-0242ac130003', 'fabien_test', '123Soleil', true, true, true);
+INSERT INTO EMERGENCITY_SUPER_USER (user_id) VALUES ('09adbcf4-83d2-11ea-bc55-0242ac130003');
+
+INSERT INTO EMERGENCITY_USER (id, name, password, admin, superuser, algorithm) VALUES ('1ff9c67e-83d2-11ea-bc55-0242ac130003', 'yanis_test', '123Soleil', true, true, true);
+INSERT INTO EMERGENCITY_SUPER_USER (user_id) VALUES ('1ff9c67e-83d2-11ea-bc55-0242ac130003');
