@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.function.Supplier;
 
+@CrossOrigin(origins = "*", maxAge = 3600)
 @EnableWebSecurity
 @RestController
 @RequestMapping("/SU")

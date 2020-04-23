@@ -25,12 +25,12 @@ import javax.validation.constraints.NotNull;
 import java.util.UUID;
 import java.util.function.Supplier;
 
+@CrossOrigin(origins = "*", maxAge = 3600)
 @EnableWebSecurity
 @RestController
-@RequestMapping("/barrackUsers")
+@RequestMapping("/barrack/{id}/user")
 @Slf4j
 public class BarrackUserControllers {
-
     @Autowired
     Users users;
     @Autowired
@@ -48,28 +48,29 @@ public class BarrackUserControllers {
     }
 
     @PostMapping("/new")
-    private Object create(@Valid BarrackUserRequest request, @Valid String token) {
+    private Object create(@PathVariable @Valid @NotNull UUID id, @Valid BarrackUserRequest request, @Valid String token) {
         return API.For(
                 tokens.checkToken(token),
-                barracks.getById(request.getBarrack_id())
+                barracks.getById(id)
         ).yield((check, barrack )->
-                ifAuthorized(token, () -> Either.right(barrackUsers.create(request)))
+                ifAuthorized(token, () -> Either.right(barrackUsers.create(id, request.getUser_id())))
         ).getOrElse(Either.left(DomainError.NotFound(null)))
                 .fold(r -> ResponseEntity.status(r.getStatus()).body(r.getData()), u -> u);
     }
 
     @DeleteMapping("/delete")
-    private Object delete(@Valid @NotNull BarrackUserRequest request, @Valid String token) throws ParseException {
+    private Object delete(@PathVariable @Valid @NotNull UUID id,  @Valid BarrackUserRequest request, @Valid String token) throws ParseException {
+        log.info(id + " " +  request.getUser_id());
         return API.For(
                 tokens.checkToken(token),
-                barracks.getById(request.getBarrack_id())
+                barracks.getById(id)
         ).yield((check, barrack )->
-                ifAuthorized(token, () -> Either.right(barrackUsers.delete(request)))
+                ifAuthorized(token, () -> Either.right(barrackUsers.delete(id, request.getUser_id())))
         ).getOrElse(Either.left(DomainError.NotFound(null)))
                 .fold(r -> ResponseEntity.status(r.getStatus()).body(r.getData()), u -> u);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("")
     private Object List(@PathVariable @Valid @NotNull UUID id, Pageable pageable, @Valid String token) {
         return API.For(
                 tokens.checkToken(token)

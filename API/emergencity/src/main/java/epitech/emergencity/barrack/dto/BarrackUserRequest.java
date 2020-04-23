@@ -14,7 +14,5 @@ import java.util.UUID;
 @AllArgsConstructor
 public class BarrackUserRequest {
     @NotNull
-    private UUID barrack_id;
-    @NotNull
     private UUID user_id;
 }

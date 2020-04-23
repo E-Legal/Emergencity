@@ -40,23 +40,23 @@ public class JOOQBarrackUser implements BarrackUsers, JOOQCrudUtils {
     }
 
     @Override
-    public BarrackUser create(BarrackUserRequest request) {
+    public BarrackUser create(UUID barrack_id, UUID user_id) {
         EmergencityBarrackUserRecord record = database.insertInto(EMERGENCITY_BARRACK_USER)
                 .columns(EMERGENCITY_BARRACK_USER.BARRACK_ID, EMERGENCITY_BARRACK_USER.USER_ID)
-                .values(request.getBarrack_id(), request.getUser_id())
+                .values(barrack_id, user_id)
                 .returning()
                 .fetchOne();
 
         return BarrackUser.builder()
-                .barrack_id(request.getBarrack_id())
-                .user_id(request.getUser_id())
+                .barrack_id(barrack_id)
+                .user_id(user_id)
                 .build();
     }
 
     @Override
-    public Boolean delete(BarrackUserRequest request) {
+    public Boolean delete(UUID barrack_id, UUID user_id) {
         return database.delete(EMERGENCITY_BARRACK_USER)
-                .where(EMERGENCITY_BARRACK_USER.BARRACK_ID.eq(request.getBarrack_id()).and(EMERGENCITY_BARRACK_USER.USER_ID.eq(request.getUser_id())))
+                .where(EMERGENCITY_BARRACK_USER.BARRACK_ID.eq(barrack_id).and(EMERGENCITY_BARRACK_USER.USER_ID.eq(user_id)))
                 .execute() > 0;
     }
 

@@ -26,6 +26,7 @@ import javax.validation.constraints.NotNull;
 import java.util.UUID;
 import java.util.function.Supplier;
 
+@CrossOrigin(origins = "*", maxAge = 3600)
 @EnableWebSecurity
 @RestController
 @RequestMapping("/barrackVehicles")
