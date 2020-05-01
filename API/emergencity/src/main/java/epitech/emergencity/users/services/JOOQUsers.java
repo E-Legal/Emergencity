@@ -48,12 +48,6 @@ public class JOOQUsers implements Users, JOOQCrudUtils {
                 .name(record.getName())
                 .createdAt(record.getCreatedAt())
                 .updatedAt(record.getUpdateAt())
-                .admin(record.getAdmin())
-                .superuser(record.getSuperuser())
-                .algorithm(record.getAlgorithm())
-                .token(record.getToken())
-                .updateToken(record.getTokenUpdate())
-                .endToken(record.getTokenEnd())
                 .build();
     }
 
@@ -64,12 +58,6 @@ public class JOOQUsers implements Users, JOOQCrudUtils {
                 .name(record.getValue(EMERGENCITY_USER.NAME))
                 .createdAt(record.getValue(EMERGENCITY_USER.CREATED_AT))
                 .updatedAt(record.getValue(EMERGENCITY_USER.UPDATE_AT))
-                .admin(record.getValue(EMERGENCITY_USER.ADMIN))
-                .superuser(record.getValue(EMERGENCITY_USER.SUPERUSER))
-                .algorithm(record.getValue(EMERGENCITY_USER.ALGORITHM))
-                .token(record.getValue(EMERGENCITY_USER.TOKEN))
-                .updateToken(record.getValue(EMERGENCITY_USER.TOKEN_UPDATE))
-                .endToken(record.getValue(EMERGENCITY_USER.TOKEN_END))
                 .build();
     }
 
@@ -95,8 +83,8 @@ public class JOOQUsers implements Users, JOOQCrudUtils {
         OffsetDateTime now = OffsetDateTime.now();
         UUID id = UUID.randomUUID();
         EmergencityUserRecord record = database.insertInto(EMERGENCITY_USER)
-                .columns(EMERGENCITY_USER.NAME, EMERGENCITY_USER.PASSWORD, EMERGENCITY_USER.CREATED_AT, EMERGENCITY_USER.ID, EMERGENCITY_USER.ADMIN)
-                .values(name, password, now, id, false)
+                .columns(EMERGENCITY_USER.NAME, EMERGENCITY_USER.PASSWORD, EMERGENCITY_USER.CREATED_AT, EMERGENCITY_USER.ID)
+                .values(name, password, now, id)
                 .returning()
                 .fetchOne();
 
@@ -107,69 +95,6 @@ public class JOOQUsers implements Users, JOOQCrudUtils {
                 .build();
     }
 
-    @Override
-    @Transactional
-    public Option<User> tokenGen(String name, String password) {
-        RandomString session = new RandomString();
-        String token = session.toString();
-        token = token.replace("epitech.emergencity.services.RandomString@", "");
-        OffsetDateTime now = OffsetDateTime.now();
-        return Option.ofOptional(
-                database.update(EMERGENCITY_USER)
-                        .set(EMERGENCITY_USER.TOKEN, token)
-                        .set(EMERGENCITY_USER.TOKEN_UPDATE, now)
-                        .set(EMERGENCITY_USER.TOKEN_END, now.plusMinutes(10))
-                        .where(EMERGENCITY_USER.NAME.eq(name).and(EMERGENCITY_USER.PASSWORD.eq(password)))
-                        .returning(EMERGENCITY_USER.asterisk())
-                        .fetchOptional()
-                        .map(JOOQUsers::fromRecord)
-        );
-    }
-
-    @Override
-    @Transactional
-    public Option<User> tokenUpdate(String oldToken) {
-        RandomString session = new RandomString();
-        String token = session.toString();
-        token = token.replace("epitech.emergencity.services.RandomString@", "");
-        OffsetDateTime now = OffsetDateTime.now();
-        return Option.ofOptional(
-                database.update(EMERGENCITY_USER)
-                        .set(EMERGENCITY_USER.TOKEN, token)
-                        .set(EMERGENCITY_USER.TOKEN_UPDATE, now)
-                        .set(EMERGENCITY_USER.TOKEN_END, now.plusMinutes(10))
-                        .where(EMERGENCITY_USER.TOKEN.eq(oldToken))
-                        .returning(EMERGENCITY_USER.asterisk())
-                        .fetchOptional()
-                        .map(JOOQUsers::fromRecord)
-        );
-    }
-
-    @Override
-    @Transactional(readOnly = true)
-    public Option<User> checkToken(String token) {
-        OffsetDateTime now = OffsetDateTime.now();
-        return Option.ofOptional(
-                database.selectFrom(EMERGENCITY_USER)
-                        .where(EMERGENCITY_USER.TOKEN.eq(token).and(EMERGENCITY_USER.TOKEN_END.greaterThan(now)))
-                        .fetchOptional()
-                        .map(JOOQUsers::fromRecord)
-        );
-    }
-
-    @Override
-    @Transactional(readOnly = true)
-    public Option<User> UserEgalOfSuppAdmin(String token) {
-        OffsetDateTime now = OffsetDateTime.now();
-        return Option.ofOptional(
-                database.selectFrom(EMERGENCITY_USER)
-                        .where(EMERGENCITY_USER.TOKEN.eq(token)
-                                .and(EMERGENCITY_USER.TOKEN_END.greaterThan(now))
-                                .and(EMERGENCITY_USER.ADMIN.eq(true).or(EMERGENCITY_USER.SUPERUSER.eq(true))))
-                        .fetchOptional()
-                        .map(JOOQUsers::fromRecord)
-        );
-    }
 
     @Override
     @Transactional(readOnly = true)

@@ -32,17 +32,6 @@ public class JOOQSuperUsers implements SuperUsers, JOOQCrudUtils {
     @Autowired
     Users users;
 
-    @Override
-    @Transactional(readOnly = true)
-    public Option<User> isSuperUser(String token) {
-        OffsetDateTime now = OffsetDateTime.now();
-        return Option.ofOptional(
-                database.selectFrom(EMERGENCITY_USER)
-                        .where(EMERGENCITY_USER.TOKEN.eq(token).and(EMERGENCITY_USER.TOKEN_END.greaterThan(now).and(EMERGENCITY_USER.SUPERUSER.eq(true))))
-                        .fetchOptional()
-                        .map(JOOQUsers::fromRecord)
-        );
-    }
 
     @Override
     public Map<String, Field<?>> sortableField() {
@@ -56,8 +45,8 @@ public class JOOQSuperUsers implements SuperUsers, JOOQCrudUtils {
         OffsetDateTime now = OffsetDateTime.now();
         UUID id = UUID.randomUUID();
         EmergencityUserRecord record = database.insertInto(EMERGENCITY_USER)
-                .columns(EMERGENCITY_USER.NAME, EMERGENCITY_USER.PASSWORD, EMERGENCITY_USER.ADMIN, EMERGENCITY_USER.SUPERUSER, EMERGENCITY_USER.ALGORITHM, EMERGENCITY_USER.CREATED_AT, EMERGENCITY_USER.ID, EMERGENCITY_USER.ADMIN)
-                .values(request.getName(), request.getPassword(), request.getAdmin(), request.getSuperuser(), request.getAlgorithm(), now, id, false)
+                .columns(EMERGENCITY_USER.NAME, EMERGENCITY_USER.PASSWORD,  EMERGENCITY_USER.CREATED_AT, EMERGENCITY_USER.ID)
+                .values(request.getName(), request.getPassword(), now, id)
                 .returning()
                 .fetchOne();
 
@@ -71,18 +60,4 @@ public class JOOQSuperUsers implements SuperUsers, JOOQCrudUtils {
                 .build();
     }
 
-    @Override
-    @Transactional
-    public Option<User> updateGrade(GradeRequest request) {
-        return Option.ofOptional(
-                database.update(EMERGENCITY_USER)
-                        .set(EMERGENCITY_USER.ADMIN , request.getAdmin())
-                        .set(EMERGENCITY_USER.SUPERUSER , request.getSuperuser())
-                        .set(EMERGENCITY_USER.ALGORITHM , request.getAlgorithm())
-                        .where(EMERGENCITY_USER.ID.eq(request.getId()))
-                        .returning(EMERGENCITY_USER.asterisk())
-                        .fetchOptional()
-                        .map(JOOQUsers::fromRecord)
-        );
-    }
 }

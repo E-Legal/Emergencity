@@ -30,19 +30,13 @@ public class SuperUsersControllers {
     @Autowired
     Tokens tokens;
 
+
+
     private <T> Either<DomainError, T> ifAuthorized(String token, Supplier<Either<DomainError, T>> block) {
         if (tokens.is_super_user(token))
             return block.get();
         else
             return Either.left(DomainError.Unauthorized(null));
-    }
-    @GetMapping("")
-    private Object CheckSuperUser(@Valid String token) {
-        return API.For(
-                superUsers.isSuperUser(token))
-                .yield(user -> user)
-                .toEither(DomainError.Unauthorized(null))
-                .fold(r -> ResponseEntity.status(r.getStatus()).body(r.getData()), u -> u);
     }
 
     @PostMapping("user/create")
@@ -56,13 +50,14 @@ public class SuperUsersControllers {
                 .fold(r -> ResponseEntity.status(r.getStatus()).body(r.getData()), u -> u);
     }
 
-    @PostMapping("user/grade")
+    /*@PostMapping("user/grade")
     private Object ChangeGradeOfUser(@Valid GradeRequest request, @Valid String token) {
         return API.For(
+
                 superUsers.isSuperUser(token),
                 users.get(request.getId()))
                 .yield((admin, user ) -> superUsers.updateGrade(request))
                 .toEither(DomainError.Unauthorized(null))
                 .fold(r -> ResponseEntity.status(r.getStatus()).body(r.getData()), u -> u);
-    }
+    }*/
 }

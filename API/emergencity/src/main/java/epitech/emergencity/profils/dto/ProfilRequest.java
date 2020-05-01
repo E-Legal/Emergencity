@@ -1,4 +1,4 @@
-package epitech.emergencity.users.dto;
+package epitech.emergencity.profils.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -12,7 +12,14 @@ import java.util.UUID;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class GradeRequest {
+public class ProfilRequest {
     @NotNull
     private UUID user_id;
+    @NotNull
+    private String first_name;
+    @NotNull
+    private String last_name;
+    @NotNull
+    private String job;
+
 }
