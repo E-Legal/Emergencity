@@ -16,15 +16,6 @@ public class User {
     private String name;
     @NotNull
     private String password;
-    private String token;
-    private String lastName;
-    private String firstName;
-    private Boolean admin;
-    private Boolean superuser;
-    private Boolean algorithm;
-
-    private OffsetDateTime updateToken;
-    private OffsetDateTime endToken;
     private OffsetDateTime createdAt;
     private OffsetDateTime updatedAt;
 }
