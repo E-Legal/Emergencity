@@ -8,6 +8,7 @@ import Logout from "./views/Logout.vue";
 import Stats from "./views/Stats.vue";
 import Dashboard from "./views/Dashboard.vue";
 import BootstrapVue from "bootstrap-vue";
+import Admin from './views/Admin/Admin';
 
 Vue.use(BootstrapVue);
 Vue.use(Router);
@@ -40,9 +41,9 @@ export default new Router({
       }
     },
     {
-      path: "/",
+      path: "/admin",
       name: "admin",
-      component: Home,
+      component: Admin,
       beforeEnter(to, from, next) {
         if (isAuthenticated()) {
           next();
