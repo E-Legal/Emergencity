@@ -36,7 +36,7 @@
                 <router-link class="navbar-brand" to="/stats"><span class="power_up"><img class="pict" src="/img/icons/bar.svg"/></span><span class="link"> Statistique </span></router-link>
             </li>
              <li v-if="user" class="nav-item">
-                <router-link class="navbar-brand" to="/"><span class="power_up"><img class="pict" src="/img/icons/car.svg"/></span><span class="link"> Véhicules </span></router-link>
+                <router-link class="navbar-brand" to="/caserne"><span class="power_up"><img class="pict" src="/img/icons/car.svg"/></span><span class="link"> Véhicules </span></router-link>
             </li>
             <li v-if="user" class="nav-item">
               <b-dropdown id="dropdown-dropleft" variant="link"  toggle-class="text-decoration-none" no-caret>
