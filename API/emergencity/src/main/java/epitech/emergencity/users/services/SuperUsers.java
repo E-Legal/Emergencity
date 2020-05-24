@@ -16,4 +16,5 @@ public interface SuperUsers {
     PageImpl<Object> listAdmin(Pageable pageable);
     PageImpl<Object> listAlgo(Pageable pageable);
     PageImpl<Object> listSU(Pageable pageable);
+    public Boolean deleteUserById(UUID id);
 }

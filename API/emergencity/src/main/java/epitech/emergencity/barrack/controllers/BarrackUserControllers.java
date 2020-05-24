@@ -28,7 +28,7 @@ import java.util.function.Supplier;
 @CrossOrigin(origins = "*", maxAge = 3600)
 @EnableWebSecurity
 @RestController
-@RequestMapping("/barrack/{id}/user")
+@RequestMapping("/barrack")
 @Slf4j
 public class BarrackUserControllers {
     @Autowired
@@ -47,7 +47,7 @@ public class BarrackUserControllers {
             return Either.left(DomainError.Unauthorized(null));
     }
 
-    @PostMapping("/new")
+    @PostMapping("/{id}/user/new")
     private Object create(@PathVariable @Valid @NotNull UUID id, @Valid BarrackUserRequest request, @Valid String token) {
         return API.For(
                 tokens.checkToken(token),
@@ -58,7 +58,7 @@ public class BarrackUserControllers {
                 .fold(r -> ResponseEntity.status(r.getStatus()).body(r.getData()), u -> u);
     }
 
-    @DeleteMapping("/delete")
+    @DeleteMapping("/{id}/user/delete")
     private Object delete(@PathVariable @Valid @NotNull UUID id,  @Valid BarrackUserRequest request, @Valid String token) throws ParseException {
         log.info(id + " " +  request.getUser_id());
         return API.For(
@@ -70,11 +70,20 @@ public class BarrackUserControllers {
                 .fold(r -> ResponseEntity.status(r.getStatus()).body(r.getData()), u -> u);
     }
 
-    @GetMapping("")
+    @GetMapping("/{id}/user")
     private Object List(@PathVariable @Valid @NotNull UUID id, Pageable pageable, @Valid String token) {
         return API.For(
                 tokens.checkToken(token)
         ).yield(user -> barrackUsers.listUser(id, pageable))
+                .toEither(DomainError.Unauthorized(null))
+                .fold(r -> ResponseEntity.status(r.getStatus()).body(r.getData()), u -> u);
+    }
+
+    @GetMapping("/user/{id}")
+    private Object ListBarrack(@PathVariable @Valid @NotNull UUID id, Pageable pageable, @Valid String token) {
+        return API.For(
+                tokens.checkToken(token)
+        ).yield(user -> barrackUsers.listBarrack(id, pageable))
                 .toEither(DomainError.Unauthorized(null))
                 .fold(r -> ResponseEntity.status(r.getStatus()).body(r.getData()), u -> u);
     }

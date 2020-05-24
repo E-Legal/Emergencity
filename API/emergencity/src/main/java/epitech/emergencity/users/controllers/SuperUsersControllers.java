@@ -1,5 +1,6 @@
 package epitech.emergencity.users.controllers;
 
+import epitech.emergencity.barrack.dto.BarrackUserRequest;
 import epitech.emergencity.security.services.Tokens;
 import epitech.emergencity.services.DomainError;
 import epitech.emergencity.users.dto.GradeRequest;
@@ -9,6 +10,7 @@ import epitech.emergencity.users.services.Users;
 import io.vavr.API;
 import io.vavr.control.Either;
 import lombok.extern.slf4j.Slf4j;
+import org.jooq.tools.json.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -63,6 +65,18 @@ public class SuperUsersControllers {
                 .fold(r -> ResponseEntity.status(r.getStatus()).body(r.getData()), u -> u);
     }
 
+    @DeleteMapping("/user/{id}")
+    private Object delete(@PathVariable @Valid @NotNull UUID id, @Valid String token) throws ParseException {
+        return API.For(
+                tokens.checkToken(token),
+                users.get(id)
+        ).yield((check, barrack )->
+                ifAuthorized(token, () -> Either.right(superUsers.deleteUserById(id)))
+        ).getOrElse(Either.left(DomainError.NotFound(null)))
+                .fold(r -> ResponseEntity.status(r.getStatus()).body(r.getData()), u -> u);
+    }
+
+
     @GetMapping("/user/list/admin")
     private Object ListAdmin(Pageable pageable, @Valid String token) {
         return API.For(
@@ -91,7 +105,6 @@ public class SuperUsersControllers {
         ).getOrElse(Either.left(DomainError.NotFound(null)))
                 .fold(r -> ResponseEntity.status(r.getStatus()).body(r.getData()), u -> u);
     }
-
 
     /*@PostMapping("user/grade")
     private Object ChangeGradeOfUser(@Valid GradeRequest request, @Valid String token) {

@@ -129,6 +129,14 @@ public class JOOQSuperUsers implements SuperUsers, JOOQCrudUtils {
     }
 
     @Override
+    public Boolean deleteUserById(UUID id) {
+        return database.delete(EMERGENCITY_USER)
+                .where(EMERGENCITY_USER.ID.eq(id))
+                .execute() > 0;
+    }
+
+
+    @Override
     public PageImpl<Object> listAlgo(Pageable pageable){
         Field<Integer> countField = count(asterisk()).over().as("count");
         Result<Record> records = database

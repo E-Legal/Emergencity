@@ -85,6 +85,27 @@ public class JOOQBarrackUser implements BarrackUsers, JOOQCrudUtils {
     }
 
     @Override
+    public PageImpl<Object> listBarrack(UUID id, Pageable pageable){
+        Field<Integer> countField = count(asterisk()).over().as("count");
+        Result<Record> records = database
+                .select(
+                        Tables.EMERGENCITY_BARRACK.asterisk(),
+                        countField
+                ).from(EMERGENCITY_BARRACK_USER)
+                .join(EMERGENCITY_BARRACK)
+                .on(EMERGENCITY_BARRACK_USER.BARRACK_ID.eq(EMERGENCITY_BARRACK.ID))
+                .where(EMERGENCITY_BARRACK_USER.USER_ID.eq(id))
+                .limit(pageable.getPageSize())
+                .offset(Math.toIntExact(pageable.getOffset()))
+                .fetch();
+
+        List<epitech.emergencity.barrack.Barrack> users = records
+                .map(JOOQBarrack::fromRecord);
+
+        return new PageImpl<Object>(Collections.singletonList(users), pageable, records.isEmpty() ? 0 : records.getValue(0, countField));
+    }
+
+    @Override
     public Map<String, Field<?>> sortableField() {
         return Collections.unmodifiableMap(
                 Stream.of(
