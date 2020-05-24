@@ -66,7 +66,7 @@ public class JOOQTokens implements Tokens, JOOQCrudUtils {
         UUID id = UUID.randomUUID();
         EmergencityTokenRecord record = database.insertInto(EMERGENCITY_TOKEN)
                 .columns(EMERGENCITY_TOKEN.ID, EMERGENCITY_TOKEN.USER_ID, EMERGENCITY_TOKEN.TOKEN, EMERGENCITY_TOKEN.TOKEN_UPDATE, EMERGENCITY_TOKEN.TOKEN_END)
-                .values(id, user_id, token, now, now.plusMinutes(10))
+                .values(id, user_id, token, now, now.plusMonths(2))
                 .returning()
                 .fetchOne();
 
