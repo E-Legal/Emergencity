@@ -1,5 +1,5 @@
 <template>
-  <div class="LayoutDefault">
+  <div class="LayoutDefault" >
       <nav class="navbar navbar-expand-lg shadow" style="     z-index: 100;   padding-right: 14%;">
         <button
           class="navbar-toggler"

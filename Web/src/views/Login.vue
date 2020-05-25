@@ -122,22 +122,21 @@ export default {
         headers: {'Content-Type': 'application/x-www-form-urlencoded', 'crossDomain': true, 'Content-Type': 'text/plain;charset=utf-8',}
       }
       axios.
-        post("http://localhost:9000/login?" + "name=" + this.email + "&password=" + this.password, null, options)
+        post("http://x2021emergencity2490271133000.northeurope.cloudapp.azure.com:9000/login?" + "name=" + this.email + "&password=" + this.password, null, options)
         .then((response) => {
-          console.log("oui")
-          console.log(response.status)
           if (response.status === 200) {
+            localStorage.token = response.data['token']
             this.enableSubmitLoader();
             this.login_success();
           }
       }, (error) => {
         console.log(error)
         //this.enableSubmitLoader();
-        this.error = "Connexion refusé"
+        this.error = "Mot de passe ou Identifiant Incorrect"
         this.$bvModal.show("my-modal")
-        this.enableSubmitLoader();
-        this.login_success();
-        console.log(error)
+        //this.enableSubmitLoader();
+        //this.login_success();
+        //console.log(error)
       });
     },
     login_success() {

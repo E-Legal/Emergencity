@@ -60,7 +60,14 @@ export default new Router({
     {
       path: "/stats",
       name: "stats",
-      component: Stats
+      component: Stats,
+      beforeEnter(to, from, next) {
+        if (isAuthenticated()) {
+          next();
+        } else {
+          next("/login");
+        }
+      }
     },
     {
       path: "/profile",
@@ -82,12 +89,26 @@ export default new Router({
     {
       path: "/dashboard",
       name: "dashboard",
-      component: Dashboard
+      component: Dashboard,
+      beforeEnter(to, from, next) {
+        if (isAuthenticated()) {
+          next();
+        } else {
+          next("/login");
+        }
+      }
     },
     {
       path: "/logout",
       name: "logout",
-      component: Logout
+      component: Logout,
+      beforeEnter(to, from, next) {
+        if (isAuthenticated()) {
+          next();
+        } else {
+          next("/login");
+        }
+      }
     },
     {
       path: "/about",
