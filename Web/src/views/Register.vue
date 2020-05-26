@@ -185,7 +185,8 @@ export default {
           }
           this.register_success();
       }, (error) => {
-        
+        this.error = "Utilisateur déjà existant avec cette adresse email."
+        this.$bvModal.show("my-modal")
         //          this.enableSubmitLoader();
         console.log(error)
         //this.register_success();

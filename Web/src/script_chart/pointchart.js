@@ -1,7 +1,7 @@
 import {Line, Bar} from 'vue-chartjs'
 
 export default {
-    extends: Bar,
+    extends: Point,
     props: {
       title: String,
       intervention: Array,

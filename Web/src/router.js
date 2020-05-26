@@ -8,8 +8,11 @@ import Logout from "./views/Logout.vue";
 import Stats from "./views/Stats.vue";
 import Dashboard from "./views/Dashboard.vue";
 import BootstrapVue from "bootstrap-vue";
+
 import Caserne from "./views/Barracks/Caserne.vue"
 import HomeNotConnected from './views/HomeNotConnected.vue'
+import Admin from './views/Admin/Admin';
+
 
 Vue.use(BootstrapVue);
 Vue.use(Router);
@@ -42,6 +45,18 @@ export default new Router({
       }
     },
     {
+      path: "/admin",
+      name: "admin",
+      component: Admin,
+      beforeEnter(to, from, next) {
+        if (isAuthenticated()) {
+          next();
+        } else {
+          next("/login");
+        }
+      }
+    },
+    {
       path: "/login",
       name: "login",
       component: Login
@@ -49,7 +64,14 @@ export default new Router({
     {
       path: "/stats",
       name: "stats",
-      component: Stats
+      component: Stats,
+      beforeEnter(to, from, next) {
+        if (isAuthenticated()) {
+          next();
+        } else {
+          next("/login");
+        }
+      }
     },
     {
       path: "/profile",
@@ -71,12 +93,26 @@ export default new Router({
     {
       path: "/dashboard",
       name: "dashboard",
-      component: Dashboard
+      component: Dashboard,
+      beforeEnter(to, from, next) {
+        if (isAuthenticated()) {
+          next();
+        } else {
+          next("/login");
+        }
+      }
     },
     {
       path: "/logout",
       name: "logout",
-      component: Logout
+      component: Logout,
+      beforeEnter(to, from, next) {
+        if (isAuthenticated()) {
+          next();
+        } else {
+          next("/login");
+        }
+      }
     },
     {
       path: "/caserne",
