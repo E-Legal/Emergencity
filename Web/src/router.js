@@ -8,7 +8,7 @@ import Logout from "./views/Logout.vue";
 import Stats from "./views/Stats.vue";
 import Dashboard from "./views/Dashboard.vue";
 import BootstrapVue from "bootstrap-vue";
-import Caserne from "./views/Caserne.vue"
+import Caserne from "./views/Barracks/Caserne.vue"
 import HomeNotConnected from './views/HomeNotConnected.vue'
 
 Vue.use(BootstrapVue);
