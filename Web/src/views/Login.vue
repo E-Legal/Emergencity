@@ -132,6 +132,7 @@ export default {
       }, (error) => {
         console.log(error)
         //this.enableSubmitLoader();
+
         this.error = "Mot de passe ou Identifiant Incorrect"
         this.$bvModal.show("my-modal")
         //this.enableSubmitLoader();

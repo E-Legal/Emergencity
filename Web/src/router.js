@@ -8,7 +8,11 @@ import Logout from "./views/Logout.vue";
 import Stats from "./views/Stats.vue";
 import Dashboard from "./views/Dashboard.vue";
 import BootstrapVue from "bootstrap-vue";
+
+import Caserne from "./views/Barracks/Caserne.vue"
+import HomeNotConnected from './views/HomeNotConnected.vue'
 import Admin from './views/Admin/Admin';
+
 
 Vue.use(BootstrapVue);
 Vue.use(Router);
@@ -109,6 +113,16 @@ export default new Router({
           next("/login");
         }
       }
+    },
+    {
+      path: "/caserne",
+      name: "caserne",
+      component: Caserne
+    },
+    {
+      path: "/home",
+      name: "home",
+      component: HomeNotConnected
     },
     {
       path: "/about",
