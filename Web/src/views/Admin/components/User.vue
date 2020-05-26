@@ -162,7 +162,7 @@ export default {
               //this.eraseLight(props, val)
               this.idBarracks = val
               this.$bvModal.show("barracks_modal")
-              this.$bvModal.show("my-modal")sss
+              this.$bvModal.show("my-modal")
             }
           })
           .catch(err => {
