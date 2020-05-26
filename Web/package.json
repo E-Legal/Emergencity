@@ -29,7 +29,8 @@
     "vue2-google-maps": "^0.10.7",
     "vue2-leaflet": "^2.2.1",
     "vuejs-datepicker": "^1.6.2",
-    "vuex": "^3.2.0"
+    "vuetable-2": "^2.0.0-beta.4",
+    "vuex": "^3.0.1"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.10.0",
@@ -40,6 +41,7 @@
     "@vue/eslint-config-prettier": "^5.0.0",
     "@vue/test-utils": "1.0.0-beta.29",
     "babel-eslint": "^10.0.1",
+    "babel-preset-es2015": "^6.24.1",
     "chai": "^4.1.2",
     "eslint": "^5.16.0",
     "eslint-plugin-prettier": "^3.1.0",
