@@ -3,7 +3,8 @@
 <template>
 
   <div class="vehicle">
-      {{this.label}}
+    <div v-if="this.all_vehicle">
+            {{this.all_vehicle}}
         <b-list-group>
  <b-list-group-item href="#" class="flex-column align-items-start">
     <div class="d-flex w-100 justify-content-between">
@@ -13,6 +14,8 @@
 
     <p class="mb-1">
       Description numéro 1
+
+      {{this.log(this.all_vehicle)}}
     </p>
 
   </b-list-group-item>
@@ -41,7 +44,8 @@
 
   </b-list-group-item>
 </b-list-group>
-
+    </div>
+    <div v-else> Loading </div>
   </div>
 </template>
 
@@ -57,34 +61,47 @@ export default {
   name: "vehicle",
   components: {
   },
+  props: {
+      total: Array,
+      vehicle: Array,
+  },
   data() {
     return {
-        label: null
+        label: null,
+        all_vehicle: null
     };
   },
-      props: {
-      total: Array
-  },
   watch: {
-      total: {
-          handler: function(newVal, oldVal) {
+      total: function(newVal, oldVal) {
           console.log("old:", oldVal, "new: ", newVal)
           if (this.total) {
+              console.log("YOOOLOOOO")
               this.label = this.total
           }
+      },
+      vehicle: function(newVal, oldVal) {
+          console.log("old:", oldVal, "new: ", newVal);
+          console.log("OLLLLD VEHIICCLLLLE");
+          if (this.vehicle) {
+            console.log("YOLOOOOOOOO");
+              this.all_vehicle = this.vehicle;
+          }
       }
-    }
-  },
-  methods: {
   },
   mounted() {
     if (this.total) {
-        this.label = this.total
+      this.label = this.total;
+    }
+    if (this.vehicle) {
+      this.all_vehicle = this.vehicle
     }
   },
-  created() {
+  methods: {
+    log(message) {
+      console.log(message)
+      console.log("LOG FUNCTION")
+    }
   },
-  
 };
 
 </script>

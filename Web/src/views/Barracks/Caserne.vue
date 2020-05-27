@@ -12,7 +12,8 @@
     <b-tabs pills card vertical nav-wrapper-class="w-50" v-model="selected">
       <template v-for="cas in caserne">
         <b-tab item :title="cas.name" :key="cas.id" lazy>
-          <Vehicle :total="getTabs()"/>
+
+          <Vehicle :key="cas.id + 'vehi'" :total="getTabs()" :vehicle="getVehicule()"/>
         </b-tab>
       </template>
     </b-tabs>
@@ -132,7 +133,6 @@ color: black;
 }
 
 .mybutton {
-  color: #BFC0C0;
   text-decoration: none;
   letter-spacing: 1px;
 }
@@ -317,6 +317,7 @@ export default {
       total_vehicle: null,
       caserne: null,
       selected: 0,
+      all_vehicle: null
     };
   },
   components: {
@@ -330,6 +331,7 @@ export default {
         console.log(this.caserne[value]["id"]);
         this.total_vehicle = [this.caserne[value]]
         console.log(this.total_vehicle)
+        this.vehiculeget(this.caserne[value]["id"])
       }
       console.log(value);
       console.log("SELECTED")
@@ -338,6 +340,10 @@ export default {
   methods: {
     getTabs() {
       return(this.total_vehicle);
+    },
+    getVehicule() {
+      console.log(this.vehicule, "VEHI")
+      return(this.vehicule)
     },
     save_edit() {
       this.error = "Sauvegarde effectué!"
@@ -352,24 +358,27 @@ export default {
     },
     caserneget() {
        axios.
-        get("http://x2021emergencity2490271133000.northeurope.cloudapp.azure.com:9000/barracks?token=" + "7db68824")
+        get("http://x2021emergencity2490271133000.northeurope.cloudapp.azure.com:9000/barrack/user/" + localStorage.getItem('id_user') + "?token=" + localStorage.getItem('token'))
         .then((response) => {
           if (response.status === 200) {
-            this.caserne = response.data['content'];
+            this.caserne = response.data['content'][0];
             console.log(this.caserne);
             console.log("caserne");
+            return(this.caserne)
           }
       }, (error) => {
         console.log(error)
       });
     
     },
-     vehiculeget() {
+     vehiculeget(idBarracks) {
        axios.
-        get("http://x2021emergencity2490271133000.northeurope.cloudapp.azure.com:9000/barrackVehicles/?token=" + "7db68824" + "/{" + idbarrackVehicles + "}")
+        get("http://x2021emergencity2490271133000.northeurope.cloudapp.azure.com:9000/barrackVehicles/" + idBarracks + "?token=" + localStorage.getItem('token'))
         .then((response) => {
           if (response.status === 200) {
             this.vehicule = response.data['content'];
+            console.log(this.vehicule)
+            console.log("VEHICULE")
           }
       }, (error) => {
         console.log(error)
@@ -377,7 +386,7 @@ export default {
     
     },
   },
-  mounted() {
+  beforeMount() {
     this.$emit("update:layout", LayoutDefault);
     this.caserneget();
   },

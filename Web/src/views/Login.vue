@@ -125,7 +125,7 @@ export default {
         post("http://x2021emergencity2490271133000.northeurope.cloudapp.azure.com:9000/login?" + "name=" + this.email + "&password=" + this.password, null, options)
         .then((response) => {
           if (response.status === 200) {
-            localStorage.id_user = response.data['id'];
+            localStorage.id_user = response.data['user_id'];
             localStorage.token = response.data['token'];
             this.enableSubmitLoader();
             this.login_success();
