@@ -6,6 +6,7 @@ import Login from "./views/Login.vue";
 import Profile from "./views/Profile.vue";
 import Logout from "./views/Logout.vue";
 import Stats from "./views/Stats.vue";
+import Support from "./views/Support.vue";
 import Dashboard from "./views/Dashboard.vue";
 import BootstrapVue from "bootstrap-vue";
 
@@ -123,6 +124,11 @@ export default new Router({
       path: "/home",
       name: "home",
       component: HomeNotConnected
+    },
+    {
+      path: "/support",
+      name: "support",
+      component: Support
     },
     {
       path: "/about",

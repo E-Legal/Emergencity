@@ -35,6 +35,9 @@
             <li v-if="user" class="nav-item">
                 <router-link class="navbar-brand" to="/stats"><span class="power_up"><img class="pict" src="/img/icons/bar.svg"/></span><span class="link"> Statistique </span></router-link>
             </li>
+              <li v-if="user" class="nav-item">
+                  <router-link class="navbar-brand" to="/support"><span class="power_up"><img class="pict" src="/img/icons/email.svg" alt=""/></span><span class="link"> Support </span></router-link>
+              </li>
              <li v-if="user" class="nav-item">
                 <router-link class="navbar-brand" to="/caserne"><span class="power_up"><img class="pict" src="/img/icons/car.svg"/></span><span class="link"> Véhicules </span></router-link>
             </li>
