@@ -4,6 +4,7 @@
          
 <div>
   <Barracksmodal :idBarracks="idBarracks" msg="yolo"/>
+  <Display msg="yolo"/>
 <b-tabs content-class="mt-3" justified>
     <b-tab  v-if="this.label" title="Gestion Utilisateurs">
     <form id="demo" @submit.prevent="submit" novalidate>
@@ -37,6 +38,11 @@
       <div>
             {{assignUserRole(props['rowIndex'], props['rowData'])}}
          <b-form-select style="width: 200px" v-model="selected[props['rowIndex']]" :options="options"></b-form-select>
+      </div>
+    </template>
+        <template slot="caserne_actions" slot-scope="props"> 
+      <div>
+          <b-button :id="props['rowData'].id" v-on:click="showCaserneDialog(props, props['rowData'].id)" variant="outline-primary">Voir les Casernes liés à l'utilisateur</b-button>
       </div>
     </template>
   <template slot="actions" slot-scope="props"> 
@@ -124,9 +130,11 @@ export default {
           titleClass: 'center aligned',
           dataClass: 'center aligned'
         },
-        {
-          name: 'caserne',
-          title: 'Caserne'
+      {
+          name: 'caserne_actions',
+          title: 'Caserne',
+          titleClass: 'center aligned',
+          dataClass: 'center aligned'
         },
         {
           name: 'actions',
@@ -160,15 +168,18 @@ export default {
             if (value === true) {
               console.log("erase")
               //this.eraseLight(props, val)
-              this.idBarracks = val
-              this.$bvModal.show("barracks_modal")
-              this.$bvModal.show("my-modal")
             }
           })
           .catch(err => {
             // An error occurred
           })
       },
+    showCaserneDialog(props, val) {
+        this.idBarracks = val;
+        this.$bvModal.show("barracks_modal");
+        //this.$bvModal.show("my-modal");
+
+    },
     onAction (action, data, index) {
       console.log('slot) action: ' + action, data.name, index)
     },
