@@ -176,6 +176,12 @@ export default {
         }
     },
   methods: {
+    updateLightList() 
+    {
+          axios.get('http://x2021emergencity2490271133000.northeurope.cloudapp.azure.com:9000/feu?token=' + localStorage.getItem('token')).then(response => {
+              this.label = response.data['content']
+          });
+    },
     log(message) {
       console.log(message)
     },
@@ -191,7 +197,7 @@ export default {
       axios.post('http://x2021emergencity2490271133000.northeurope.cloudapp.azure.com:9000/feu?x=' + this.form.x + '&y=' + this.form.y + '&z=' + this.form.z + '&city=' + this.form.ville + '&token=' + localStorage.getItem('token'))
         .then((response) => {
            if (response.status === 200) {
-             this.$forceUpdate();
+             this.updateLightList();
            }
         });
     }

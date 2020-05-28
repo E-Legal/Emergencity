@@ -4,7 +4,6 @@
          
 <div>
   <Barracksmodal :idBarracks="idBarracks" msg="yolo"/>
-  <Display msg="yolo"/>
 <b-tabs content-class="mt-3" justified>
     <b-tab  v-if="this.label" title="Gestion Utilisateurs">
     <form id="demo" @submit.prevent="submit" novalidate>
@@ -42,7 +41,7 @@
     </template>
         <template slot="caserne_actions" slot-scope="props"> 
       <div>
-          <b-button :id="props['rowData'].id" v-on:click="showCaserneDialog(props, props['rowData'].id)" variant="outline-primary">Voir les Casernes liés à l'utilisateur</b-button>
+          <b-button :id="props['rowData'].id" v-on:click="showCaserneDialog(props, props['rowData'].id)" variant="outline-primary">Voir les Casernes liées à l'utilisateur</b-button>
       </div>
     </template>
   <template slot="actions" slot-scope="props"> 
@@ -160,6 +159,12 @@ export default {
   },
   methods: {
     //...
+    updateUserList() {
+             axios.get('http://x2021emergencity2490271133000.northeurope.cloudapp.azure.com:9000/SU/user/list?token=' + localStorage.getItem('token')).then(response => {
+              console.log(response.data)
+              this.label = response.data['content']
+          });
+    },
     showMsgBoxOne(props, val) {
         this.boxOne = ''
         this.$bvModal.msgBoxConfirm('Etes-vous sûr de vouloir supprimer cet utilisateur?')
@@ -167,7 +172,7 @@ export default {
             //this.boxOne = value
             if (value === true) {
               console.log("erase")
-              //this.eraseLight(props, val)
+              this.eraseLight(props, val)
             }
           })
           .catch(err => {
@@ -205,7 +210,7 @@ export default {
       axios.post('http://x2021emergencity2490271133000.northeurope.cloudapp.azure.com:9000/register?name=' + this.email + '&password=' + this.password)
         .then((response) => {
            if (response.status === 200) {
-             this.$forceUpdate();
+             this.updateUserList();
            }
         });
     }
