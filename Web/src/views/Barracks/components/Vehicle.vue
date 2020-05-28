@@ -4,45 +4,21 @@
 
   <div class="vehicle">
     <div v-if="this.all_vehicle">
-            {{this.all_vehicle}}
+
         <b-list-group>
- <b-list-group-item href="#" class="flex-column align-items-start">
-    <div class="d-flex w-100 justify-content-between">
-      <h5 class="mb-1">Vehicule n°0240</h5>
-   
-    </div>
+          <div v-bind:key="index" v-for="(vehic, index) in all_vehicle[0]">
+                            <b-list-group-item href="#" class="flex-column align-items-start">
+            <div class="d-flex w-100 justify-content-between">
+              <h5 class="mb-1">Vehicule <b> {{vehic.model}}</b> n°{{vehic.registration}}</h5>
+          
+            </div>
 
-    <p class="mb-1">
-      Description numéro 1
+            <p class="mb-1">
+              Description numéro 1
+            </p>
 
-      {{this.log(this.all_vehicle)}}
-    </p>
-
-  </b-list-group-item>
-
-   <b-list-group-item href="#" class="flex-column align-items-start">
-    <div class="d-flex w-100 justify-content-between">
-      <h5 class="mb-1">Vehicule n°0245</h5>
-   
-    </div>
-
-    <p class="mb-1">
-      Description numéro 1
-    </p>
-
-  </b-list-group-item>
-
- <b-list-group-item href="#" class="flex-column align-items-start">
-    <div class="d-flex w-100 justify-content-between">
-      <h5 class="mb-1">Vehicule n°0110</h5>
-   
-    </div>
-
-    <p class="mb-1">
-      Description numéro 1
-    </p>
-
-  </b-list-group-item>
+            </b-list-group-item>
+          </div>
 </b-list-group>
     </div>
     <div v-else> Loading </div>

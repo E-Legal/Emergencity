@@ -41,7 +41,7 @@ export default new Router({
         if (isAuthenticated()) {
           next();
         } else {
-          next("/login");
+          next("/home");
         }
       }
     },
@@ -53,7 +53,7 @@ export default new Router({
         if (isAuthenticated()) {
           next();
         } else {
-          next("/login");
+          next("/home");
         }
       }
     },
@@ -82,7 +82,7 @@ export default new Router({
         if (isAuthenticated()) {
           next();
         } else {
-          next("/login");
+          next("/home");
         }
       }
     },
@@ -99,7 +99,7 @@ export default new Router({
         if (isAuthenticated()) {
           next();
         } else {
-          next("/login");
+          next("/home");
         }
       }
     },

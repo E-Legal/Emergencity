@@ -1,6 +1,6 @@
 <template>
     <div
-            style="background: url('/assets/white3.png') repeat center center fixed;  background-position: center; overflow: auto;"
+            style="background: url('/assets/white3.png') repeat center center fixed; background-position: center; overflow: auto;"
     >
         <div class="ticket-form">
             <form>

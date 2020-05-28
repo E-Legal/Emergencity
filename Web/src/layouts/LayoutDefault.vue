@@ -1,6 +1,6 @@
 <template>
   <div class="LayoutDefault" >
-      <nav class="navbar navbar-expand-lg shadow" style="     z-index: 100;   padding-right: 14%;">
+      <nav class="navbar navbar-expand-lg shadow fixed-top" style=" z-index: 100;   padding-right: 5%;">
         <button
           class="navbar-toggler"
           type="button"
@@ -69,7 +69,7 @@
     </span>---->
         </div>
       </nav>
-
+    <div style="padding-bottom: 80px;"> </div>
     <main class="LayoutDefault__main">
       <slot />
     </main>

@@ -12,7 +12,6 @@
     <b-tabs pills card vertical nav-wrapper-class="w-50" v-model="selected">
       <template v-for="cas in caserne">
         <b-tab item :title="cas.name" :key="cas.id" lazy>
-
           <Vehicle :key="cas.id + 'vehi'" :total="getTabs()" :vehicle="getVehicule()"/>
         </b-tab>
       </template>
