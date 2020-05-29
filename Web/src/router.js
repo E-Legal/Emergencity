@@ -28,6 +28,14 @@ function isAuthenticated() {
     return false;
   }
 }
+function isAuthenticatedAdmin() {
+  if (localStorage.getItem("login") === "test") {
+    console.log(localStorage.getItem("login"));
+    return true;
+  } else {
+    return false;
+  }
+}
 
 export default new Router({
   mode: "history",
@@ -50,7 +58,7 @@ export default new Router({
       name: "admin",
       component: Admin,
       beforeEnter(to, from, next) {
-        if (isAuthenticated()) {
+        if (isAuthenticatedAdmin()) {
           next();
         } else {
           next("/home");
