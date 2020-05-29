@@ -12,7 +12,7 @@
       <div style="width: 1600px; height: 1000px; margin: 0 auto">
     <b-card
       title=""
-      img-src="http://www.leparisien.fr/resizer/84WjgayktqIDZjeH4KyitV7snAc=/932x582/arc-anglerfish-eu-central-1-prod-leparisien.s3.amazonaws.com/public/FTSMI3355P2JEHPNA3DPX7D624.jpg"
+      img-src="/assets/landingpage1.png"
       img-alt="Image"
       img-top
       align= "center"
@@ -31,10 +31,98 @@ box-shadow: 10px 10px 5px -5px rgba(0,0,0,0.75);"
       <br>
       <hr/>
       <h2>Multi-plateforme</h2>
-      <img style="padding-right: 20%" src="/assets/computer.png"/>
+       <p style="font-weight: bold">
+      Emergencity est également un projet multi-plateforme. Il est disponible sur navigateur web et mobile.
+          </p>
+      <br>
+      <br>
+      <img src="/assets/computer.png"/>
+        <br>
+        <p style="font-weight: bold">
+        Une application mobile indiquant le trajet le plus rapide et les feux tricolores équipés de notre boitier.
+          </p>
+      
+      <br> 
+    
       <img src="/assets/mobile.png"/>
-
+        <br>  
+        <p style="font-weight: bold">
+    Un écran permettant de donner en temps réel le nombre de véhicules en intervention et leurs destinations.
+          </p>
+      <br>
+      <hr/>
+            <h2>L'équipe</h2>
+      <br>
+        <br>
+       <img src="/assets/monsieur.png" style="width: 400px"/>
+       <h3 style="font-weight: bold">
+         Eliott
+           <br>
+         Développeur Web
+       </h3>
+         <br>  
+         <br>
+       <img src="/assets/monsieur.png" style="width: 400px"/>
+       <h3  style="font-weight: bold">
+         Quentin
+           <br>
+         Développeur Back-end
+       </h3 >
+        <br>  
+         <br>
+      <img src="/assets/monsieur.png" style="width: 400px"/>
+       <h3 style="font-weight: bold">
+         Colin
+           <br>
+         Développeur Back-end
+       </h3 >
+       <br>  
+         <br>
+         <img src="/assets/monsieur.png" style="width: 400px"/>
+       <h3  style="font-weight: bold">
+         Fabien
+           <br>
+         Développeur Web
+       </h3 >
+       <br>  
+         <br>
+         <img src="/assets/monsieur.png" style="width: 400px"/>
+       <h3  style="font-weight: bold">
+         Eliott
+           <br>
+         Développeur Mobile
+       </h3 >
+       <br>  
+         <br>
+         <img src="/assets/madame.png" style="width: 400px"/>
+       <h3  style="font-weight: bold">
+         Sophie
+           <br>
+         Développeur Web
+       </h3 >
+       <br>  
+         <br>
+         <img src="/assets/madame.png" style="width: 400px"/>
+       <h3  style="font-weight: bold">
+         Eloïse
+           <br>
+         Développeur Web
+       </h3 >
+       <br>  
+         <br>
+        <hr>
+        <h5>
+        Contactez-nous pour tout type de demandes ou collaboration. Nous sommes ouverts pour partager notre vision et 
+        <br>développer de nouvelles coopérations avec des entreprises.
+        <br>
+        <br>
+        Email : emergen.city.epitech@gmail.com
+        <br>
+        <br>
+        <a href="/support">Formulaire de contact</a>
+        </h5>
       </b-card-text>
+
     </b-card>
     </div>
     </div>

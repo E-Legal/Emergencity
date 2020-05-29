@@ -13,10 +13,6 @@
           
             </div>
 
-            <p class="mb-1">
-              Description numéro 1
-            </p>
-
             </b-list-group-item>
           </div>
 </b-list-group>
@@ -49,22 +45,22 @@ export default {
   },
   watch: {
       total: function(newVal, oldVal) {
-          console.log("old:", oldVal, "new: ", newVal)
-          if (this.total) {
-              console.log("YOOOLOOOO")
-              this.label = this.total
-          }
+          console.log("old:", oldVal, "newddd: ", newVal)
+          axios.
+        get("http://x2021emergencity2490271133000.northeurope.cloudapp.azure.com:9000/barrackVehicles/" + this.total + "?token=" + localStorage.getItem('token'))
+        .then((response) => {
+              if (response.status === 200) {
+                this.all_vehicle = response.data['content'];
+                console.log(this.vehicule)
+                console.log("VEHICULE")
+              }
+          }, (error) => {
+            console.log(error)
+          });
       },
-      vehicle: function(newVal, oldVal) {
-          console.log("old:", oldVal, "new: ", newVal);
-          console.log("OLLLLD VEHIICCLLLLE");
-          if (this.vehicle) {
-            console.log("YOLOOOOOOOO");
-              this.all_vehicle = this.vehicle;
-          }
-      }
   },
   mounted() {
+    
     if (this.total) {
       this.label = this.total;
     }
