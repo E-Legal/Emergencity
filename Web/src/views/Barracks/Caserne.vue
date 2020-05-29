@@ -11,39 +11,13 @@
  <b-card>
     <b-tabs pills card vertical nav-wrapper-class="w-50" v-model="selected">
       <template v-for="cas in caserne">
-        <b-tab item :title="cas.name" :key="cas.id" lazy>
-          <Vehicle :key="cas.id + 'vehi'" :total="getTabs()" :vehicle="getVehicule()"/>
+        <b-tab item :title="cas.name" :key="cas.id">
+          <Vehicle :key="cas.id + 'vehi'" :total="total_vehicle"/>
         </b-tab>
       </template>
     </b-tabs>
     </b-card>
-  <br/>  
-  <br/>  
-  <br/>  
-  <br/>  
- <br/>  
- <br/>  
- <br/>  
- <br/>  
- <br/>  
- <br/>  
- <br/>  
- <br/>  
- <br/>  
- <br/>
- <br/>  
- <br/>  
- <br/>  
- <br/>  
- <br/>  
- <br/>  
-  <br/>  
- <br/>  
- <br/>  
- <br/>  
-  <br/>  
- <br/>  
- <br/>  
+  
     </div>
     
     
@@ -328,9 +302,10 @@ export default {
     selected(value) {
       if (this.caserne) {
         console.log(this.caserne[value]["id"]);
-        this.total_vehicle = [this.caserne[value]]
+        console.log("CASERNE=", this.caserne[value])
+        this.total_vehicle = this.caserne[value]["id"]
         console.log(this.total_vehicle)
-        this.vehiculeget(this.caserne[value]["id"])
+
       }
       console.log(value);
       console.log("SELECTED")
@@ -363,7 +338,6 @@ export default {
             this.caserne = response.data['content'][0];
             console.log(this.caserne);
             console.log("caserne");
-            return(this.caserne)
           }
       }, (error) => {
         console.log(error)
