@@ -88,7 +88,7 @@ box-shadow: 10px 10px 5px -5px rgba(0,0,0,0.75);"
          <br>
          <img src="/assets/monsieur.png" style="width: 400px"/>
        <h3  style="font-weight: bold">
-         Eliott
+         Yanis
            <br>
          Développeur Mobile
        </h3 >
