@@ -7,36 +7,51 @@
   <center>
      <br>
       <br>
-      <img style="width: 150px; height: 150px;" src="/assets/marie.png" />
+      <img style="width: 150px; height: 150px;" src="https://images.vexels.com/media/users/3/135606/isolated/preview/b474b5c5c7ac007448c0111ac3a3eb29-cat-face-round-icon-by-vexels.png" />
       <br>
       <br>
       <Display :msg="this.error" :reload="true"/>
- <h2 style="font-family: 'Raleway', sans-serif;">Bienvenue, <i style="color:gray">Marie</i></h2>
+ <h2 style="font-family: 'Raleway', sans-serif;">Bienvenue, <i style="color:gray">Eloïse</i></h2>
         </center>
         <center>
         <form action="/" class="w3-container w3-card-4 w3-light-grey w3-text-blue w3-margin">
         <div class="w3-row w3-section">
   <div class="w3-col" style="width:50px">  <i class="fa fa-pen"></i></div>
-    <div class="w3-rest">
+  <b-container class="bv-example-row">
+  <b-row>
+    <b-col>
+       <div class="w3-rest">
       <div class="button" id="button-4">
     <div id="underline"></div>
     <a v-on:click="greet" style="text-decoration:none;">Editer informations</a>
   </div>
     </div>
+    </b-col>
+    <b-col>    
+      <div v-on:click="save_edit" class="button" id="button-2">
+    <div id="slide"></div>
+Sauvegarder
+  </div></b-col>
+  </b-row>
+</b-container>
 </div>
 <br>
 
  
-<div class="w3-row w3-section">
+
+<b-container class="bv-example-row">
+  <b-row>
+    <b-col>
+  <div class="w3-row w3-section">
   <div class="w3-col" style="width:50px"><i class="w3-xxlarge fa fa-user"></i></div>
     <div class="w3-rest">
       <input  v-if="this.edit" style="width:350px; height: 50px" class="w3-input w3-border" name="first" type="text" placeholder="" value="Marie">
       <input v-else style="width:350px; height: 50px" class="w3-input w3-border" name="first" type="text" placeholder="" value="Marie" disabled>
 
     </div>
-</div>
-<br>
-<br>
+  </div>
+  </b-col>
+    <b-col>
 <div class="w3-row w3-section">
   <div class="w3-col" style="width:50px"><i class="w3-xxlarge fa fa-user"></i></div>
     <div class="w3-rest">
@@ -44,8 +59,8 @@
       <input  v-else style="width:350px; height: 50px" class="w3-input w3-border" name="last" type="text" placeholder="" value="Boodart" disabled>
     </div>
 </div>
-<br>
-<br>
+    </b-col>
+    <b-col>
 <div class="w3-row w3-section">
   <div class="w3-col" style="width:50px"><i class="w3-xxlarge fa fa-envelope"></i></div>
     <div class="w3-rest">
@@ -53,17 +68,25 @@
       <input v-else style="width:350px; height: 50px" class="w3-input w3-border" name="email" type="text" placeholder="" :value="this.log" disabled>
     </div>
 </div>
-<br>
-<br>
-<div class="w3-row w3-section">
+    </b-col>
+  </b-row>
+</b-container> 
+<br/>
+<br/>
+<br/>
+
+<b-container class="bv-example-row">
+  <b-row>
+    <b-col>
+      <div class="w3-row w3-section">
   <div class="w3-col" style="width:50px"><i class="w3-xxlarge fa fa-user"></i></div>
     <div class="w3-rest">
       <input id="oui" v-if="this.edit" style="width:350px; height: 50px" class="w3-input w3-border" name="last" type="text" placeholder="Fonction" value="Agent">
       <input id="lol" v-else style="width:350px; height: 50px" class="w3-input w3-border" name="last" type="text" value="Agent" placeholder="Fonction" disabled>
     </div>
 </div>
-<br>
-<br>
+    </b-col>
+    <b-col>
 <div class="w3-row w3-section">
    <div class="w3-col" style="width:50px"><i class="w3-xxlarge fa fa-user"></i></div>
     <div class="w3-rest">
@@ -71,14 +94,12 @@
       <input v-else style="width:350px; height: 50px" class="w3-input w3-border" name="phone" type="text" placeholder=""  value="Marseille" disabled>
     </div>
 </div>
-<br>
-<br>
-<div v-on:click="save_edit" class="button" id="button-2">
-    <div id="slide"></div>
-Sauvegarder
-  </div>
-  <br>
-  <br>
+    </b-col>
+  </b-row>
+</b-container>
+<br/>
+<br/>
+<br/> 
 </form>
 </center>
       </div>

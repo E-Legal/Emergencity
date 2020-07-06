@@ -1,14 +1,14 @@
 
 
 <template>
-
   <div class="vehicle">
     <div v-if="this.all_vehicle">
-
         <b-list-group>
           <div v-bind:key="index" v-for="(vehic, index) in all_vehicle[0]">
                             <b-list-group-item href="#" class="flex-column align-items-start">
+
             <div class="d-flex w-100 justify-content-between">
+               <img     width="4%" src="https://exoes.com/site_v2/wp-content/uploads/2017/12/icon-lorry.png"/>
               <h5 class="mb-1">Vehicule <b> {{vehic.model}}</b> n°{{vehic.registration}}</h5>
           
             </div>
@@ -21,8 +21,7 @@
   </div>
 </template>
 
-<style lang="scss">
-
+<style scoped>
 </style>
 <script>
 

@@ -77,6 +77,8 @@ width: 1920px; height: calc(100vh - 66px)
   animation: spin 2s linear infinite;
 }
 
+
+
 @-webkit-keyframes spin {
   0% { -webkit-transform: rotate(0deg); }
   100% { -webkit-transform: rotate(360deg); }

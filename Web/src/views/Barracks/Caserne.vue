@@ -1,14 +1,19 @@
 
 
 <template>
+
   <div class="caserne">
+    <br/>
+     <b-navbar toggleable="lg" type="dark" variant="dark" style="box-shadow: 10px 5px 5px black;">
+   <b-navbar-brand href="#" >Liste des Casernes lié à <strong>eloise_test</strong></b-navbar-brand>
+  </b-navbar>
     <div style="background: url('/assets/white3.png') repeat center center fixed;  background-position: center;   background-size: cover;">
 
  <br>
 
  <template v-if="this.total_vehicle">
   </template>
- <b-card>
+ <b-card border="none">
     <b-tabs pills card vertical nav-wrapper-class="w-50" v-model="selected">
       <template v-for="cas in caserne">
         <b-tab item :title="cas.name" :key="cas.id">
