@@ -101,7 +101,7 @@
 </template>
 
 <script>
-    import LayoutDefault from "../layouts/LayoutDefault.vue";
+    import LayoutDefault from "../../layouts/LayoutDefault.vue";
     export default {
         name: "todo-list",
         data() {

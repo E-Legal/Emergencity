@@ -83,12 +83,14 @@ box-shadow: 10px 10px 5px -5px rgba(0,0,0,0.75);"
 
 <script>
 // @ is an alias to /src
-import LayoutDefault from "../layouts/LayoutDefault.vue";
+import LayoutDefault from "../../layouts/LayoutDefault.vue";
 import axios from 'axios'
-import Display from "../components/MyModal.vue";
+import Display from "../../components/MyModal.vue";
+import store from "./store/userStore";
 
 export default {
   name: "login",
+  store,
   data() {
     return {
       title: "Vue.js Demo Form",
@@ -114,6 +116,8 @@ export default {
     sendFormData() {
       console.log(this.email) 
       console.log(this.password)
+      const payload = {"email": this.email, "password": this.password};
+      store.dispatch('handleLogin', payload);
       const params = {
         name: this.email, 
         password: this.password
@@ -125,10 +129,10 @@ export default {
         post("http://x2021emergencity2490271133000.northeurope.cloudapp.azure.com:9000/login?" + "name=" + this.email + "&password=" + this.password, null, options)
         .then((response) => {
           if (response.status === 200) {
-            localStorage.id_user = response.data['user_id'];
+            /*localStorage.id_user = response.data['user_id'];
             localStorage.token = response.data['token'];
             this.enableSubmitLoader();
-            this.login_success();
+            this.login_success();*/
           }
       }, (error) => {
         console.log(error)

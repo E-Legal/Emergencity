@@ -1,17 +1,17 @@
 import Vue from "vue";
 import Router from "vue-router";
-import Home from "./views/Home.vue";
-import Register from "./views/Register.vue";
-import Login from "./views/Login.vue";
-import Profile from "./views/Profile.vue";
-import Logout from "./views/Logout.vue";
-import Stats from "./views/Stats.vue";
-import Support from "./views/Support.vue";
-import Dashboard from "./views/Dashboard.vue";
+import Home from "./views/Home/Home.vue";
+import Register from "./views/Users/Register.vue";
+import Login from "./views/Users/Login.vue";
+import Profile from "./views/Users/Profile.vue";
+import Logout from "./views/Users/Logout.vue";
+import Stats from "./views/Stats/Stats.vue";
+import Support from "./views/Support/Support.vue";
+import Dashboard from "./views/Dashboard/Dashboard.vue";
 import BootstrapVue from "bootstrap-vue";
 
 import Caserne from "./views/Barracks/Caserne.vue"
-import HomeNotConnected from './views/HomeNotConnected.vue'
+import HomeNotConnected from './views/Home/HomeNotConnected.vue'
 import Admin from './views/Admin/Admin';
 
 
@@ -145,7 +145,7 @@ export default new Router({
       // this generates a separate chunk (about.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
       component: () =>
-        import(/* webpackChunkName: "about" */ "./views/About.vue")
+        import(/* webpackChunkName: "about" */ "./views/About/About.vue")
     }
   ]
 });

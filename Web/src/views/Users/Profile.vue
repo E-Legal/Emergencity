@@ -1,209 +1,89 @@
-
-
 <template>
 
-  <div class="caserne">
-    <div style="background: url('/assets/white3.png') repeat center center fixed;  background-position: center;   background-size: cover;">
-
+  <div class="profile">
     <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" />
- <br/>  
- <br/>  
- <br/>  
- <br/>  
+    <div style="background: url('/assets/white3.png') repeat center center fixed;  background-position: center;">
+  <center>
+     <br>
+      <br>
+      <img style="width: 150px; height: 150px;" src="/assets/marie.png" />
+      <br>
+      <br>
+      <Display :msg="this.error" :reload="true"/>
+ <h2 style="font-family: 'Raleway', sans-serif;">Bienvenue, <i style="color:gray">Marie</i></h2>
+        </center>
+        <center>
+        <form action="/" class="w3-container w3-card-4 w3-light-grey w3-text-blue w3-margin">
+        <div class="w3-row w3-section">
+  <div class="w3-col" style="width:50px">  <i class="fa fa-pen"></i></div>
+    <div class="w3-rest">
+      <div class="button" id="button-4">
+    <div id="underline"></div>
+    <a v-on:click="greet" style="text-decoration:none;">Editer informations</a>
+  </div>
+    </div>
+</div>
+<br>
+
  
- <b-card no-body @caserneget.prevent="caserneget">
-    <b-tabs pills card vertical nav-wrapper-class="w-50">
-      <b-tab active>{{caserneget.city}}<b-card-text>
-        <b-list-group>
- <b-list-group-item href="#" class="flex-column align-items-start">
-    <div class="d-flex w-100 justify-content-between">
-      <h5 class="mb-1">{{caserneget.namecaserne }}</h5>
-   
+<div class="w3-row w3-section">
+  <div class="w3-col" style="width:50px"><i class="w3-xxlarge fa fa-user"></i></div>
+    <div class="w3-rest">
+      <input  v-if="this.edit" style="width:350px; height: 50px" class="w3-input w3-border" name="first" type="text" placeholder="" value="Marie">
+      <input v-else style="width:350px; height: 50px" class="w3-input w3-border" name="first" type="text" placeholder="" value="Marie" disabled>
+
     </div>
-
-    <p class="mb-1">
-      Description numéro 1
-    </p>
-
-  </b-list-group-item>
-
-   <b-list-group-item href="#" class="flex-column align-items-start">
-    <div class="d-flex w-100 justify-content-between">
-      <h5 class="mb-1">Vehicule n°1245</h5>
-   
+</div>
+<br>
+<br>
+<div class="w3-row w3-section">
+  <div class="w3-col" style="width:50px"><i class="w3-xxlarge fa fa-user"></i></div>
+    <div class="w3-rest">
+      <input  v-if="this.edit" style="width:350px; height: 50px" class="w3-input w3-border" name="last" type="text" placeholder="" value="Boodart">
+      <input  v-else style="width:350px; height: 50px" class="w3-input w3-border" name="last" type="text" placeholder="" value="Boodart" disabled>
     </div>
-
-    <p class="mb-1">
-      Description numéro 1
-    </p>
-
-  </b-list-group-item>
-
- <b-list-group-item href="#" class="flex-column align-items-start">
-    <div class="d-flex w-100 justify-content-between">
-      <h5 class="mb-1">Vehicule n°2110</h5>
-   
+</div>
+<br>
+<br>
+<div class="w3-row w3-section">
+  <div class="w3-col" style="width:50px"><i class="w3-xxlarge fa fa-envelope"></i></div>
+    <div class="w3-rest">
+      <input  v-if="this.edit" style="width:350px; height: 50px" class="w3-input w3-border" name="email" type="text" placeholder="" :value="this.log">
+      <input v-else style="width:350px; height: 50px" class="w3-input w3-border" name="email" type="text" placeholder="" :value="this.log" disabled>
     </div>
-
-    <p class="mb-1">
-      Description numéro 1
-    </p>
-
-  </b-list-group-item>
-</b-list-group>
-</b-card-text></b-tab>
-      <b-tab title="Paris"><b-card-text>
-        <b-list-group>
- <b-list-group-item href="#" class="flex-column align-items-start">
-    <div class="d-flex w-100 justify-content-between">
-      <h5 class="mb-1">Vehicule n°5240</h5>
-   
+</div>
+<br>
+<br>
+<div class="w3-row w3-section">
+  <div class="w3-col" style="width:50px"><i class="w3-xxlarge fa fa-user"></i></div>
+    <div class="w3-rest">
+      <input id="oui" v-if="this.edit" style="width:350px; height: 50px" class="w3-input w3-border" name="last" type="text" placeholder="Fonction" value="Agent">
+      <input id="lol" v-else style="width:350px; height: 50px" class="w3-input w3-border" name="last" type="text" value="Agent" placeholder="Fonction" disabled>
     </div>
-
-    <p class="mb-1">
-      Description numéro 1
-    </p>
-
-  </b-list-group-item>
-
-   <b-list-group-item href="#" class="flex-column align-items-start">
-    <div class="d-flex w-100 justify-content-between">
-      <h5 class="mb-1">Vehicule n°4245</h5>
-   
+</div>
+<br>
+<br>
+<div class="w3-row w3-section">
+   <div class="w3-col" style="width:50px"><i class="w3-xxlarge fa fa-user"></i></div>
+    <div class="w3-rest">
+      <input  v-if="this.edit" style="width:350px; height: 50px" class="w3-input w3-border" name="phone" type="text" placeholder="" value="Marseille" >
+      <input v-else style="width:350px; height: 50px" class="w3-input w3-border" name="phone" type="text" placeholder=""  value="Marseille" disabled>
     </div>
-
-    <p class="mb-1">
-      Description numéro 1
-    </p>
-
-  </b-list-group-item>
-
- <b-list-group-item href="#" class="flex-column align-items-start">
-    <div class="d-flex w-100 justify-content-between">
-      <h5 class="mb-1">Vehicule n°3110</h5>
-   
+</div>
+<br>
+<br>
+<div v-on:click="save_edit" class="button" id="button-2">
+    <div id="slide"></div>
+Sauvegarder
+  </div>
+  <br>
+  <br>
+</form>
+</center>
+      </div>
     </div>
-
-    <p class="mb-1">
-      Description numéro 1
-    </p>
-
-  </b-list-group-item>
-</b-list-group>
-        </b-card-text></b-tab>
-      <b-tab title="Lyon"><b-card-text>
-        <b-list-group>
- <b-list-group-item href="#" class="flex-column align-items-start">
-    <div class="d-flex w-100 justify-content-between">
-      <h5 class="mb-1">Vehicule n°0240</h5>
-   
-    </div>
-
-    <p class="mb-1">
-      Description numéro 1
-    </p>
-
-  </b-list-group-item>
-
-   <b-list-group-item href="#" class="flex-column align-items-start">
-    <div class="d-flex w-100 justify-content-between">
-      <h5 class="mb-1">Vehicule n°0245</h5>
-   
-    </div>
-
-    <p class="mb-1">
-      Description numéro 1
-    </p>
-
-  </b-list-group-item>
-
- <b-list-group-item href="#" class="flex-column align-items-start">
-    <div class="d-flex w-100 justify-content-between">
-      <h5 class="mb-1">Vehicule n°0110</h5>
-   
-    </div>
-
-    <p class="mb-1">
-      Description numéro 1
-    </p>
-
-  </b-list-group-item>
-</b-list-group>
-        </b-card-text></b-tab>
-      <b-tab title="Perpignan"><b-card-text>
-        <b-list-group>
- <b-list-group-item href="#" class="flex-column align-items-start">
-    <div class="d-flex w-100 justify-content-between">
-      <h5 class="mb-1">Vehicule n°8240</h5>
-   
-    </div>
-
-    <p class="mb-1">
-      Description numéro 1
-    </p>
-
-  </b-list-group-item>
-
-   <b-list-group-item href="#" class="flex-column align-items-start">
-    <div class="d-flex w-100 justify-content-between">
-      <h5 class="mb-1">Vehicule n°8245</h5>
-   
-    </div>
-
-    <p class="mb-1">
-      Description numéro 1
-    </p>
-
-  </b-list-group-item>
-
- <b-list-group-item href="#" class="flex-column align-items-start">
-    <div class="d-flex w-100 justify-content-between">
-      <h5 class="mb-1">Vehicule n°8110</h5>
-   
-    </div>
-
-    <p class="mb-1">
-      Description numéro 1
-    </p>
-
-  </b-list-group-item>
-</b-list-group>
-        </b-card-text></b-tab>
-    </b-tabs>
-  </b-card>
- <br/>  
- <br/>  
- <br/>  
- <br/>  
- <br/>  
- <br/>  
- <br/>  
- <br/>  
- <br/>  
- <br/>  
- <br/>  
- <br/>  
- <br/>  
- <br/>  
- <br/>  
- <br/>  
- <br/>  
- <br/>  
- <br/>  
- <br/>  
-  <br/>  
- <br/>  
- <br/>  
- <br/>  
-  <br/>  
- <br/>  
- <br/>  
-    </div>
-    
-    
   <!--container end.//-->
-     </div>
 </template>
 
 <style lang="scss">
@@ -457,12 +337,13 @@ h2.active {
 
 
 </style>
+
 <script>
 
 // @ is an alias to /src
-import LayoutDefault from "../layouts/LayoutDefault.vue";
-import Display from "../components/MyModal.vue";
-import Map from "../components/Map.vue";
+import LayoutDefault from "../../layouts/LayoutDefault.vue";
+import Display from "../../components/MyModal.vue";
+import Map from "../../components/Map.vue";
 import axios from 'axios';
 
 export default {
@@ -479,10 +360,7 @@ export default {
       submitting: false,
       log: "",
       edit: false,
-      error: "",
-      city: "",
-      namecaserne: ""
-
+      error: ""
     };
   },
   methods: {
@@ -497,22 +375,12 @@ export default {
       this.edit = false;
       }
     },
-    caserneget() {
-       axios.
-        get("http://x2021emergencity2490271133000.northeurope.cloudapp.azure.com:9000/barracks?token=" + "405472fe")
-        .then((response) => {
-          console.log(response.status)
-          console.log(response.data)
-          if (response.status === 200) {
-            this.enableSubmitLoader();
-          }
-          this.city = response.city
-          this.namecaserne = response.name
-          this.register_success();
-      }, (error) => {
-        console.log(error)
-      });
-    
+    submit() {
+      if (this.password) {
+        this.sendFormData();
+      } else {
+        this.validationError();
+      }
     },
     editProfile() {
 
@@ -534,12 +402,23 @@ export default {
   },
   mounted() {
     this.$emit("update:layout", LayoutDefault);
-    this.caserneget();
-    console.log("test999")
   },
   created() {
-  },
-  
-};
+                this.log = localStorage.login;
+               const options = { crossdomain: true,
+        headers: {'Content-Type': 'application/x-www-form-urlencoded', 'crossDomain': true, 'Content-Type': 'text/plain;charset=utf-8',}
+      }
+    axios.
+        post("http://localhost:9000/login?" + "name=" + this.email + "&password=" + "123456", null, options)
+        .then((response) => {
+          if (response.status === 200) {
+            this.log = response.data["name"]
+          }
+      }, (error) => {
+                    this.log = localStorage.login;
+      });
 
+    this.$emit("update:layout", LayoutDefault);
+  },
+};
 </script>

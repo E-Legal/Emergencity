@@ -135,9 +135,9 @@
 </style>
 
 <script>
-import LayoutDefault from "../layouts/LayoutDefault.vue";
-import LineExample from '../script_chart/linechart.js'
-import BarExample from '../script_chart/barchart.js'
+import LayoutDefault from "../../layouts/LayoutDefault.vue";
+import LineExample from '../../script_chart/linechart.js'
+import BarExample from '../../script_chart/barchart.js'
 import axios from 'axios'
 import Datepicker from 'vuejs-datepicker';
 

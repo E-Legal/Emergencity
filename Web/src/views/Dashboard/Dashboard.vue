@@ -5,9 +5,9 @@
 </template>
 
 <script>
-import LayoutDefault from "../layouts/LayoutDefault.vue";
-import Map from "../components/Map.vue";
-import Display from "../components/MyModal.vue";
+import LayoutDefault from "../../layouts/LayoutDefault.vue";
+import Map from "../../components/Map.vue";
+import Display from "../../components/MyModal.vue";
 
 export default {
   name: "dashboard",

@@ -140,9 +140,9 @@ box-shadow: 10px 10px 5px -5px rgba(0,0,0,0.75);"
 
 <script>
 
-import LayoutDefault from "../layouts/LayoutDefault.vue";
+import LayoutDefault from "../../layouts/LayoutDefault.vue";
 import axios from 'axios'
-import Display from "../components/MyModal.vue";
+import Display from "../../components/MyModal.vue";
 
 export default {
   name: "register",
