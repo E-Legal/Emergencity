@@ -1,0 +1,4 @@
+{
+  "connectionString": "mongodb+srv://emergencity:d9KZRi9AzGVul2R9@cluster0-ws6vw.gcp.mongodb.net/test?retryWrites=true&w=majority",
+  "secret": "teyz78azsdpz4"
+}
