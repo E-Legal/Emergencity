@@ -19,6 +19,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
 
@@ -27,8 +28,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static epitech.emergencity.domain.Tables.*;
-import static org.jooq.impl.DSL.asterisk;
-import static org.jooq.impl.DSL.count;
+import static org.jooq.impl.DSL.*;
 
 @Service
 @Slf4j
@@ -88,11 +88,10 @@ public class JOOQCourse implements Courses, JOOQCrudUtils {
     }
 
     private String[] geocodeur(String adress) {
-        UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl("https://api-adresse.data.gouv.fr/search")
-                .queryParam("q", adress);
-        log.info("Uri ? {}", builder.toUriString());
+        UriComponents builder = UriComponentsBuilder.newInstance().scheme("https").host("api-adresse.data.gouv.fr").path("/search").queryParam("q", adress).build();
+        String url = builder.toUriString();
         RestTemplate restTemplate = new RestTemplate();
-        String resp = restTemplate.getForObject(builder.toUriString(), String.class);
+        String resp = restTemplate.getForObject(url, String.class);
 
         JSONObject root = new JSONObject(resp);
 
@@ -102,6 +101,7 @@ public class JOOQCourse implements Courses, JOOQCrudUtils {
             return null;
 
         String[] value = new String[2];
+
 
         JSONArray coord = feat.getJSONObject(0).getJSONObject("geometry").getJSONArray("coordinates");
 

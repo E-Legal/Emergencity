@@ -8,7 +8,7 @@ import java.util.UUID;
 
 @Data
 @Builder
-public class wVehicle {
+public class Vehicle {
     private UUID id;
     @NotNull
     private String model;
