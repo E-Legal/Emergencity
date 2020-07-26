@@ -4,6 +4,8 @@
          
 <div>
   <Barracksmodal :idBarracks="idBarracks" msg="yolo"/>
+  <Usermodal :idUser="idBarracks" msg=""/>
+
 <b-tabs content-class="mt-3" justified>
     <b-tab  v-if="this.label" title="Gestion Utilisateurs">
     <form id="demo" @submit.prevent="submit" novalidate>
@@ -42,6 +44,11 @@
         <template slot="caserne_actions" slot-scope="props"> 
       <div>
           <b-button :id="props['rowData'].id" v-on:click="showCaserneDialog(props, props['rowData'].id)" variant="outline-primary">Voir les Casernes liées à l'utilisateur</b-button>
+      </div>
+    </template>
+      <template slot="profile_actions" slot-scope="props"> 
+      <div>
+          <b-button :id="props['rowData'].id" v-on:click="showUserDialog(props, props['rowData'].id)" variant="outline-primary">Modifier</b-button>
       </div>
     </template>
   <template slot="actions" slot-scope="props"> 
@@ -96,6 +103,7 @@ width: 1920px; height: calc(100vh - 66px)
 import Vuetable from 'vuetable-2';
 import axios from 'axios';
 import Barracksmodal from "../../../components/BarracksModal.vue";
+import Usermodal from "../../../components/UserModal.vue";
 import Display from "../../../components/MyModal.vue";
 
 export default {
@@ -103,6 +111,7 @@ export default {
   components: {
     Vuetable,
     Barracksmodal,
+    Usermodal,
     Display
   },
   props: {
@@ -134,6 +143,12 @@ export default {
       {
           name: 'caserne_actions',
           title: 'Caserne',
+          titleClass: 'center aligned',
+          dataClass: 'center aligned'
+        },
+         {
+          name: 'profile_actions',
+          title: 'Modifier',
           titleClass: 'center aligned',
           dataClass: 'center aligned'
         },
@@ -185,6 +200,11 @@ export default {
         this.idBarracks = val;
         this.$bvModal.show("barracks_modal");
         //this.$bvModal.show("my-modal");
+
+    },
+      showUserDialog(props, val) {
+        this.idBarracks = val;
+        this.$bvModal.show("user_modal");
 
     },
     onAction (action, data, index) {

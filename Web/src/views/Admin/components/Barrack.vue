@@ -81,7 +81,7 @@ import Vuetable from 'vuetable-2';
 import axios from 'axios';
 import VehiculeModal from "../../../components/VehiculeModal.vue";
 import BarracksModal from "../../../components/BarracksModal.vue";
-
+import UserModal from "../../../components/UserModal.vue";
 export default {
   name: "Barrack",
   components: {
