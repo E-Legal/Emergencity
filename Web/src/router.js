@@ -8,6 +8,7 @@ import Logout from "./views/Users/Logout.vue";
 import Stats from "./views/Stats/Stats.vue";
 import Support from "./views/Support/Support.vue";
 import Dashboard from "./views/Dashboard/Dashboard.vue";
+import Agenda from "./views/Agenda/Agenda.vue";
 import BootstrapVue from "bootstrap-vue";
 
 import Caserne from "./views/Barracks/Caserne.vue"
@@ -69,6 +70,11 @@ export default new Router({
       path: "/login",
       name: "login",
       component: Login
+    },
+    {
+      path: "/agenda",
+      name: "agenda",
+      component: Agenda
     },
     {
       path: "/stats",

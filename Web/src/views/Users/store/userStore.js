@@ -26,16 +26,13 @@ const store = new Vuex.Store({
   },
   actions: {  
     addUser ({ commit }, user) {
-      console.log("oui");
       commit('addUser', user)
     },
     handleLogin({commit}, {email, password}) {
-      console.log(email, password);
       axios.
         post("http://x2021emergencity2490271133000.northeurope.cloudapp.azure.com:9000/login?" + "name=" + email + "&password=" + password, null)
         .then((response) => {
           if (response.status === 200) {
-            console.log("200");
             commit('addUser', response.data);
           }
       }, (error) => {
@@ -43,6 +40,6 @@ const store = new Vuex.Store({
       });
     }
   }
-})
+});
 
 export default store;
