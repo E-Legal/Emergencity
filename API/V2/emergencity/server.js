@@ -19,6 +19,9 @@ app.use('/trafficlights', require('./trafficlights/trafficlights.controller'));
 app.use('/barracks', require('./barracks/barracks.controller'));
 app.use('/vehicles', require('./vehicles/vehicles.controller'));
 app.use('/profiles', require('./profiles/profiles.controller'));
+app.use('/barrackUsers', require('./barrackUsers/barrackUsers.controller'));
+app.use('/barrackVehicles', require('./barrackVehicles/barrackVehicles.controller'));
+app.use('/courses', require('./courses/course.controller'));
 
 
 // global error handler

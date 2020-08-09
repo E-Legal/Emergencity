@@ -15,4 +15,7 @@ module.exports = {
     Barrack: require('../barracks/barrack.model'),
     Vehicle: require('../vehicles/vehicle.model'),
     Profile: require('../profiles/profile.model'),
+    BarrackUsers: require('../barrackUsers/barrackUsers.model'),
+    BarrackVehicles: require('../barrackVehicles/barrackVehicles.model'),
+    Course: require('../courses/course.model'),
 };

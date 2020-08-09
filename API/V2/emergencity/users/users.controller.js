@@ -17,7 +17,7 @@ module.exports = router;
 
 function authenticate(req, res, next) {
     userService.authenticate(req.body)
-        .then(user => user ? res.json(user) : res.status(400).json({ message: 'Username or password is incorrect' }))
+        .then(user => user ? res.json(user) : res.status(400).json({message: 'Username or password is incorrect'}))
         .catch(err => next(err));
 }
 
@@ -52,9 +52,19 @@ function member(req, res, next) {
 }
 
 function update(req, res, next) {
-    userService.update(req.user.sub, req.body)
-        .then(user => user ? res.json(user) : res.status(404).send({message: 'Somebody found an error'}))
-        .catch(err => next(err));
+    if (userService.is_admin(req.user.sub).then(admin => {
+        if (admin == true) {
+            userService.update(req.user.sub, req.body)
+                .then(user => user ? res.json(user) : res.status(404).send({message: 'Somebody found an error'}))
+                .catch(err => next(err));
+        } else {
+            res.status(401).send({message: 'Make your dream'})
+        }
+    })) ;
+}
+
+function updateAdmin(req, res, next) {
+
 }
 
 function _delete(req, res, next) {

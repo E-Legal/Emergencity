@@ -21,6 +21,7 @@
       "resolved": "https://registry.npmjs.org/async/-/async-1.5.2.tgz",
       "version": "1.5.2"
     },
+    "axios": "^0.19.2",
     "bcryptjs": "^2.4.3",
     "bl": {
       "integrity": "sha512-wbgvOpqopSr7uq6fJrLH8EsvYMJf9gzfo2jCsL2eTy75qXPukA4pCgHamOQkZtY5vmfVtjB+P3LNlMHW5CEZXA==",
@@ -668,5 +669,8 @@
       "resolved": "https://registry.npmjs.org/vary/-/vary-1.1.2.tgz",
       "version": "1.1.2"
     }
+  },
+  "devDependencies": {
+    "request": "^2.88.2"
   }
 }
