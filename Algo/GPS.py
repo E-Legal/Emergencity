@@ -6,9 +6,9 @@ class GPS(Thread):
 	def __init__(self, coords, token):
 		super(GPS, self).__init__()
 		self.id = coords["id"]
-		self.coord_from = [coords["x_start"], coords["y_start"]]
-		self.coord_to = [coords["x_end"], coords["y_end"]]
-		self.route = coords["course"]
+		self.coord_from = [coords["lat_pos"], coords["long_pos"]]
+		self.coord_to = [coords["lat_des"], coords["long_des"]]
+		self.route = None
 		self.token = token
 		self.data = {"time": 0, "distance": 0}
 
@@ -25,6 +25,7 @@ class GPS(Thread):
 	def run(self):
 		print("-- Je suis un thread")
 		route = str(self.get_route())
-		res = requests.post("http://localhost:9000/courses/" + self.id, params= {"token": self.token}, data = {"route": str(route), "time": str(self.data["time"]), "distance": str(self.data["distance"])})
+		print(route)
+		res = requests.put("http://localhost:9000/courses/" + self.id, headers= {"Authorization": "Bearer " + self.token}, data = {"course": str(route), "time": str(self.data["time"]), "distance": str(self.data["distance"])})
 		if (res.status_code != 200):
 			raise "Erreur envoi route"

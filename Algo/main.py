@@ -8,10 +8,11 @@ print("---------- Log API")
 
 token = ""
 try:
-	username = "algo"
-	password = "cocolito"
-	req = "http://localhost:9000/login"
-	res = requests.post(req, data = {"name": username, "password": password})
+	username = "Laegan"
+	password = "nouveau"
+	req = "http://localhost:9000/users/login"
+	res = requests.post(req, data = {"username": username, "password": password})
+	print(res.json())
 	token = res.json()['token']
 	print("---------- LOG OK")
 except Exception as e:
@@ -33,6 +34,7 @@ except Exception as e:
 	print("KO GET feu")
 
 
+
 while (1):
 	print("-------- Je tourne en boucle ---------")
 	print()
@@ -41,11 +43,12 @@ while (1):
 
 	coords = {}
 	try:
-		res = requests.get("http://localhost:9000/courses", params = {"token": token})
-		coords = res.json()["content"]
+		res = requests.get("http://localhost:9000/courses", headers={"Authorization": "Bearer " + token})
+		coords = res.json()
 		print("---------- GET coordonnées OK")
 	except Exception as e:
 		print("KO GET coordonnées")
+		print(e)
 
 	# calcule road from position to to
 	print("---------- calcule route")
@@ -62,6 +65,7 @@ while (1):
 		print("---------- Calcule route OK")
 	except Exception as e:
 		print("KO Calculer route")
+		print(e)
 
 	#c = input();
 	#if (c == "end"):
