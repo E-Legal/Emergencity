@@ -6,8 +6,8 @@ class GPS(Thread):
 	def __init__(self, coords, token):
 		super(GPS, self).__init__()
 		self.id = coords["id"]
-		self.coord_from = [coords["lat_pos"], coords["long_pos"]]
-		self.coord_to = [coords["lat_des"], coords["long_des"]]
+		self.coord_from = [coords["long_pos"], coords["lat_pos"]]
+		self.coord_to = [coords["long_des"], coords["lat_des"]]
 		self.route = None
 		self.token = token
 		self.data = {"time": 0, "distance": 0}
