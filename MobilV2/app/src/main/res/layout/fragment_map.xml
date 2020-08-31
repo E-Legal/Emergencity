@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+<EditText
+    android:id="@+id/txt_add"
+    android:layout_width="284dp"
+    android:layout_height="wrap_content"
+    android:contentDescription="Adresse"
+    android:ems="10"
+    android:inputType="textPersonName" />
+
+<Button
+android:id="@+id/btn_go"
+android:layout_width="53dp"
+android:layout_height="wrap_content"
+android:text="Go !"
+android:visibility="visible" />
+
+<org.osmdroid.views.MapView
+android:id="@+id/map"
+android:layout_width="fill_parent"
+android:layout_height="fill_parent"
+tilesource="Mapnik">
+
+</org.osmdroid.views.MapView>
+
+    </LinearLayout>
+
