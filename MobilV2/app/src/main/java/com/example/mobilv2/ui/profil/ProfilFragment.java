@@ -1,7 +1,11 @@
 package com.example.mobilv2.ui.profil;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,12 +37,31 @@ public class ProfilFragment extends Fragment {
     private TextView poste;
     private View root;
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
+    public View onCreateView(@NonNull final LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         root = inflater.inflate(R.layout.fragment_profil, container, false);
         if (ApiManager.getInstance().getToken().isEmpty()) {
-            Intent intent = new Intent(requireActivity().getApplicationContext(), MainActivity.class);
-            startActivity(intent);
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                    TextView title = new TextView(getActivity());
+                    title.setText("Vous n'etes pas connecté !");
+                    title.setTextSize(20);
+                    title.setTypeface(Typeface.DEFAULT_BOLD);
+                    title.setPadding(10, 10, 10, 40);
+                    title.setGravity(Gravity.CENTER);
+                    builder.setCustomTitle(title);
+                    builder.setView(inflater.inflate(R.layout.fragment_alert_login, null)).setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            Intent intent = new Intent(requireActivity().getApplicationContext(), MainActivity.class);
+                            startActivity(intent);
+                        }
+                    }).show();
+                    builder.create();
+                }
+            });
         }
         nom = root.findViewById(R.id.cp_firstname);
         prenom = root.findViewById(R.id.cp_lastname);

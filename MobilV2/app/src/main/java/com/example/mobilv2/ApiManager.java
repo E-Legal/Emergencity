@@ -19,7 +19,7 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class ApiManager extends OkHttpClient {
-    private String _url = "http://168.63.46.169:9000"; //http://192.168.1.16:9000";
+    private String _url = "https://emergencity.herokuapp.com";
     private String _token = "";
     private static boolean connected = false;
 

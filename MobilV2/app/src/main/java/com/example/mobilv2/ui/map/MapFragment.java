@@ -1,8 +1,12 @@
 package com.example.mobilv2.ui.map;
 
 import android.Manifest;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Typeface;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -10,6 +14,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +29,7 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.example.mobilv2.ApiManager;
+import com.example.mobilv2.MainActivity;
 import com.example.mobilv2.R;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -70,7 +76,7 @@ public class MapFragment extends Fragment {
 
 
     @RequiresApi(api = Build.VERSION_CODES.M)
-    public View onCreateView(@NonNull LayoutInflater inflater,
+    public View onCreateView(@NonNull final LayoutInflater inflater,
                          ViewGroup container, Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //View root = inflater.inflate(R.layout.fragment_map, container, false);
@@ -89,6 +95,30 @@ public class MapFragment extends Fragment {
 
         //inflate and create the map
         final View root = inflater.inflate(R.layout.fragment_map, container, false);
+
+        if (ApiManager.getInstance().getToken().isEmpty()) {
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                    TextView title = new TextView(getActivity());
+                    title.setText("Vous n'etes pas connecté !");
+                    title.setTextSize(20);
+                    title.setTypeface(Typeface.DEFAULT_BOLD);
+                    title.setPadding(10, 10, 10, 40);
+                    title.setGravity(Gravity.CENTER);
+                    builder.setCustomTitle(title);
+                    builder.setView(inflater.inflate(R.layout.fragment_alert_login, null)).setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            Intent intent = new Intent(requireActivity().getApplicationContext(), MainActivity.class);
+                            startActivity(intent);
+                        }
+                    }).show();
+                    builder.create();
+                }
+            });
+        }
 
         map = (MapView) root.findViewById(R.id.map);
         map.setTileSource(TileSourceFactory.MAPNIK);
