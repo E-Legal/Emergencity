@@ -6,20 +6,20 @@
       <b-container fluid>
   <b-row class="my-1">
     <b-col sm="2">
-      <label for="input-small">Identifiant:</label>
+      <label for="input-small">Prénom:</label>
     </b-col>
     <br/>
     <b-col sm="10">
       <b-form-input id="input-small" size="sm" placeholder="test" v-model="userProfile.first_name"></b-form-input>
     </b-col>
         <b-col sm="2">
-      <label for="input-small">Adresse mail :</label>
+      <label for="input-small">Nom:</label>
     </b-col>
     <b-col sm="10">
       <b-form-input id="input-small" size="sm" placeholder="test@live.fr" v-model="userProfile.last_name"></b-form-input>
     </b-col>
      <b-col sm="2">
-      <label for="input-small">Job :</label>
+      <label for="input-small">Job:</label>
     </b-col>
     <b-col sm="10">
       <b-form-input id="input-small" size="sm" placeholder="test@live.fr" v-model="userProfile.job"></b-form-input>
@@ -44,9 +44,9 @@
     </vuetable>
       </div>
     </div>
-      <b-button class="mt-3" variant="outline-danger" block @click="hideModal">Ok</b-button>
-      <b-button class="mt-3" variant="outline-danger" block @click="hideModal">Enregistrer</b-button>
-      <b-button id="test" v-on:click="updateUserModal()" variant="outline-primary">Modifier</b-button>
+      <b-button class="mt-3" variant="outline-danger" block @click="hideModal">Annuler</b-button>
+      <b-button id="test" v-on:click="updateUserModal()"  class="mt-3" variant="outline-danger" block @click="hideModal">Enregistrer</b-button>
+      <!-- <b-button id="test" v-on:click="updateUserModal()" variant="outline-primary">Modifier</b-button> -->
   </b-modal>
   </div>
 </template>
@@ -130,7 +130,7 @@ export default {
       console.log("updated")
     },
     getUserInfo(idUser) {
-      axios.get('http://x2021emergencity2490271133000.northeurope.cloudapp.azure.com:9000/barracks?token=' + localStorage.getItem('token')).then(response => {
+      // axios.get('http://x2021emergencity2490271133000.northeurope.cloudapp.azure.com:9000/barracks?token=' + localStorage.getItem('token')).then(response => {
               console.log("USER=")
               console.log(response.data, "USER")
               // this.all_barracks = response.data['content']
@@ -141,7 +141,7 @@ export default {
                   obj["text"] = value.name + ' | ' + value.city;
                   this.options.push(obj);
               })*/
-          });
+          // });
     },
     listBarracks() {
 
