@@ -4,7 +4,7 @@
          
 <div>
   <Barracksmodal :idBarracks="idBarracks" msg="yolo"/>
-  <Usermodal :idUser="idBarracks" msg=""/>
+  <Usermodal :idUser="idBarracks" :idProfile="idProfile" msg=""/>
 
 <b-tabs content-class="mt-3" justified>
     <b-tab  v-if="this.label" title="Gestion Utilisateurs">
@@ -119,9 +119,11 @@ export default {
     },
   data() {
     return {
+        idProfile: null,
         idBarracks: null,
         email: null,
         password: null,
+        profile: [],
         selected: [],
         options: [
           { value: null, text: 'Please select an option', disabled: true },
@@ -164,9 +166,10 @@ export default {
     };
   },
   watch: { 
-      	total: function(newVal, oldVal) { // watch it
+      	total: async function(newVal, oldVal) { // watch it
         console.log('Prop changed: ', newVal, ' | was: ', oldVal);
         if (this.total) {
+                await this.getUserProfile();
                 this.total.forEach((value, index) => {
                   this.label = this.total;
                   console.log(this.label);
@@ -176,6 +179,17 @@ export default {
   },
   methods: {
     //...
+    printRowIndex(index) {
+      console.log("index===")
+    },
+    getUserProfile() {
+       axios.get('http://x2021emergencity2490271133000.northeurope.cloudapp.azure.com:9000/user/' + localStorage.getItem('id_user') + '/profile/list?token=' + localStorage.getItem('token')).then(response => {
+          response.data['content'].forEach((value, index) => {
+                  console.log(value);
+                  this.profile.push(value);
+          });
+      });
+    },
     updateUserList() {
              axios.get('http://x2021emergencity2490271133000.northeurope.cloudapp.azure.com:9000/SU/user/list?token=' + localStorage.getItem('token')).then(response => {
               console.log(response.data)
@@ -203,7 +217,11 @@ export default {
 
     },
       showUserDialog(props, val) {
-        this.idBarracks = val;
+        console.log(props, "propssssss")
+        this.idProfile = this.profile[props['rowIndex']];
+        console.log(this.profile, 'PROFILE');
+        console.log("PROPILE ROW", this.profile[props['rowIndex']])
+
         this.$bvModal.show("user_modal");
 
     },

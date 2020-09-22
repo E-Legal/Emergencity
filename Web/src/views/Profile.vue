@@ -11,7 +11,7 @@
       <br>
       <br>
       <Display :msg="this.error" :reload="true"/>
- <h2 style="font-family: 'Raleway', sans-serif;">Bienvenue, <i style="color:gray">Eloïse</i></h2>
+ <h2 style="font-family: 'Raleway', sans-serif;">Bienvenue, <i style="color:gray">{{name}}</i></h2>
         </center>
         <center>
         <form action="/" class="w3-container w3-card-4 w3-light-grey w3-text-blue w3-margin">
@@ -30,7 +30,7 @@
     <b-col>    
       <div v-on:click="save_edit" class="button" id="button-2">
     <div id="slide"></div>
-Sauvegarder
+      Sauvegarder
   </div></b-col>
   </b-row>
 </b-container>
@@ -43,29 +43,29 @@ Sauvegarder
   <b-row>
     <b-col>
   <div class="w3-row w3-section">
-  <div class="w3-col" style="width:50px"><i class="w3-xxlarge fa fa-user"></i></div>
+  <h4>Prénom</h4>
     <div class="w3-rest">
-      <input  v-if="this.edit" style="width:350px; height: 50px" class="w3-input w3-border" name="first" type="text" placeholder="" value="Marie">
-      <input v-else style="width:350px; height: 50px" class="w3-input w3-border" name="first" type="text" placeholder="" value="Marie" disabled>
+      <input  v-if="this.edit" style="width:350px; height: 50px" class="w3-input w3-border" name="first" type="text" placeholder="" v-model="data.first_name">
+      <input v-else style="width:350px; height: 50px" class="w3-input w3-border" name="first" type="text" placeholder="" v-model="data.first_name" disabled>
 
     </div>
   </div>
   </b-col>
     <b-col>
 <div class="w3-row w3-section">
-  <div class="w3-col" style="width:50px"><i class="w3-xxlarge fa fa-user"></i></div>
+  <h4>Nom</h4>
     <div class="w3-rest">
-      <input  v-if="this.edit" style="width:350px; height: 50px" class="w3-input w3-border" name="last" type="text" placeholder="" value="Boodart">
-      <input  v-else style="width:350px; height: 50px" class="w3-input w3-border" name="last" type="text" placeholder="" value="Boodart" disabled>
+      <input  v-if="this.edit" style="width:350px; height: 50px" class="w3-input w3-border" name="last" type="text" placeholder="" v-model="data.last_name">
+      <input  v-else style="width:350px; height: 50px" class="w3-input w3-border" name="last" type="text" placeholder="" v-model="data.last_name" disabled>
     </div>
 </div>
     </b-col>
     <b-col>
-<div class="w3-row w3-section">
-  <div class="w3-col" style="width:50px"><i class="w3-xxlarge fa fa-envelope"></i></div>
+     <div class="w3-row w3-section">
+  <h4>Job</h4>
     <div class="w3-rest">
-      <input  v-if="this.edit" style="width:350px; height: 50px" class="w3-input w3-border" name="email" type="text" placeholder="" :value="this.log">
-      <input v-else style="width:350px; height: 50px" class="w3-input w3-border" name="email" type="text" placeholder="" :value="this.log" disabled>
+      <input id="oui" v-if="this.edit" style="width:350px; height: 50px" class="w3-input w3-border" name="last" type="text" placeholder="Fonction" v-model="data.job">
+      <input id="lol" v-else style="width:350px; height: 50px" class="w3-input w3-border" name="last" type="text" v-model="data.job" placeholder="Fonction" disabled>
     </div>
 </div>
     </b-col>
@@ -75,28 +75,6 @@ Sauvegarder
 <br/>
 <br/>
 
-<b-container class="bv-example-row">
-  <b-row>
-    <b-col>
-      <div class="w3-row w3-section">
-  <div class="w3-col" style="width:50px"><i class="w3-xxlarge fa fa-user"></i></div>
-    <div class="w3-rest">
-      <input id="oui" v-if="this.edit" style="width:350px; height: 50px" class="w3-input w3-border" name="last" type="text" placeholder="Fonction" value="Agent">
-      <input id="lol" v-else style="width:350px; height: 50px" class="w3-input w3-border" name="last" type="text" value="Agent" placeholder="Fonction" disabled>
-    </div>
-</div>
-    </b-col>
-    <b-col>
-<div class="w3-row w3-section">
-   <div class="w3-col" style="width:50px"><i class="w3-xxlarge fa fa-user"></i></div>
-    <div class="w3-rest">
-      <input  v-if="this.edit" style="width:350px; height: 50px" class="w3-input w3-border" name="phone" type="text" placeholder="" value="Marseille" >
-      <input v-else style="width:350px; height: 50px" class="w3-input w3-border" name="phone" type="text" placeholder=""  value="Marseille" disabled>
-    </div>
-</div>
-    </b-col>
-  </b-row>
-</b-container>
 <br/>
 <br/>
 <br/> 
@@ -375,19 +353,36 @@ export default {
   },
   data() {
     return {
+      data: null,
       title: "Vue.js Demo Form",
       email: "",
       password: "",
       submitting: false,
       log: "",
       edit: false,
-      error: ""
+      error: "",
+      name: "",
     };
   },
   methods: {
-    save_edit() {
+      updateUserModal() {
+    console.log(this.data, "DATA");
+    return axios.
+      post("http://x2021emergencity2490271133000.northeurope.cloudapp.azure.com:9000/user/" + localStorage.getItem('id_user') + "/profile/" + this.data.id + "/update?token=" + localStorage.getItem("token") + 
+      "&first_name=" + this.data.first_name + "&last_name=" + this.data.last_name + "&job=" + this.data.job + "&user_id=" + this.data.user_id)
+      .then((response) => {
+          console.log(response.data, "TESSSST")
+    }, (error) => {
+      console.log(error)
+    });
+    console.log("updated")
+  },
+    save_edit: async function() {
+      await this.updateUserModal();
+      this.getProfile();
       this.error = "Sauvegarde effectué!"
       this.$bvModal.show('my-modal')
+
     },
       greet: function () {
       if (this.edit == false) {
@@ -419,10 +414,28 @@ export default {
     },
     validationError() {
       console.log("nouh");
-    }
+    },
+    getProfile() {
+      axios.get('http://x2021emergencity2490271133000.northeurope.cloudapp.azure.com:9000/user/0e37df36-f698-11e6-8dd4-cb9ced3df976/profile/d320097c-bcd7-4ac3-8bc5-7bed0370b601?token=' + localStorage.getItem('token')).then(response => {
+          console.log("USER=")
+          console.log(response.data, "USER")
+          this.name = response.data.first_name
+          this.data = response.data;
+          console.log(this.data, "data");
+        });
+    },
   },
   mounted() {
     this.$emit("update:layout", LayoutDefault);
+  },
+  beforeCreate() {
+    axios.get('http://x2021emergencity2490271133000.northeurope.cloudapp.azure.com:9000/user/0e37df36-f698-11e6-8dd4-cb9ced3df976/profile/d320097c-bcd7-4ac3-8bc5-7bed0370b601?token=' + localStorage.getItem('token')).then(response => {
+          console.log("USER=")
+          console.log(response.data, "USER")
+          this.name = response.data.first_name
+          this.data = response.data;
+          console.log(this.data, "data");
+        });
   },
   created() {
                 this.log = localStorage.login;

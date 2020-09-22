@@ -10,14 +10,21 @@
     </b-col>
     <br/>
     <b-col sm="10">
-      <b-form-input id="input-small" size="sm" placeholder="test"></b-form-input>
+      <b-form-input id="input-small" size="sm" placeholder="test" v-model="userProfile.first_name"></b-form-input>
     </b-col>
         <b-col sm="2">
       <label for="input-small">Adresse mail :</label>
     </b-col>
     <b-col sm="10">
-      <b-form-input id="input-small" size="sm" placeholder="test@live.fr"></b-form-input>
+      <b-form-input id="input-small" size="sm" placeholder="test@live.fr" v-model="userProfile.last_name"></b-form-input>
     </b-col>
+     <b-col sm="2">
+      <label for="input-small">Job :</label>
+    </b-col>
+    <b-col sm="10">
+      <b-form-input id="input-small" size="sm" placeholder="test@live.fr" v-model="userProfile.job"></b-form-input>
+    </b-col>
+    
     
   </b-row>
       </b-container>
@@ -38,6 +45,8 @@
       </div>
     </div>
       <b-button class="mt-3" variant="outline-danger" block @click="hideModal">Ok</b-button>
+      <b-button class="mt-3" variant="outline-danger" block @click="hideModal">Enregistrer</b-button>
+      <b-button id="test" v-on:click="updateUserModal()" variant="outline-primary">Modifier</b-button>
   </b-modal>
   </div>
 </template>
@@ -59,18 +68,25 @@ export default {
   props: {
     msg: String,
     idBarracks: String,
-    reload: Boolean
+    reload: Boolean,
+    idProfile: Object
     },
   watch: { 
       	idUser: function(newVal, oldVal) { // watch it
           console.log('Prop changed: ', newVal, ' | was: ', oldVal);
           console.log("U S E R ")
-          //this.getUserInfo();
+          this.getUserInfo();
+        },
+        idProfile: function(newVal, oldVal) { // watch it
+          console.log('Prop changed: ', newVal, ' | was: ', oldVal);
+          console.log("PROFILE CHANGED")
+          this.setProfile(this.idProfile);
         }
   },
   data() {
     
     return {
+      userProfile: null,
       all_barracks: null,
       selected: null,
       options: [],
@@ -97,6 +113,22 @@ export default {
     //this.getUserInfo();
   },
   methods: {
+    setProfile(profile) {
+      this.userProfile = profile
+      console.log("BITE DE CHEVRE", this.userProfile);
+    },
+    updateUserModal() {
+      let data = 
+      axios.
+        post("http://x2021emergencity2490271133000.northeurope.cloudapp.azure.com:9000/user/" + localStorage.getItem('id_user') + "/profile/" + this.userProfile.id + "/update?token=" + localStorage.getItem("token") + 
+        "&first_name=" + this.userProfile.first_name + "&last_name=" + this.userProfile.last_name + "&job=" + this.userProfile.job + "&user_id=" + this.userProfile.user_id)
+        .then((response) => {
+           console.log(response.data, "TESSSST")
+      }, (error) => {
+        console.log(error)
+      });
+      console.log("updated")
+    },
     getUserInfo(idUser) {
       axios.get('http://x2021emergencity2490271133000.northeurope.cloudapp.azure.com:9000/barracks?token=' + localStorage.getItem('token')).then(response => {
               console.log("USER=")

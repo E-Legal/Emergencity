@@ -13,11 +13,6 @@
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarText">
-          <ul class="navbar-nav mr-auto">
-             <li class="nav-item" style="float:left">
-                <router-link class="navbar-brand" to="/"><img style="" class="pict" src="/img/logo.png"/></router-link>
-            </li>
-          </ul>
           <ul class="navbar-nav ml-auto">
             <li v-if="!user" class="nav-item">
               
@@ -40,6 +35,9 @@
               </li>
              <li v-if="user" class="nav-item">
                 <router-link class="navbar-brand" to="/caserne"><span class="power_up"><img class="pict" src="/img/icons/car.svg"/></span><span class="link"> Véhicules </span></router-link>
+            </li>
+                <li v-if="user" class="nav-item">
+                <router-link class="navbar-brand" to="/admin"><span class="power_up"><img class="pict" src="/img/icons/user.svg"/></span><span class="link"> Admin </span></router-link>
             </li>
             <li v-if="user" class="nav-item">
               <b-dropdown id="dropdown-dropleft" variant="link"  toggle-class="text-decoration-none" no-caret>
@@ -69,7 +67,7 @@
     </span>---->
         </div>
       </nav>
-    <div style="padding-bottom: 80px;"> </div>
+    <div style="padding-bottom: 60px;"> </div>
     <main class="LayoutDefault__main">
       <slot />
     </main>
@@ -80,8 +78,8 @@
 
 <style scoped lang="scss">
 .shadow {
-box-shadow: 3px 7px 23px 1px rgba(0,0,0,0.75) !important;
-background: linear-gradient(90deg, rgba(81,84,87,1) 0%, rgba(52,58,64,1) 59%);
+box-shadow: 3px 7px 23px 1px rgba(0,0,0,0.75);
+background: #2BBBAD;
 };
 .power_up img{
             transition: 0.2s ease-in-out;

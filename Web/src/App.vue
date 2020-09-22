@@ -22,7 +22,7 @@ export default {
 
 <style lang="scss">
 html {
-  height: 100vh;
+  height: 100%;
 }
 body {
   height: 100%;

@@ -29,7 +29,13 @@ function isAuthenticated() {
   }
 }
 function isAuthenticatedAdmin() {
-  if (localStorage.getItem("login") === "test") {
+  // if (localStorage.getItem("login") === "test") {
+  //   console.log(localStorage.getItem("login"));
+  //   return true;
+  // } else {
+  //   return false;
+  // }
+  if (localStorage.getItem("login")) {
     console.log(localStorage.getItem("login"));
     return true;
   } else {

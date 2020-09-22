@@ -4,15 +4,21 @@
 
   <div class="caserne">
     <br/>
-     <b-navbar toggleable="lg" type="dark" variant="dark" style="box-shadow: 10px 5px 5px black;">
-   <b-navbar-brand href="#" >Liste des Casernes lié à <strong>eloise_test</strong></b-navbar-brand>
-  </b-navbar>
+    <center>
+   <div class="container">
+      <div class="Chart">
+        <h2>Liste des casernes</h2>
+            
+      </div>
+    </div>
+    </center>
     <div style="background: url('/assets/white3.png') repeat center center fixed;  background-position: center;   background-size: cover;">
 
  <br>
 
  <template v-if="this.total_vehicle">
   </template>
+  <center>
  <b-card border="none">
     <b-tabs pills card vertical nav-wrapper-class="w-50" v-model="selected">
       <template v-for="cas in caserne">
@@ -22,6 +28,7 @@
       </template>
     </b-tabs>
     </b-card>
+  </center>
   
     </div>
     
@@ -30,7 +37,7 @@
      </div>
 </template>
 
-<style lang="scss">
+<style scoped lang="scss">
 @import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Raleway:300,400');
 body {
@@ -50,15 +57,15 @@ color: black;
 
 /* Layout Styling */
 
-#container {
-  width: 100%;
-  margin: 0 auto;
-  padding: 50px 0 150px 0;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: center;
-}
+// #container {
+//   width: 100%;
+//   margin: 0 auto;
+//   padding: 50px 0 150px 0;
+//   display: flex;
+//   flex-direction: row;
+//   flex-wrap: wrap;
+//   justify-content: center;
+// }
 
 
 #button-2 {
@@ -277,6 +284,13 @@ h2.active {
   box-sizing: border-box;
 }
 
+.card {
+  border: 1.9px solid rgb(0, 0, 0);
+  width: 1464px;
+}
+.card-body {
+      padding: 0 !important;
+}
 
 
 </style>

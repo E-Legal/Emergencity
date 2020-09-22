@@ -58,6 +58,7 @@ width: 1920px; height: calc(100vh - 66px)
 <script>
 
 import {gmapApi} from 'vue2-google-maps'
+import axios from 'axios';
 
 export default {
   name: "MyAwesomeMap",
@@ -77,29 +78,37 @@ export default {
             height: -35
         }
       },
-      markers: [{
-          position: {lat: 43.2697659, lng: 5.3671704}, infoText: '<p> 61 Rue Marx Dormoy, 13004 Marseille, France </p><b><strong>Feu Indisponible</strong></b>', state: 0, icon: 'mark', color: 'black'
-        },{
-          position: {lat: 43.2709000, lng: 5.3671709}, infoText: '<p> 61 Rue Marx Dormoy, 13004 Marseille, France </p><b><strong>Feu Rouge</strong></b>', state: 0, icon: 'mark', color: 'red'}, 
-        {position: {lat: 43.2697659, lng: 5.3717040}, infoText: '<p> 61 Rue Marx Dormoy, 13004 Marseille, France </p><b><strong>Feu vert</strong></b>', state: 1, icon: 'mark2', color: 'green'}
-      ],
-      latitude: 43.2697659,
-      longitude: 5.3671704
+      markers: [],
+      latitude: 43.3102483,
+      longitude: 5.3789625
     };
   },
+  mounted() {
+        var totalMarkers = [];
+        axios.get('http://x2021emergencity2490271133000.northeurope.cloudapp.azure.com:9000/feu?token=' + localStorage.getItem('token')).then(response => {
+                console.log(response, "response")
+                response.data['content'].forEach((element) => {
+                    let marker = {position: {lat: parseFloat(element.x), lng:  parseFloat(element.y)}, infoText: '', state: 0, icon: 'mark', color: 'red'};
+                    totalMarkers.push(marker);
+                })
+                this.markers = totalMarkers;
+                console.log(this.markers, "marke")
+        });
+
+  },
   methods: {
-  toggleInfoWindow: function(marker, idx) {
-    this.infoWindowPos = marker.position;
-    this.infoOptions.content = marker.infoText;
-    if (this.currentMidx == idx) {
-      this.infoWinOpen = !this.infoWinOpen;
-    }
-    else {
-      this.infoWinOpen = true;
-      this.currentMidx = idx;
+    toggleInfoWindow: function(marker, idx) {
+      this.infoWindowPos = marker.position;
+      this.infoOptions.content = marker.infoText;
+      if (this.currentMidx == idx) {
+        this.infoWinOpen = !this.infoWinOpen;
+      }
+      else {
+        this.infoWinOpen = true;
+        this.currentMidx = idx;
+      }
     }
   }
-}
 };
 
 </script>
