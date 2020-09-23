@@ -72,7 +72,7 @@ export default new Router({
       component: Login
     },
     {
-      path: "/agenda",
+      path: "/calendar",
       name: "agenda",
       component: Agenda
     },
