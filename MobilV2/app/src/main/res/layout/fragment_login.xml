@@ -2,36 +2,41 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/login_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.login.LoginFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-
-     <!-- <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_centerHorizontal="true"
-        android:src="@drawable/logo_emergencity" /> -->
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="319dp"
+        android:layout_height="76dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="93dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="92dp"
+        android:src="@drawable/logo_emergencity" />
 
     <TextView
         android:id="@+id/mylogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
+        android:layout_below="@+id/imageView2"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="60dp"
+        android:fontFamily="@font/montserrat_bold"
         android:text="Identifiant"
+        android:textColor="#444"
         android:textSize="20dp"
         android:textStyle="bold" />
 
     <EditText
+        android:id="@+id/loginText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/loginText"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/mylogin"/>
+        android:layout_below="@+id/mylogin"
+        android:layout_centerHorizontal="true" />
 
     <TextView
         android:id="@+id/mypassword"
@@ -40,17 +45,19 @@
         android:layout_below="@+id/loginText"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="52dp"
-        android:textStyle="bold"
+        android:fontFamily="@font/montserrat_bold"
+        android:text="Mot de passe"
+        android:textColor="#444"
         android:textSize="20dp"
-        android:text="Mot de passe" />
+        android:textStyle="bold" />
 
     <EditText
+        android:id="@+id/passwordText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/passwordText"
+        android:layout_below="@+id/mypassword"
         android:layout_centerHorizontal="true"
-        android:inputType="textPassword"
-        android:layout_below="@+id/mypassword"/>
+        android:inputType="textPassword" />
 
     <Button
         android:id="@+id/login_btn"
@@ -59,7 +66,8 @@
         android:layout_below="@id/passwordText"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="40dp"
-        android:background="#70a1ff"
+        android:background="@drawable/buttonshape"
+        android:fontFamily="@font/montserrat"
         android:text="Connexion"
         android:textColor="#FFFFFF" />
 

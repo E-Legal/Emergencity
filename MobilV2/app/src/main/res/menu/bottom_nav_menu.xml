@@ -6,14 +6,13 @@
         android:id="@+id/navigation_login"
         android:enabled="true"
         app:showAsAction="ifRoom"
-        android:icon="@drawable/ic_login"
+        android:icon="@drawable/login_selector"
         android:title="" />
-
 
     <item
         android:id="@+id/navigation_notifications"
         android:enabled="true"
-        android:icon="@drawable/ic_user"
+        android:icon="@drawable/profile_selector"
         app:showAsAction="ifRoom"
         android:title="" />
 
@@ -21,15 +20,14 @@
         android:id="@+id/navigation_home"
         android:enabled="true"
         app:showAsAction="ifRoom"
-        android:icon="@drawable/ic_pin"
+        android:icon="@drawable/map_selector"
         android:title="" />
 
     <item
         android:id="@+id/navigation_dashboard"
         android:enabled="true"
-        android:icon="@drawable/ic_support"
+        android:icon="@drawable/support_selector"
         app:showAsAction="ifRoom"
         android:title="" />
-
 
 </menu>

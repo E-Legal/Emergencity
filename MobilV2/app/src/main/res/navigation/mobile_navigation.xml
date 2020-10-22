@@ -28,6 +28,9 @@
         <action
             android:id="@+id/action_navigation_notifications_to_navigation_dashboard"
             app:destination="@id/navigation_dashboard" />
+        <action
+            android:id="@+id/navigateToLogin"
+            app:destination="@id/navigation_login" />
     </fragment>
 
     <fragment
@@ -36,7 +39,7 @@
         android:label="Profile"
         tools:layout="@layout/fragment_login" >
         <action
-            android:id="@+id/action_navigation_login_to_navigation_notifications"
+            android:id="@+id/navigateToProfile"
             app:destination="@id/navigation_notifications" />
     </fragment>
 

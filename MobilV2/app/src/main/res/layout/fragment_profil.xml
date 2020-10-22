@@ -4,30 +4,33 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/profil_container"
+    android:id="@+id/profile"
+    android:background="?android:windowBackground"
     tools:context=".ui.profil.ProfilFragment">
 
     <TextView
+        android:id="@+id/cp_moncompte"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/cp_moncompte"
+        android:fontFamily="@font/montserrat_bold"
+        android:paddingLeft="20dp"
         android:paddingTop="27dp"
         android:text="Mon compte"
-        android:textStyle="bold"
         android:textColor="#211414"
         android:textSize="20dp"
-        android:paddingLeft="20dp" />
+        android:textStyle="bold" />
 
     <TextView
+        android:id="@+id/cp_nom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/cp_nom"
+        android:layout_below="@+id/cp_moncompte"
+        android:fontFamily="@font/montserrat"
+        android:paddingLeft="20dp"
         android:paddingTop="27dp"
         android:text="Nom"
         android:textColor="#211414"
-        android:textSize="18dp"
-        android:layout_below="@+id/cp_moncompte"
-        android:paddingLeft="20dp" />
+        android:textSize="18dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -35,62 +38,69 @@
         android:layout_below="@id/cp_nom"
         android:paddingLeft="20dp"
         >
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/cp_firstname"
-            android:text=""
-            android:paddingTop="5dp" />
 
         <TextView
+            android:id="@+id/cp_firstname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat"
+            android:paddingTop="5dp"
+            android:text="" />
+
+        <TextView
             android:id="@+id/cp_lastname"
-            android:text=""
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat"
             android:paddingLeft="5dp"
-            android:paddingTop="5dp" />
+            android:paddingTop="5dp"
+            android:text="" />
 
     </LinearLayout>
 
     <TextView
+        android:id="@+id/cp_courriel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/cp_courriel"
+        android:layout_below="@+id/cp_nom"
+        android:fontFamily="@font/montserrat"
+        android:paddingLeft="20dp"
         android:paddingTop="47dp"
         android:text="ID Utilisateur"
         android:textColor="#211414"
-        android:textSize="18dp"
-        android:layout_below="@+id/cp_nom"
-        android:paddingLeft="20dp" />
+        android:textSize="18dp" />
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:id="@+id/cp_email"
-        android:text=""
-        android:layout_below="@id/cp_courriel"
-        android:paddingTop="5dp"
-        android:paddingLeft="20dp" />
-
-    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@id/cp_courriel"
+        android:fontFamily="@font/montserrat"
+        android:paddingLeft="20dp"
+        android:paddingTop="5dp"
+        android:text="" />
+
+    <TextView
         android:id="@+id/cp_review"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/cp_courriel"
+        android:fontFamily="@font/montserrat"
+        android:paddingLeft="20dp"
         android:paddingTop="47dp"
         android:text="Poste"
         android:textColor="#211414"
-        android:textSize="18dp"
-        android:layout_below="@+id/cp_courriel"
-        android:paddingLeft="20dp" />
+        android:textSize="18dp" />
 
     <TextView
+        android:id="@+id/cp_nbreview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/cp_nbreview"
-        android:text=""
         android:layout_below="@id/cp_review"
+        android:fontFamily="@font/montserrat"
+        android:paddingLeft="20dp"
         android:paddingTop="5dp"
-        android:paddingLeft="20dp" />
+        android:text="" />
 
     <Button
         android:id="@+id/cp_bottom_btn"
@@ -101,15 +111,16 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:shadowColor="#2114140F"
-        android:shadowDy="8"
-        android:shadowDx="0"
-        android:layout_marginTop="196dp"
         android:layout_marginStart="20dp"
+        android:layout_marginTop="196dp"
         android:layout_marginEnd="20dp"
+        android:background="#ff4757"
         android:clickable="true"
         android:focusable="true"
-        android:background="#ff4757"
+        android:fontFamily="@font/montserrat"
+        android:shadowColor="#2114140F"
+        android:shadowDx="0"
+        android:shadowDy="8"
         android:text="Déconnexion"
         android:textColor="#FFFFFF" />
 

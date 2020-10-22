@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import com.example.mobilv2.ApiManager;
 import com.example.mobilv2.MainActivity;
@@ -40,6 +41,7 @@ public class ProfilFragment extends Fragment {
     public View onCreateView(@NonNull final LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         root = inflater.inflate(R.layout.fragment_profil, container, false);
+
         if (ApiManager.getInstance().getToken().isEmpty()) {
             getActivity().runOnUiThread(new Runnable() {
                 @Override
@@ -107,8 +109,12 @@ public class ProfilFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 ApiManager.getInstance().removeToken();
-                Intent intent = new Intent(requireActivity().getApplicationContext(), MainActivity.class);
-                startActivity(intent);
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Navigation.findNavController(root).navigate(R.id.navigateToLogin);
+                    }
+                });
             }
         });
         return root;
