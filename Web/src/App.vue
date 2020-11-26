@@ -1,14 +1,16 @@
 <template>
   <component :is="layout">
-    
     <router-view :layout.sync="layout" />
   </component>
 </template>
 
 <script>
 import LayoutDefault from "./layouts/LayoutDefault.vue";
+import store from "./store/index";
+
 export default {
   name: `App`,
+  store: store,
   data() {
     return {
       layout: `div`
@@ -28,9 +30,9 @@ body {
   height: 100%;
   max-width: 100%;
   overflow-x: hidden;
-  background: url('/assets/white3.png') repeat center center fixed !important;  
-  background-position: center; 
-  overflow: auto; 
+  background: url("/assets/white3.png") repeat center center fixed !important;
+  background-position: center;
+  overflow: auto;
 }
 
 #app {

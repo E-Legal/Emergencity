@@ -1,47 +1,39 @@
-
-
 <template>
   <div class="caserne">
-    <div style="background: url('/assets/white3.png') repeat center center fixed;  background-position: center;   background-size: cover;">
+    <div
+      style="background: url('/assets/white3.png') repeat center center fixed;  background-position: center;   background-size: cover;"
+    >
+      <br />
 
- <br>
-
- <template v-if="this.total_vehicle">
-  </template>
- <b-card>
-    <b-tabs pills card vertical nav-wrapper-class="w-50" v-model="selected">
-      <template v-for="cas in caserne">
-        <b-tab item :title="cas.name" :key="cas.id">
-          <Vehicle :key="cas.id + 'vehi'" :total="total_vehicle"/>
-        </b-tab>
-      </template>
-    </b-tabs>
-    </b-card>
-  
+      <template v-if="this.total_vehicle"> </template>
+      <b-card>
+        <b-tabs pills card vertical nav-wrapper-class="w-50" v-model="selected">
+          <template v-for="cas in caserne">
+            <b-tab item :title="cas.name" :key="cas.id">
+              <Vehicle :key="cas.id + 'vehi'" :total="total_vehicle" />
+            </b-tab>
+          </template>
+        </b-tabs>
+      </b-card>
     </div>
-    
-    
-  <!--container end.//-->
-     </div>
+
+    <!--container end.//-->
+  </div>
 </template>
 
 <style lang="scss">
-@import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
-@import url('https://fonts.googleapis.com/css?family=Raleway:300,400');
+@import url("https://fonts.googleapis.com/css?family=Open+Sans&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Raleway:300,400");
 body {
-  background: #2D3142;
-  font-family: 'Raleway', sans-serif;
+  background: #2d3142;
+  font-family: "Raleway", sans-serif;
 }
-.mybutton:link
-{
-text-decoration:none;
-color: black;
+.mybutton:link {
+  text-decoration: none;
+  color: black;
 }
 
 /* Heading */
-
-
-
 
 /* Layout Styling */
 
@@ -55,7 +47,6 @@ color: black;
   justify-content: center;
 }
 
-
 #button-2 {
   position: relative;
   overflow: hidden;
@@ -64,16 +55,16 @@ color: black;
 
 #button-2 a {
   position: relative;
-  transition: all .35s ease-Out;
+  transition: all 0.35s ease-Out;
 }
 
 #slide {
   width: 100%;
   height: 100%;
   left: -200px;
-  background: #BFC0C0;
+  background: #bfc0c0;
   position: absolute;
-  transition: all .35s ease-Out;
+  transition: all 0.35s ease-Out;
   bottom: 0;
 }
 
@@ -82,10 +73,8 @@ color: black;
 }
 
 #button-2:hover a {
-  color: #2D3142;
+  color: #2d3142;
 }
-
-
 
 /* Button Styles */
 
@@ -93,12 +82,12 @@ color: black;
   display: inline-flex;
   height: 40px;
   width: 150px;
-  border: 2px solid #BFC0C0;
+  border: 2px solid #bfc0c0;
   margin: 20px 20px 20px 20px;
-  color: #BFC0C0;
+  color: #bfc0c0;
   text-transform: uppercase;
   text-decoration: none;
-  font-size: .8em;
+  font-size: 0.8em;
   letter-spacing: 1.5px;
   align-items: center;
   justify-content: center;
@@ -110,7 +99,6 @@ color: black;
   letter-spacing: 1px;
 }
 
-
 #button-4 {
   position: relative;
   overflow: hidden;
@@ -119,7 +107,7 @@ color: black;
 
 #button-4 a {
   position: relative;
-  transition: all .45s ease-Out;
+  transition: all 0.45s ease-Out;
 }
 
 #underline {
@@ -128,9 +116,9 @@ color: black;
   margin-top: 15px;
   align-self: flex-end;
   left: -200px;
-  background: #BFC0C0;
+  background: #bfc0c0;
   position: absolute;
-  transition: all .3s ease-Out;
+  transition: all 0.3s ease-Out;
   bottom: 0;
 }
 
@@ -138,12 +126,11 @@ color: black;
   left: 0;
 }
 
-
 /* STRUCTURE */
 .emergencity_title {
   padding: 80px;
   font-size: 70px;
-  font-weight:bold;
+  font-weight: bold;
 }
 
 .wrapper {
@@ -192,8 +179,6 @@ h2.active {
 
 /* FORM TYPOGRAPHY*/
 
-
-
 /* ANIMATIONS */
 
 /* Simple CSS3 Fade-in-down Animation */
@@ -234,11 +219,11 @@ h2.active {
 .box_space {
   margin-top: 30px !important;
   margin-bottom: 20px !important;
-  opacity:0.7;
+  opacity: 0.7;
 }
 .button_space {
   margin-bottom: 50px !important;
-  opacity:0.7;
+  opacity: 0.7;
 }
 .underlineHover:after {
   display: block;
@@ -271,17 +256,13 @@ h2.active {
 * {
   box-sizing: border-box;
 }
-
-
-
 </style>
 <script>
-
 // @ is an alias to /src
 import LayoutDefault from "../../layouts/LayoutDefault.vue";
 import Display from "../../components/MyModal.vue";
-import axios from 'axios';
-import Vehicle from './components/Vehicle.vue'
+import axios from "axios";
+import Vehicle from "./components/Vehicle.vue";
 
 export default {
   name: "caserne",
@@ -302,62 +283,85 @@ export default {
     selected(value) {
       if (this.caserne) {
         console.log(this.caserne[value]["id"]);
-        console.log("CASERNE=", this.caserne[value])
-        this.total_vehicle = this.caserne[value]["id"]
-        console.log(this.total_vehicle)
-
+        console.log("CASERNE=", this.caserne[value]);
+        this.total_vehicle = this.caserne[value]["id"];
+        console.log(this.total_vehicle);
       }
       console.log(value);
-      console.log("SELECTED")
+      console.log("SELECTED");
     }
   },
   methods: {
     getTabs() {
-      return(this.total_vehicle);
+      return this.total_vehicle;
     },
     getVehicule() {
-      console.log(this.vehicule, "VEHI")
-      return(this.vehicule)
+      console.log(this.vehicule, "VEHI");
+      return this.vehicule;
     },
     save_edit() {
-      this.error = "Sauvegarde effectué!"
-      this.$bvModal.show('my-modal')
+      this.error = "Sauvegarde effectué!";
+      this.$bvModal.show("my-modal");
     },
-      greet: function () {
+    greet: function() {
       if (this.edit == false) {
         this.edit = true;
       } else {
-      this.edit = false;
+        this.edit = false;
       }
     },
     caserneget() {
-       axios.
-        get("http://x2021emergencity2490271133000.northeurope.cloudapp.azure.com:9000/barrack/user/" + localStorage.getItem('id_user') + "?token=" + localStorage.getItem('token'))
-        .then((response) => {
-          if (response.status === 200) {
-            this.caserne = response.data['content'][0];
-            console.log(this.caserne);
-            console.log("caserne");
+      console.log
+      this.$store.dispatch("Barrack/getBarracks", this.$store.getters["User/token"]).then((response) => {
+        this.caserne = this.$store.getters['Barrack/barracks']
+        console.log(this.caserne, "yoloswag")
+      })
+      /*axios
+        .get(
+          "http://x2021emergencity2490271133000.northeurope.cloudapp.azure.com:9000/barrack/user/" +
+            localStorage.getItem("id_user") +
+            "?token=" +
+            localStorage.getItem("token")
+        )
+        .then(
+          response => {
+            if (response.status === 200) {
+              this.caserne = response.data["content"][0];
+              console.log(this.caserne);
+              console.log("caserne");
+            }
+          },
+          error => {
+            console.log(error);
           }
-      }, (error) => {
-        console.log(error)
-      });
-    
+        );*/
     },
-     vehiculeget(idBarracks) {
-       axios.
-        get("http://x2021emergencity2490271133000.northeurope.cloudapp.azure.com:9000/barrackVehicles/" + idBarracks + "?token=" + localStorage.getItem('token'))
-        .then((response) => {
-          if (response.status === 200) {
-            this.vehicule = response.data['content'];
-            console.log(this.vehicule)
-            console.log("VEHICULE")
-          }
-      }, (error) => {
-        console.log(error)
-      });
-    
-    },
+    vehiculeget(idBarracks) {
+
+      this.$store.dispatch("Barrack/getBarrackVehicule", {token: this.$store.getters["User/token"], idBarracks: idBarracks}).then((response) => {
+        console.log(response);
+      })
+    }
+    //   axios
+    //     .get(
+    //       "http://x2021emergencity2490271133000.northeurope.cloudapp.azure.com:9000/barrackVehicles/" +
+    //         idBarracks +
+    //         "?token=" +
+    //         localStorage.getItem("token")
+    //     )
+    //     .then(
+    //       response => {
+    //         if (response.status === 200) {
+    //           this.vehicule = response.data["content"];
+    //           console.log(this.vehicule);
+    //           console.log("VEHICULE");
+    //         }
+    //       },
+    //       error => {
+    //         console.log(error);
+    //       }
+    //     );
+    // }
   },
   beforeMount() {
     this.$emit("update:layout", LayoutDefault);
@@ -365,8 +369,6 @@ export default {
   },
   created() {
     console.log("created");
-  },
-  
+  }
 };
-
 </script>

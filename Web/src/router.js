@@ -11,17 +11,19 @@ import Dashboard from "./views/Dashboard/Dashboard.vue";
 import Agenda from "./views/Agenda/Agenda.vue";
 import BootstrapVue from "bootstrap-vue";
 
-import Caserne from "./views/Barracks/Caserne.vue"
-import HomeNotConnected from './views/Home/HomeNotConnected.vue'
-import Admin from './views/Admin/Admin';
+import Caserne from "./views/Barracks/Caserne.vue";
+import HomeNotConnected from "./views/Home/HomeNotConnected.vue";
+import Admin from "./views/Admin/Admin";
 
+import store from "./store/index";
 
 Vue.use(BootstrapVue);
 Vue.use(Router);
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-vue/dist/bootstrap-vue.css";
 
-function isAuthenticated() {
+function isAuthenticated(test) {
+  console.log("this:::", test);
   if (localStorage.getItem("login")) {
     console.log(localStorage.getItem("login"));
     return true;
@@ -30,7 +32,7 @@ function isAuthenticated() {
   }
 }
 function isAuthenticatedAdmin() {
-  if (localStorage.getItem("login") === "test") {
+  if (localStorage.getItem("login") === "Laegan") {
     console.log(localStorage.getItem("login"));
     return true;
   } else {
@@ -38,7 +40,7 @@ function isAuthenticatedAdmin() {
   }
 }
 
-export default new Router({
+let router = new Router({
   mode: "history",
   base: process.env.BASE_URL,
   routes: [
@@ -46,24 +48,16 @@ export default new Router({
       path: "/",
       name: "home",
       component: Home,
-      beforeEnter(to, from, next) {
-        if (isAuthenticated()) {
-          next();
-        } else {
-          next("/home");
-        }
+      meta: {
+        requiresAuth: true
       }
     },
     {
       path: "/admin",
       name: "admin",
       component: Admin,
-      beforeEnter(to, from, next) {
-        if (isAuthenticatedAdmin()) {
-          next();
-        } else {
-          next("/home");
-        }
+      meta: {
+        requiresAuth: true
       }
     },
     {
@@ -74,30 +68,25 @@ export default new Router({
     {
       path: "/calendar",
       name: "agenda",
-      component: Agenda
+      component: Agenda,
+      meta: {
+        requiresAuth: true
+      }
     },
     {
       path: "/stats",
       name: "stats",
       component: Stats,
-      beforeEnter(to, from, next) {
-        if (isAuthenticated()) {
-          next();
-        } else {
-          next("/login");
-        }
+      meta: {
+        requiresAuth: true
       }
     },
     {
       path: "/profile",
       name: "profile",
       component: Profile,
-      beforeEnter(to, from, next) {
-        if (isAuthenticated()) {
-          next();
-        } else {
-          next("/home");
-        }
+      meta: {
+        requiresAuth: true
       }
     },
     {
@@ -109,40 +98,41 @@ export default new Router({
       path: "/dashboard",
       name: "dashboard",
       component: Dashboard,
-      beforeEnter(to, from, next) {
-        if (isAuthenticated()) {
-          next();
-        } else {
-          next("/home");
-        }
+      meta: {
+        requiresAuth: true
       }
     },
     {
       path: "/logout",
       name: "logout",
       component: Logout,
-      beforeEnter(to, from, next) {
-        if (isAuthenticated()) {
-          next();
-        } else {
-          next("/login");
-        }
+      meta: {
+        requiresAuth: true
       }
     },
     {
       path: "/caserne",
       name: "caserne",
-      component: Caserne
+      component: Caserne,
+      meta: {
+        requiresAuth: true
+      }
     },
     {
       path: "/home",
       name: "home",
-      component: HomeNotConnected
+      component: HomeNotConnected,
+      meta: {
+        requiresAuth: true
+      }
     },
     {
       path: "/support",
       name: "support",
-      component: Support
+      component: Support,
+      meta: {
+        requiresAuth: true
+      }
     },
     {
       path: "/about",
@@ -155,3 +145,18 @@ export default new Router({
     }
   ]
 });
+
+router.beforeEach((to, from, next) => {
+  console.log(to);
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    if (store.getters["User/logged"]) {
+      next();
+      return;
+    }
+    next("/login");
+  } else {
+    next();
+  }
+});
+
+export default router;

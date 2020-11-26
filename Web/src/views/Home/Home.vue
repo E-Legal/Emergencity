@@ -1,58 +1,45 @@
 <template>
   <div class="home">
-    <div style="background: url('/assets/black.jpg')   no-repeat center center fixed; height: calc(100vh - 56px);  background-position: center;
+    <div
+      style="background: url('/assets/black.jpg')   no-repeat center center fixed; height: calc(100vh - 56px);  background-position: center;
   background-repeat: no-repeat;
-  background-size: cover; " class="container-fluid">
-  <br>
-          <h1
-            class="d-flex justify-content-center bold_title bienvenue "
-          >
-            Bienvenue
-          </h1>
-          <h2 class="d-flex justify-content-center emergencity">
-            Emergencity
-          </h2>
-          <div class="row">
-            <div class="col-lg-4 d-flex justify-content-center img_padd">
-              <router-link class="nav-link" to="/profile">
-              <img
-                src="/img/profile/avatar.png"
-                style=""
-              />  
-         
-              </router-link>
-            </div>
-            <div class="col-lg-4 d-flex justify-content-center img_padd">
-              <router-link class="nav-link" to="/stats">
-              <img 
-                src="/img/profile/profits.png"
-                style=""
-              /></router-link>
-            </div>
-            <div class="col-lg-4 d-flex justify-content-center img_padd">
-               <router-link class="nav-link" to="/dashboard">
-              <img
-                src="/img/profile/map.png"
-                style=""
-              /></router-link>
-            </div>
-            <div
-              class="col-lg-4 offset-lg-4 d-flex justify-content-center img_padd"
-             
-            >
-              <img 
-                src="/img/profile/car.png"
-             
-              />
-            </div>
-          </div>
+  background-size: cover; "
+      class="container-fluid"
+    >
+      <br />
+      <h1 class="d-flex justify-content-center bold_title bienvenue ">
+        Bienvenue
+      </h1>
+      <h2 class="d-flex justify-content-center emergencity">
+        Emergencity
+      </h2>
+      <div class="row">
+        <div class="col-lg-4 d-flex justify-content-center img_padd">
+          <router-link class="nav-link" to="/profile">
+            <img src="/img/profile/avatar.png" style="" />
+          </router-link>
+        </div>
+        <div class="col-lg-4 d-flex justify-content-center img_padd">
+          <router-link class="nav-link" to="/stats">
+            <img src="/img/profile/profits.png" style=""
+          /></router-link>
+        </div>
+        <div class="col-lg-4 d-flex justify-content-center img_padd">
+          <router-link class="nav-link" to="/dashboard">
+            <img src="/img/profile/map.png" style=""
+          /></router-link>
+        </div>
+        <div
+          class="col-lg-4 offset-lg-4 d-flex justify-content-center img_padd"
+        >
+          <img src="/img/profile/car.png" />
         </div>
       </div>
-      
+    </div>
+  </div>
 </template>
 
 <style scoped>
-
 .bienvenue {
   font-weight: bold;
   font-size: 70px;
@@ -69,7 +56,7 @@
   padding-bottom: 5%;
 }
 .img_border {
-    border-style: solid;
+  border-style: solid;
   border-width: 2px;
   border-color: white;
 }
