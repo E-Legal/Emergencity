@@ -6,8 +6,11 @@
 
 <script>
 import LayoutDefault from "./layouts/LayoutDefault.vue";
+import store from "./store/index";
+
 export default {
   name: `App`,
+  store: store,
   data() {
     return {
       layout: `div`
@@ -21,20 +24,15 @@ export default {
 
 <style lang="scss">
 html {
-  height: 100%;
+  height: 100vh;
 }
 body {
   height: 100%;
   max-width: 100%;
   overflow-x: hidden;
-  background-image: linear-gradient(
-    to bottom,
-    #ababab,
-    #9b9b9b,
-    #8c8b8c,
-    #7e7b7c,
-    #706c6c
-  );
+  background: url("/assets/white3.png") repeat center center fixed !important;
+  background-position: center;
+  overflow: auto;
 }
 
 #app {
