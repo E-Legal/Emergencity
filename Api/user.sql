@@ -1,3 +1,0 @@
-psql;
-CREATE USER admin WITH PASSWORD 'admin';
-ALTER ROLE admin WITH SUPERUSER;

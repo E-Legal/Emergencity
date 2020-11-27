@@ -1,7 +1,0 @@
-
-    @PostMapping("")
-    private Object getcoord() {
-        return String 5.834861 String 43.409492
-        return String 5.767904 String 43.473034
-        );
-    }
