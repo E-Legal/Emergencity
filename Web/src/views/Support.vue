@@ -2,7 +2,17 @@
     <div
             style="background: url('/assets/white3.png') repeat center center fixed; background-position: center; overflow: auto;"
     >
-        <div class="ticket-form">
+  <div style="text-align:center">
+        <div style="width: 99%;" class="ticket-form">
+            <h1>Contacter Nous</h1>
+            <br/>
+             <div class="row">
+                  <div class="column" style="margin-right: 2%;margin-left: 1%;">
+      <img style="width: 75%;" src="https://images.frandroid.com/wp-content/uploads/2018/02/udemy-promotion-mwc-header.jpg">
+    </div>
+    <br/>
+                  <div class="column">
+
             <form>
                 <input
                         type="text"
@@ -11,7 +21,7 @@
                         v-model="newTitleTodo"
                         @keyup.enter="addTodo"
                 />
-                <input
+               <textarea 
                         type="text"
                         class="todo-input"
                         placeholder="Description du ticket"
@@ -19,7 +29,7 @@
                         @keyup.enter="addTodo"
                 />
                 <div class="ticket-service">
-                    <p>Service à contacté :</p>
+                    <p>Service à contacter :</p>
                     <input
                             type="radio"
                             id="api"
@@ -44,12 +54,17 @@
                             @keyup.enter="addTodo"
                     />
                     <label for="mobile">Mobile</label>
+                    <br/>
+                    <br/>
+                      <b-button block variant="primary">Envoyer</b-button>
                 </div>
             </form>
-        </div>
-        <div class="support-ticket">
+             </div>
+             <div style="border-style: dotted;margin-top: -7%;margin-left: 17%;" class="column">
+                         <div class="support-ticket">
             <h2>Vos ticket en cours :</h2>
-            <b-card>
+            <br/>
+            <b-card style="border-style: solid;">
                 <transition-group
                         name="fade"
                         enter-active-class="animated fadeInUp"
@@ -92,26 +107,42 @@
                         <div class="remove-item" @click="removeTodo(index)">
                             &times;
                         </div>
+                                <hr/>
+
                     </div>
                 </transition-group>
             </b-card>
         </div>
-        <div>{{ remaining }} Ticket en cours</div>
+             </div>
+             </div>
+        </div>
+        <div>
+  </div>
+    </div>
+        <!-- <hr/> -->
+        <!-- <center>
+
+        </center> -->
+        <!-- <div>{{ remaining }} Ticket en cours</div> -->
     </div>
 </template>
 
 <script>
     import LayoutDefault from "../layouts/LayoutDefault.vue";
+    import axios from 'axios'
+
     export default {
         name: "todo-list",
         data() {
             return {
+                requestString: "/json/support_ticket.json?new=true",
                 newTitleTodo: "",
                 newContentTodo: "",
                 idForTodo: 3,
                 checkedNames: "",
                 beforeEditCache: "",
                 filter: "all",
+                data: "",
                 todos: [
                     {
                         id: 1,
@@ -158,9 +189,15 @@
             this.$emit("update:layout", LayoutDefault);
         },
         created() {
+             axios.get(this.requestString).then(response => {
+                        this.data = response.data;
+                    });
             this.$emit("update:layout", LayoutDefault);
         },
         methods: {
+                  initialize_graph: function() {
+                   
+                },
             addTodo() {
                 if (
                     this.newTitleTodo.trim().length === 0 &&
@@ -242,4 +279,35 @@
     label {
         padding-right: 10px;
     }
+    input[type=text], select, textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  margin-top: 6px;
+  margin-bottom: 16px;
+  resize: vertical;
+}
+
+input[type=submit] {
+  background-color: #4CAF50;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+body {
+    overflow: hidden;
+}
+input[type=submit]:hover {
+  background-color: #45a049;
+}
+
+.container {
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+}
 </style>
